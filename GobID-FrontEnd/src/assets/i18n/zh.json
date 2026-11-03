@@ -1,0 +1,138 @@
+{
+  "language": {
+    "select": "选择语言"
+  },
+  "common": {
+    "help": "帮助",
+    "email": "电子邮箱",
+    "emailPlaceholder": "example@email.gob.do",
+    "emailInvalid": "电子邮箱无效",
+    "password": "密码",
+    "confirmPassword": "确认密码",
+    "passwordsMismatch": "两次输入的密码不一致",
+    "docType": "身份证件类型",
+    "docNumber": "身份证件",
+    "phone": "电话号码",
+    "loading": "正在加载信息...",
+    "close": "关闭",
+    "yes": "是",
+    "no": "否",
+    "cedula": "国民身份证",
+    "passport": "护照",
+    "country": "多米尼加共和国",
+    "terms": "条款",
+    "privacy": "隐私",
+    "contact": "联系"
+  },
+  "footer": {
+    "copyright": "© 2026 版权所有。"
+  },
+  "auth": {
+    "welcome": "欢迎",
+    "selectOrg": "选择一个组织",
+    "selectOrgHint": "您的账户可以访问多个组织。",
+    "policyDenied": "因安全策略被拒绝访问",
+    "forgotPassword": "忘记密码？",
+    "rememberDevice": "记住此设备",
+    "signIn": "登录",
+    "noAccount": "还没有账户？",
+    "registerHere": "在此注册",
+    "passwordInvalid": "密码无效",
+    "toasts": {
+      "missingFields": "缺少字段",
+      "invalidCredentials": "电子邮箱和/或密码无效",
+      "loginError": "登录时发生错误"
+    }
+  },
+  "register": {
+    "title": "创建账户",
+    "step1Intro": "请输入您的证件号码以验证身份并完成注册。",
+    "selectDocType": "请选择身份证件类型",
+    "docNumberPlaceholder": "请输入您的证件号码",
+    "searching": "正在搜索...",
+    "change": "更改",
+    "searchAnother": "搜索其他证件",
+    "backToLogin": "返回登录",
+    "phonePlaceholder": "请输入您的电话号码",
+    "phoneRequired": "电话号码为必填项",
+    "passwordPlaceholder": "至少 6 个字符",
+    "passwordRule": "密码长度至少为 6 个字符，且必须包含至少一个大写字母、一个小写字母、一个数字和一个特殊字符。",
+    "confirmPasswordPlaceholder": "请再次输入您的密码",
+    "registering": "正在注册...",
+    "submit": "注册",
+    "detailsTitle": "用户详细信息",
+    "detailsDesc": "请完成下方所需的信息。",
+    "firstName": "名字",
+    "firstNameRequired": "名字为必填项",
+    "firstNamePlaceholder": "例如：张三",
+    "lastName": "姓氏",
+    "lastNameRequired": "姓氏为必填项",
+    "lastNamePlaceholder": "例如：李四",
+    "docNumberRequired": "身份证件号码为必填项",
+    "docNumberPlaceholder2": "请输入身份证件号码",
+    "birthdate": "出生日期",
+    "birthdateRequired": "日期为必填项",
+    "birthdatePlaceholder": "例如：1998/08/18",
+    "genderLabel": "性别",
+    "genderRequired": "请选择性别",
+    "emailRequired": "电子邮箱为必填项或格式无效",
+    "emailPlaceholder2": "例如：user@example.com",
+    "phonePlaceholder2": "例如：8090000000",
+    "isExternal": "是否为外部人员",
+    "selectOption": "请选择一个选项",
+    "passwordRequired": "密码为必填项",
+    "passwordPlaceholder2": "请输入您的密码",
+    "confirmPasswordPlaceholder2": "请确认您的密码",
+    "submitStep2": "注册",
+    "gender": {
+      "male": "男",
+      "female": "女",
+      "other": "其他"
+    },
+    "modal": {
+      "title": "确认电子邮箱",
+      "body": "用户注册成功。请查收您的电子邮件以确认您的账户。"
+    },
+    "toasts": {
+      "personNotFound": "未找到使用此身份证件号码的人员",
+      "completeFields": "请正确填写所有字段",
+      "registerError": "注册用户时出错",
+      "completeFieldsCorrectly": "请正确填写所有必填字段。",
+      "formError": "处理表单时发生错误。"
+    }
+  },
+  "forgot": {
+    "intro": "请输入您的电子邮箱，我们将向您发送重置密码的说明。",
+    "submit": "发送说明",
+    "toasts": {
+      "emailInvalid": "电子邮箱无效",
+      "resetError": "重置密码时出错"
+    },
+    "modal": {
+      "title": "重置密码",
+      "body": "重置密码的电子邮件已发送至"
+    }
+  },
+  "changePwd": {
+    "heading": "修改密码",
+    "intro": "在继续之前，您必须更新您的密码。",
+    "newPassword": "新密码",
+    "newPasswordPlaceholder": "请输入您的新密码",
+    "passwordRule": "密码必须至少包含一个大写字母、一个小写字母、一个数字和一个特殊字符。",
+    "confirmNewPassword": "确认新密码",
+    "confirmNewPasswordPlaceholder": "请确认您的新密码",
+    "submit": "确认",
+    "toasts": {
+      "success": "密码重置成功",
+      "error": "修改密码时出错"
+    }
+  },
+  "verify": {
+    "verifying": "正在验证您的电子邮箱...",
+    "success": "邮箱已验证！",
+    "successBody": "您的电子邮箱已成功确认。您现在可以使用您的账户登录。",
+    "goToLogin": "前往登录",
+    "failed": "验证失败",
+    "invalidLink": "验证链接无效或已过期。"
+  }
+}

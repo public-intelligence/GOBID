@@ -1,0 +1,110 @@
+<section class="my-4 overflow-hidden">
+  <div class="flex justify-between">
+    <button class="secondary-button" (click)="previousStep()">
+      <fa-icon [icon]="faArrowLeft" class="mr-2"></fa-icon>
+      Volver
+    </button>
+    <button
+      (click)="nextStep()"
+      [ngClass]="{
+      'cursor-not-allowed' : !application()
+    }"
+      [disabled]="!application()"
+    >
+      <span>{{buttonText()}}</span>
+    </button>
+  </div>
+  <h1 class="my-8 text-[1.2rem] font-semibold">
+    {{idApp ? 'Editar tipos de Acceso' : 'Vincular Organizacion-Aplicacion'}}
+  </h1>
+  <app-steps-form [data]="steps"></app-steps-form>
+  <div class="my-8">
+    <div
+      class="flex items-center justify-between"
+      [ngClass]="{'hidden': idApp || currentStep === 2 ||  currentStep === 3}"
+    >
+      <div class="flex flex-col">
+        <p class="text-[1rem]">Nombre o código de la Aplicación</p>
+        <app-search
+          [placeholder]="'Buscar Aplicación'"
+          class="place-items-start"
+          (searchValue)="onSearch($event)"
+        />
+      </div>
+    </div>
+    @if (isLoading()) {
+    <div class="mt-20">
+      <app-loading-spinner />
+    </div>
+    } @else { @switch (currentStep) { @case (1) { @if (searched()) {
+    <div class="mt-20 flex h-full items-center justify-center">
+      <div class="grid place-items-center">
+        <svg
+          id="Icons"
+          xmlns="http://www.w3.org/2000/svg"
+          version="1.1"
+          viewBox="0 0 24 24"
+          class="mb-2 h-[2.5rem] w-[2.5rem] rotate-45 text-gray-400"
+          fill="currentColor"
+        >
+          <path
+            d="M20,3H4c-.552,0-1,.448-1,1v16c0,.552.448,1,1,1h16c.552,0,1-.448,1-1V4c0-.552-.448-1-1-1ZM17.354,8.061l-9.293,9.293c-.195.195-.512.195-.707,0l-.707-.707c-.195-.195-.195-.512,0-.707L15.939,6.647c.195-.195.512-.195.707,0l.707.707c.195.195.195.512,0,.707Z"
+          />
+        </svg>
+        <p class="text-gray-400">
+          No se encontro la aplicación o esta ya ha sido vinculada
+        </p>
+      </div>
+    </div>
+    } @else {
+    <section class="mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
+      @for (app of applications(); track $index) {
+      <div
+        class="border-bg-dividers slide-in-bottom flex flex-col justify-between rounded-md border p-4"
+      >
+        <app-info-app [application]="app" />
+        <button (click)="selectApplication(app)" class="secondary-button my-3">
+          Seleccionar Aplicación
+          <fa-icon [icon]="faCheck" class="ml-3" />
+        </button>
+      </div>
+      }
+    </section>
+    } } @case (2) {
+    <section class="slide-in-bottom mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+      <div class="border-bg-dividers rounded-md border p-4">
+        <h3 class="mb-4 text-[1rem] font-medium">
+          Seleccione el tipo de acceso que esta organización tendrá en la
+          aplicación
+        </h3>
+        <form [formGroup]="accessTypeForm">
+          <div class="flex flex-col gap-6">
+            @for (item of accessType(); track $index) {
+            <app-checkbox [formControlName]="item.name" [label]="item.name" />
+            }
+          </div>
+        </form>
+      </div>
+      <div class="border-bg-dividers rounded-md border p-2">
+        <app-info-app [application]="this.application()" />
+      </div>
+    </section>
+    } @case (3) {
+    <div class="slide-in-bottom mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+      <div class="border-bg-dividers rounded-md border p-2">
+        <app-info-app [application]="this.application()" />
+      </div>
+      <div class="border-bg-dividers relative rounded-md border p-4">
+        <h3 class="mb-4 text-[1rem] font-medium">
+          Tipos de acceso seleccionado para esta aplicación son
+        </h3>
+        <div class="flex flex-col gap-6">
+          @for (item of formGroup; track $index) { @if(item[1]) {
+          <p class="text-[1rem]">{{item[0]}}</p>
+          } }
+        </div>
+      </div>
+    </div>
+    }} }
+  </div>
+</section>

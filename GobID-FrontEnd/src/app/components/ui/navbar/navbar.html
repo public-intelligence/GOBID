@@ -1,0 +1,25 @@
+<nav class="bg-primary-blue px-4 py-4">
+  <div class="flex w-full justify-between">
+    <div
+      class=""
+      (click)="toggleMobileSidebar()"
+      (keydown)="toggleMobileSidebar()"
+      tabindex="0"
+      class="mr-4 flex place-items-center justify-center text-white lg:hidden"
+    >
+      <fa-icon class="cursor-pointer text-[1.5rem]" [icon]="faBars" />
+    </div>
+    <div class="hidden place-items-center justify-center lg:flex">
+      <h4 class="text-[0.93rem] text-white">{{aplicationName}}</h4>
+    </div>
+    <section class="relative flex place-items-center space-x-6">
+      <section class="">
+        <h4
+          class="font-roboto truncate overflow-hidden text-center text-[0.8rem] text-white"
+        >
+          {{ organizationName() }}
+        </h4>
+      </section>
+    </section>
+  </div>
+</nav>

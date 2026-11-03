@@ -1,0 +1,28 @@
+@if (show) {
+  <div class="relative">
+    <p
+      class="peer text-alert-error absolute mt-1 ml-2 max-w-full cursor-default truncate overflow-hidden text-[0.9rem]"
+    >
+      @if (errors.length === 1) {
+        {{ errors[0] }}
+      } @else {
+        {{ `${errors[0]}` }}
+        <fa-icon class="text-[.7rem]" [icon]="faChevronDown" />
+      }
+    </p>
+
+    @if (errors.length > 0) {
+      <div
+        class="invisible absolute top-[2rem] z-10 h-fit min-w-[10rem] rounded-lg border bg-white opacity-0 transition-opacity duration-300 peer-hover:visible peer-hover:opacity-100 before:absolute before:top-0 before:left-1/2 before:-translate-x-1/2 before:-translate-y-full before:border-r-[10px] before:border-b-[10px] before:border-l-[10px] before:border-gray-200 before:border-r-transparent before:border-l-transparent"
+      >
+        @for (error of errors; track $index) {
+          <p
+            class="text-alert-error border-b border-gray-300 p-2 text-[0.9rem] last-of-type:border-b-0"
+          >
+            {{ error }}
+          </p>
+        }
+      </div>
+    }
+  </div>
+}

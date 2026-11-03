@@ -1,0 +1,138 @@
+{
+  "language": {
+    "select": "Seleziona lingua"
+  },
+  "common": {
+    "help": "Aiuto",
+    "email": "Indirizzo e-mail",
+    "emailPlaceholder": "esempio@email.gob.do",
+    "emailInvalid": "Indirizzo e-mail non valido",
+    "password": "Password",
+    "confirmPassword": "Conferma password",
+    "passwordsMismatch": "Le password non corrispondono",
+    "docType": "Tipo di documento d'identità",
+    "docNumber": "Documento d'identità",
+    "phone": "Numero di telefono",
+    "loading": "Caricamento delle informazioni...",
+    "close": "Chiudi",
+    "yes": "Sì",
+    "no": "No",
+    "cedula": "Carta d'identità nazionale",
+    "passport": "Passaporto",
+    "country": "Repubblica Dominicana",
+    "terms": "Termini",
+    "privacy": "Privacy",
+    "contact": "Contatto"
+  },
+  "footer": {
+    "copyright": "© 2026 Tutti i diritti riservati."
+  },
+  "auth": {
+    "welcome": "Benvenuto",
+    "selectOrg": "Seleziona un'organizzazione",
+    "selectOrgHint": "Il tuo account ha accesso a più di un'organizzazione.",
+    "policyDenied": "Accesso negato dalle politiche di sicurezza",
+    "forgotPassword": "Hai dimenticato la password?",
+    "rememberDevice": "Ricorda questo dispositivo",
+    "signIn": "Accedi",
+    "noAccount": "Non hai un account?",
+    "registerHere": "Registrati qui",
+    "passwordInvalid": "Password non valida",
+    "toasts": {
+      "missingFields": "Campi mancanti",
+      "invalidCredentials": "E-mail e/o password non validi",
+      "loginError": "Si è verificato un errore durante l'accesso"
+    }
+  },
+  "register": {
+    "title": "Crea account",
+    "step1Intro": "Inserisci il numero del documento per verificare la tua identità e completare la registrazione.",
+    "selectDocType": "Seleziona un tipo di documento d'identità",
+    "docNumberPlaceholder": "Inserisci il numero del documento",
+    "searching": "Ricerca in corso...",
+    "change": "Cambia",
+    "searchAnother": "Cerca un altro documento",
+    "backToLogin": "Torna all'accesso",
+    "phonePlaceholder": "Inserisci il tuo numero di telefono",
+    "phoneRequired": "Numero di telefono obbligatorio",
+    "passwordPlaceholder": "Minimo 6 caratteri",
+    "passwordRule": "La password deve contenere almeno 6 caratteri e includere almeno una lettera maiuscola, una lettera minuscola, un numero e un carattere speciale.",
+    "confirmPasswordPlaceholder": "Ripeti la password",
+    "registering": "Registrazione...",
+    "submit": "Registrati",
+    "detailsTitle": "Dettagli utente",
+    "detailsDesc": "Completa le informazioni richieste di seguito.",
+    "firstName": "Nome",
+    "firstNameRequired": "Il nome è obbligatorio",
+    "firstNamePlaceholder": "es.: Mario",
+    "lastName": "Cognome",
+    "lastNameRequired": "Il cognome è obbligatorio",
+    "lastNamePlaceholder": "es.: Rossi",
+    "docNumberRequired": "Il numero del documento d'identità è obbligatorio",
+    "docNumberPlaceholder2": "Inserisci il numero del documento d'identità",
+    "birthdate": "Data di nascita",
+    "birthdateRequired": "La data è obbligatoria",
+    "birthdatePlaceholder": "es.: 18/08/1998",
+    "genderLabel": "Genere",
+    "genderRequired": "Seleziona un genere",
+    "emailRequired": "L'e-mail è obbligatoria o ha un formato non valido",
+    "emailPlaceholder2": "es.: utente@example.com",
+    "phonePlaceholder2": "es.: 8090000000",
+    "isExternal": "È esterno",
+    "selectOption": "Seleziona un'opzione",
+    "passwordRequired": "La password è obbligatoria",
+    "passwordPlaceholder2": "Inserisci la tua password",
+    "confirmPasswordPlaceholder2": "Conferma la tua password",
+    "submitStep2": "Registra",
+    "gender": {
+      "male": "Maschio",
+      "female": "Femmina",
+      "other": "Altro"
+    },
+    "modal": {
+      "title": "Conferma e-mail",
+      "body": "Utente registrato con successo. Controlla la tua e-mail per confermare il tuo account."
+    },
+    "toasts": {
+      "personNotFound": "Nessuna persona trovata con questo numero di identificazione",
+      "completeFields": "Si prega di compilare correttamente tutti i campi",
+      "registerError": "Errore durante la registrazione dell'utente",
+      "completeFieldsCorrectly": "Si prega di compilare correttamente tutti i campi obbligatori.",
+      "formError": "Si è verificato un errore durante l'elaborazione del modulo."
+    }
+  },
+  "forgot": {
+    "intro": "Inserisci il tuo indirizzo e-mail e ti invieremo le istruzioni per reimpostare la tua password.",
+    "submit": "Invia istruzioni",
+    "toasts": {
+      "emailInvalid": "L'indirizzo e-mail non è valido",
+      "resetError": "Errore durante la reimpostazione della password"
+    },
+    "modal": {
+      "title": "Reimposta password",
+      "body": "È stata inviata un'e-mail per reimpostare la password a"
+    }
+  },
+  "changePwd": {
+    "heading": "Cambia password",
+    "intro": "Prima di continuare, devi aggiornare la tua password.",
+    "newPassword": "Nuova password",
+    "newPasswordPlaceholder": "Inserisci la tua nuova password",
+    "passwordRule": "La password deve contenere almeno una lettera maiuscola, una lettera minuscola, un numero e un carattere speciale.",
+    "confirmNewPassword": "Conferma nuova password",
+    "confirmNewPasswordPlaceholder": "Conferma la tua nuova password",
+    "submit": "Conferma",
+    "toasts": {
+      "success": "Password reimpostata con successo",
+      "error": "Errore durante la modifica della password"
+    }
+  },
+  "verify": {
+    "verifying": "Verifica del tuo indirizzo e-mail in corso...",
+    "success": "E-mail verificata!",
+    "successBody": "Il tuo indirizzo e-mail è stato confermato con successo. Ora puoi accedere con il tuo account.",
+    "goToLogin": "Vai all'accesso",
+    "failed": "Verifica non riuscita",
+    "invalidLink": "Il link di verifica non è valido o è scaduto."
+  }
+}

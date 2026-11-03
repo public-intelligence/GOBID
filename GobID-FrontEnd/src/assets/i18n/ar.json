@@ -1,0 +1,138 @@
+{
+  "language": {
+    "select": "اختر اللغة"
+  },
+  "common": {
+    "help": "مساعدة",
+    "email": "البريد الإلكتروني",
+    "emailPlaceholder": "example@email.gob.do",
+    "emailInvalid": "البريد الإلكتروني غير صالح",
+    "password": "كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "passwordsMismatch": "كلمتا المرور غير متطابقتين",
+    "docType": "نوع وثيقة الهوية",
+    "docNumber": "وثيقة الهوية",
+    "phone": "رقم الهاتف",
+    "loading": "جارٍ تحميل المعلومات...",
+    "close": "إغلاق",
+    "yes": "نعم",
+    "no": "لا",
+    "cedula": "بطاقة الهوية الوطنية",
+    "passport": "جواز السفر",
+    "country": "جمهورية الدومينيكان",
+    "terms": "الشروط",
+    "privacy": "الخصوصية",
+    "contact": "اتصل بنا"
+  },
+  "footer": {
+    "copyright": "© 2026 جميع الحقوق محفوظة."
+  },
+  "auth": {
+    "welcome": "مرحبًا",
+    "selectOrg": "اختر مؤسسة",
+    "selectOrgHint": "يمتلك حسابك إمكانية الوصول إلى أكثر من مؤسسة.",
+    "policyDenied": "تم رفض الوصول بموجب سياسات الأمان",
+    "forgotPassword": "هل نسيت كلمة المرور؟",
+    "rememberDevice": "تذكّر هذا الجهاز",
+    "signIn": "تسجيل الدخول",
+    "noAccount": "ليس لديك حساب؟",
+    "registerHere": "سجّل هنا",
+    "passwordInvalid": "كلمة المرور غير صالحة",
+    "toasts": {
+      "missingFields": "حقول ناقصة",
+      "invalidCredentials": "البريد الإلكتروني و/أو كلمة المرور غير صالحة",
+      "loginError": "حدث خطأ أثناء تسجيل الدخول"
+    }
+  },
+  "register": {
+    "title": "إنشاء حساب",
+    "step1Intro": "أدخل رقم وثيقتك للتحقق من هويتك وإكمال التسجيل.",
+    "selectDocType": "اختر نوع وثيقة الهوية",
+    "docNumberPlaceholder": "أدخل رقم وثيقتك",
+    "searching": "جارٍ البحث...",
+    "change": "تغيير",
+    "searchAnother": "البحث عن وثيقة أخرى",
+    "backToLogin": "العودة إلى تسجيل الدخول",
+    "phonePlaceholder": "أدخل رقم هاتفك",
+    "phoneRequired": "رقم الهاتف مطلوب",
+    "passwordPlaceholder": "6 أحرف على الأقل",
+    "passwordRule": "يجب أن تتكوّن كلمة المرور من 6 أحرف على الأقل وأن تحتوي على حرف كبير واحد وحرف صغير واحد ورقم واحد ورمز خاص واحد على الأقل.",
+    "confirmPasswordPlaceholder": "أعد إدخال كلمة المرور",
+    "registering": "جارٍ التسجيل...",
+    "submit": "تسجيل",
+    "detailsTitle": "تفاصيل المستخدم",
+    "detailsDesc": "أكمل المعلومات المطلوبة أدناه.",
+    "firstName": "الاسم",
+    "firstNameRequired": "الاسم مطلوب",
+    "firstNamePlaceholder": "مثال: محمد",
+    "lastName": "اللقب",
+    "lastNameRequired": "اللقب مطلوب",
+    "lastNamePlaceholder": "مثال: أحمد",
+    "docNumberRequired": "رقم وثيقة الهوية مطلوب",
+    "docNumberPlaceholder2": "أدخل رقم وثيقة الهوية",
+    "birthdate": "تاريخ الميلاد",
+    "birthdateRequired": "التاريخ مطلوب",
+    "birthdatePlaceholder": "مثال: 18/08/1998",
+    "genderLabel": "الجنس",
+    "genderRequired": "اختر الجنس",
+    "emailRequired": "البريد الإلكتروني مطلوب أو تنسيقه غير صالح",
+    "emailPlaceholder2": "مثال: user@example.com",
+    "phonePlaceholder2": "مثال: 8090000000",
+    "isExternal": "مستخدم خارجي",
+    "selectOption": "اختر خيارًا",
+    "passwordRequired": "كلمة المرور مطلوبة",
+    "passwordPlaceholder2": "أدخل كلمة المرور",
+    "confirmPasswordPlaceholder2": "أكّد كلمة المرور",
+    "submitStep2": "تسجيل",
+    "gender": {
+      "male": "ذكر",
+      "female": "أنثى",
+      "other": "أخرى"
+    },
+    "modal": {
+      "title": "تأكيد البريد الإلكتروني",
+      "body": "تم تسجيل المستخدم بنجاح. يرجى التحقق من بريدك الإلكتروني لتأكيد حسابك."
+    },
+    "toasts": {
+      "personNotFound": "لم يتم العثور على أي شخص برقم الهوية هذا",
+      "completeFields": "يرجى ملء جميع الحقول بشكل صحيح",
+      "registerError": "خطأ أثناء تسجيل المستخدم",
+      "completeFieldsCorrectly": "يرجى ملء جميع الحقول المطلوبة بشكل صحيح.",
+      "formError": "حدث خطأ أثناء معالجة النموذج."
+    }
+  },
+  "forgot": {
+    "intro": "أدخل بريدك الإلكتروني وسنرسل إليك التعليمات لإعادة تعيين كلمة المرور.",
+    "submit": "إرسال التعليمات",
+    "toasts": {
+      "emailInvalid": "البريد الإلكتروني غير صالح",
+      "resetError": "خطأ أثناء إعادة تعيين كلمة المرور"
+    },
+    "modal": {
+      "title": "إعادة تعيين كلمة المرور",
+      "body": "تم إرسال بريد إلكتروني لإعادة تعيين كلمة المرور إلى"
+    }
+  },
+  "changePwd": {
+    "heading": "تغيير كلمة المرور",
+    "intro": "قبل المتابعة، يجب تحديث كلمة المرور الخاصة بك.",
+    "newPassword": "كلمة مرور جديدة",
+    "newPasswordPlaceholder": "أدخل كلمة المرور الجديدة",
+    "passwordRule": "يجب أن تحتوي كلمة المرور على حرف كبير واحد وحرف صغير واحد ورقم واحد ورمز خاص واحد على الأقل.",
+    "confirmNewPassword": "تأكيد كلمة المرور الجديدة",
+    "confirmNewPasswordPlaceholder": "أكّد كلمة المرور الجديدة",
+    "submit": "تأكيد",
+    "toasts": {
+      "success": "تمت إعادة تعيين كلمة المرور بنجاح",
+      "error": "خطأ أثناء تغيير كلمة المرور"
+    }
+  },
+  "verify": {
+    "verifying": "جارٍ التحقق من بريدك الإلكتروني...",
+    "success": "تم التحقق من البريد الإلكتروني!",
+    "successBody": "تم تأكيد بريدك الإلكتروني بنجاح. يمكنك الآن تسجيل الدخول إلى حسابك.",
+    "goToLogin": "الذهاب إلى تسجيل الدخول",
+    "failed": "فشل التحقق",
+    "invalidLink": "رابط التحقق غير صالح أو انتهت صلاحيته."
+  }
+}

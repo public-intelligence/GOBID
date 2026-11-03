@@ -1,0 +1,35 @@
+<div class="relative">
+  <label for="{{ name }}" class="label {{ labelClass}}">
+    {{ label | titlecase }}
+    @if (required) {<span class="text-red-500 ml-0.5">*</span>}
+  </label>
+  @if (!loading) { @if (mask === "") {
+  <input
+    type="{{ type }}"
+    name="{{ name }}"
+    id="{{ name }}"
+    class="input w-full  {{ className }}"
+    placeholder="{{ placeholder }}"
+    [ngClass]="{ 'error-input': control.invalid && isSubmitted }"
+    [formControl]="control"
+    aria-required="true"
+  />
+  } @else {
+  <input
+    type="{{ type }}"
+    name="{{ name }}"
+    id="{{ name }}"
+    class="input w-full  {{ className }}"
+    placeholder="{{ placeholder }}"
+    [ngClass]="{ 'error-input': control.invalid && isSubmitted }"
+    [formControl]="control"
+    aria-required="true"
+    mask="{{ mask }}"
+  />
+  } } @else {
+  <div class="skeleton h-[2.6875rem] input-skeleton {{ className }}"></div>
+  } @let show = control.getError("server") || (control.invalid && isSubmitted);
+
+  <app-error-label [show]="show" [errors]="onError()" />
+</div>
+

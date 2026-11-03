@@ -1,0 +1,152 @@
+<div class="relative">
+  @if (label) {
+  <label for="{{ name }}" class="label">
+    {{ label | titlecase }}
+    @if (required) {<span class="text-red-500 ml-0.5">*</span>}
+  </label>
+  }
+
+  @if (!loading) {
+  <div class="flex items-center gap-4">
+    <div
+      class="relative flex h-24 w-24 shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-full border border-bg-dividers bg-white hover:border-input-hover-border hover:bg-bg-light-blue"
+      [class.error-input]="control.invalid && isSubmitted"
+      (click)="fileInput.click()"
+    >
+      @if (previewUrl()) {
+      <img
+        [src]="previewUrl()"
+        alt="{{ label || 'Foto' }}"
+        class="h-full w-full object-cover"
+      />
+      } @else {
+      <fa-icon [icon]="faUser" class="text-3xl text-gray-300" />
+      }
+      <span
+        class="absolute inset-x-0 bottom-0 flex items-center justify-center gap-1 bg-black/50 py-1 text-white"
+      >
+        <fa-icon [icon]="faCamera" class="text-xs" />
+      </span>
+    </div>
+
+    <input
+      #fileInput
+      type="file"
+      id="{{ name }}"
+      name="{{ name }}"
+      class="hidden"
+      accept="{{ accept }}"
+      (change)="onFileSelected($event)"
+    />
+  </div>
+  } @else {
+  <div class="skeleton h-24 w-24 rounded-full"></div>
+  } @let show = control.getError("server") || (control.invalid && isSubmitted);
+
+  <app-error-label [show]="show" [errors]="onError()" />
+</div>
+
+<app-modal #cropModal [title]="'Editar foto'" [hideOnClickOutside]="false">
+  @if (pendingFile(); as file) {
+  <div class="w-[20rem] sm:w-[24rem]">
+    <div class="h-64 w-full overflow-hidden rounded-lg bg-gray-100">
+      <image-cropper
+        [imageFile]="file"
+        [maintainAspectRatio]="true"
+        [aspectRatio]="1"
+        [roundCropper]="true"
+        [transform]="transform()"
+        [output]="'blob'"
+        format="png"
+        [autoCrop]="true"
+        (imageCropped)="onImageCropped($event)"
+      />
+    </div>
+
+    <div class="mt-8 flex items-center justify-center gap-2">
+      <div class="group relative">
+        <button
+          type="button"
+          class="secondary-button !px-3 !py-2"
+          aria-label="Rotar izquierda"
+          (click)="rotateLeft()"
+        >
+          <fa-icon [icon]="faRotateLeft" />
+        </button>
+        <span
+          class="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-gray-900 px-2 py-1 text-xs whitespace-nowrap text-white opacity-0 transition-opacity duration-150 group-hover:opacity-100"
+        >
+          Rotar izquierda
+        </span>
+      </div>
+      <div class="group relative">
+        <button
+          type="button"
+          class="secondary-button !px-3 !py-2"
+          aria-label="Rotar derecha"
+          (click)="rotateRight()"
+        >
+          <fa-icon [icon]="faRotateRight" />
+        </button>
+        <span
+          class="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-gray-900 px-2 py-1 text-xs whitespace-nowrap text-white opacity-0 transition-opacity duration-150 group-hover:opacity-100"
+        >
+          Rotar derecha
+        </span>
+      </div>
+      <div class="group relative">
+        <button
+          type="button"
+          class="secondary-button !px-3 !py-2"
+          aria-label="Alejar"
+          (click)="zoomOut()"
+        >
+          <fa-icon [icon]="faMagnifyingGlassMinus" />
+        </button>
+        <span
+          class="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-gray-900 px-2 py-1 text-xs whitespace-nowrap text-white opacity-0 transition-opacity duration-150 group-hover:opacity-100"
+        >
+          Alejar
+        </span>
+      </div>
+      <div class="group relative">
+        <button
+          type="button"
+          class="secondary-button !px-3 !py-2"
+          aria-label="Acercar"
+          (click)="zoomIn()"
+        >
+          <fa-icon [icon]="faMagnifyingGlassPlus" />
+        </button>
+        <span
+          class="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-gray-900 px-2 py-1 text-xs whitespace-nowrap text-white opacity-0 transition-opacity duration-150 group-hover:opacity-100"
+        >
+          Acercar
+        </span>
+      </div>
+      <div class="group relative">
+        <button
+          type="button"
+          class="secondary-button !px-3 !py-2"
+          aria-label="Centrar"
+          (click)="centerImage()"
+        >
+          <fa-icon [icon]="faCrosshairs" />
+        </button>
+        <span
+          class="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 rounded bg-gray-900 px-2 py-1 text-xs whitespace-nowrap text-white opacity-0 transition-opacity duration-150 group-hover:opacity-100"
+        >
+          Centrar
+        </span>
+      </div>
+    </div>
+
+    <div class="mt-8 mb-2 flex justify-end gap-4">
+      <button type="button" class="secondary-button" (click)="cancelEdit()">
+        Cancelar
+      </button>
+      <button type="button" (click)="confirmEdit()">Guardar</button>
+    </div>
+  </div>
+  }
+</app-modal>

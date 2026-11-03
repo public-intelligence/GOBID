@@ -1,0 +1,39 @@
+<app-modal [title]="title" [isConfirmation]="true" [hideOnClickOutside]="true">
+  <div class="relative max-h-[60dvh] max-w-[20rem] min-w-[20rem] overflow-auto">
+    <ul>
+      @for(d of data(); track $index) {
+      <li class="mb-4 text-[.9rem]">
+        <p class="text-[.8rem] text-gray-400">{{d.columnName| titlecase}}</p>
+        @switch (d.type) { @case ('link') {
+        <a
+          [href]="d.value"
+          target="_blank"
+          class="text-[.9rem] text-blue-500 hover:underline"
+          >{{d.value}}</a
+        >
+        } @case ('boolean') {
+        <span
+          class="text-[.9rem]"
+          [ngClass]="{'text-green-600': d.value, 'text-red-500': !d.value}"
+          >{{d.value ? 'Activo' : 'Inactivo'}}</span
+        >
+        } @case ('string') {
+        <span class="text-[.9rem] text-gray-700">{{d.value}}</span>
+        } @case ('date') {
+        <span class="text-[.9rem] text-gray-700"
+          >{{utilsService.formatDate(d.value)}}</span
+        >
+        } }
+      </li>
+      }
+    </ul>
+  </div>
+  <div class="flex justify-end">
+    @if(canEdit) {
+      <button (click)="goToEdit()" class="secondary-button mt-4 ml-auto">
+      <fa-icon [icon]="faPen" class="mr-1" />
+      Editar
+    </button>
+    }
+  </div>
+</app-modal>

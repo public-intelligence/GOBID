@@ -1,0 +1,174 @@
+<div class="my-6">
+  <h1 class="text-2xl font-bold text-gray-800">
+    {{ isEdit ? 'Edición' : 'Creación' }} de Personal
+  </h1>
+  <p class="mt-1 text-sm text-gray-500">
+    {{ isEdit ? 'Modifica la información del personal registrado' : 'Completa los datos para registrar nuevo personal' }}
+  </p>
+</div>
+
+@if(isLoading()) {
+<div class="grid gap-6 lg:grid-cols-2 items-start">
+  <div class="rounded-xl border border-gray-100 bg-white p-6 shadow-sm">
+    <div class="skeleton mb-5 h-5 w-36 rounded"></div>
+    <div class="skeleton mb-3 h-3 w-44 rounded"></div>
+    <div class="skeleton h-10 w-full rounded"></div>
+    <div class="skeleton mt-4 h-20 w-full rounded"></div>
+  </div>
+  <div class="rounded-xl border border-gray-100 bg-white p-6 shadow-sm">
+    <div class="skeleton mb-5 h-5 w-40 rounded"></div>
+    <div class="skeleton h-10 w-full rounded"></div>
+    <div class="skeleton mb-5 h-5 w-40 rounded"></div>
+    <div class="skeleton h-10 w-full rounded"></div>
+    <div class="skeleton mb-5 h-5 w-40 rounded"></div>
+    <div class="skeleton h-10 w-full rounded"></div>
+  </div>
+</div>
+<div class="mt-6 flex justify-between gap-4">
+  <div class="skeleton h-10 w-24 rounded"></div>
+  <div class="skeleton h-10 w-24 rounded"></div>
+</div>
+}
+@else {
+
+<div class="grid gap-6 lg:grid-cols-2 items-start">
+
+  <!-- Columna izquierda: búsqueda (crear) o info (editar) -->
+  @if (!isEdit) {
+  <div class="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+    <div class="mb-5 flex items-center gap-3">
+      <span class="flex h-7 w-7 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-600">1</span>
+      <h2 class="text-base font-semibold">Buscar Persona</h2>
+    </div>
+    <div class="mb-4">
+      <label class="label mb-1 block">Número de Identificación</label>
+      <app-search
+        [placeholder]="'Ingrese número de identificación'"
+        [errMsg]="searchErrMsg()"
+        (searchValue)="onSearchPerson($event)"
+      />
+    </div>
+    @if (foundPerson(); as person) {
+    <div class="rounded-lg border border-blue-100 bg-blue-50 p-4">
+      <div class="grid gap-4 sm:grid-cols-2 sm:items-center">
+        <div class="flex justify-center">
+          <app-photo-input
+            [formControl]="photoControl"
+            [label]="'Foto'"
+            [loading]="isUploadingPhoto()"
+            ngDefaultControl
+          />
+        </div>
+        <div class="grid gap-4">
+          <div>
+            <span class="text-xs font-medium uppercase tracking-wide text-gray-500">Nombre</span>
+            <p class="mt-1 text-sm font-semibold text-gray-800">{{ person.firstName }} {{ person.lastName }}</p>
+          </div>
+          <div>
+            <span class="text-xs font-medium uppercase tracking-wide text-gray-500">Identificación</span>
+            <p class="mt-1 text-sm font-semibold text-gray-800">{{ person.identificationNumber }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    } @else {
+    <div class="rounded-lg border-2 border-dashed border-gray-200 p-6 text-center text-sm text-gray-400">
+      Busca una persona por número de identificación para continuar
+    </div>
+    }
+  </div>
+  }
+
+  @if (isEdit) {
+  <div class="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+    <div class="mb-5 flex items-center gap-3">
+      <span class="flex h-7 w-7 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-600">1</span>
+      <h2 class="text-base font-semibold">Información del Personal</h2>
+    </div>
+    <div class="rounded-lg border border-blue-100 bg-blue-50 p-4">
+      <div class="grid gap-4 sm:grid-cols-2 sm:items-center">
+        <div class="flex justify-center">
+          <app-photo-input
+            [formControl]="photoControl"
+            [label]="'Foto'"
+            [loading]="isUploadingPhoto()"
+            ngDefaultControl
+          />
+        </div>
+        <div class="grid gap-4">
+          <div>
+            <span class="text-xs font-medium uppercase tracking-wide text-gray-500">Nombre</span>
+            <p class="mt-1 text-sm font-semibold text-gray-800">{{ foundPerson()?.firstName }} {{ foundPerson()?.lastName }}</p>
+          </div>
+          <div>
+            <span class="text-xs font-medium uppercase tracking-wide text-gray-500">Identificación</span>
+            <p class="mt-1 text-sm font-semibold text-gray-800">{{ foundPerson()?.identificationNumber }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+
+  <!-- Columna derecha: form único -->
+  <form id="personnel-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+      <div class="mb-6 flex items-center gap-3">
+        <span class="flex h-7 w-7 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-600">2</span>
+        <h2 class="text-base font-semibold">Datos del Personal</h2>
+      </div>
+      <div class="flex flex-col gap-6">
+        <app-custom-select-search
+          [formControlName]="'positionNominateId'"
+          [label]="'Cargo Nomina'"
+          [options]="positionNominateOptionsWithCurrent()"
+          [placeholder]="'Seleccione un cargo'"
+          [errorMessage]="isSubmitted() && form.controls['positionNominateId'].invalid ? 'Seleccione un cargo' : ''"
+          (onSearchValue)="onSearchPositionsFilter($event)"
+          [required]="true"
+          ngDefaultControl
+        />
+        <app-custom-select-search
+          [formControlName]="'positionId'"
+          [label]="'Cargo Funcional'"
+          [options]="positionOptionsWithCurrent()"
+          [placeholder]="'Seleccione un cargo'"
+          [errorMessage]="isSubmitted() && form.controls['positionId'].invalid ? (form.controls['positionId'].hasError('samePosition') ? 'El cargo funcional no puede ser el mismo que el cargo nomina' : 'Seleccione un cargo') : ''"
+          (onSearchValue)="onSearchPositionsFilter($event)"
+          ngDefaultControl
+        />
+        <app-custom-select-search
+          [formControlName]="'localityId'"
+          [label]="'Localidad'"
+          [options]="localityOptionsWithCurrent()"
+          [placeholder]="'Seleccione una localidad'"
+          [errorMessage]="isSubmitted() && form.controls['localityId'].invalid ? 'Seleccione una localidad' : ''"
+          (onSearchValue)="onSearchLocalitiesFilter($event)"
+          ngDefaultControl
+        />
+        @if (isEdit) {
+        <app-checkbox
+          [formControlName]="'isActive'"
+          [label]="'¿Activo?'"
+          [name]="'isActive'"
+          [className]="'w-full'"
+          [formControl]="form.controls['isActive']"
+          ngDefaultControl
+        />
+        }
+      </div>
+    </div>
+  </form>
+
+</div>
+
+<div class="mt-6 flex justify-between gap-4">
+  <button type="button" class="secondary-button" (click)="goBack()">
+    Volver
+  </button>
+  <button type="submit" form="personnel-form" [disabled]="isPending()">
+    {{ isEdit ? 'Actualizar' : 'Crear' }}
+  </button>
+</div>
+
+}

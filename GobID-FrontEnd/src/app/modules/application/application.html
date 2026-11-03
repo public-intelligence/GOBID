@@ -1,0 +1,22 @@
+<app-confirmation-modal />
+<app-maintenance
+  [headers]="headers"
+  [columnData]="tableData()"
+  [title]="title"
+  [createPath]="createPath"
+  [isLoading]="isLoading()"
+  [buttonText]="'Nueva Aplicación'"
+  (searchValue)="onSearchChange($event)"
+  [filters]="filters"
+  (filterSelected)="onFiltersChange($event)"
+  [showFilters]="true"
+  [showPaginator]="true"
+  [pageNumber]="applicationFilter().pageNumber || 1"
+  (pageSize)="onPageSizeChange($event)"
+  [totalCount]="totalCount()"
+  [totalPages]="totalPages()"
+  (actualPage)="onPageChange($event)"
+  [pageSizeInput]="applicationFilter().pageSize || 10"
+  [canEdit]="!isLocalAdmin"
+  [canCreate]="!isLocalAdmin"
+/>

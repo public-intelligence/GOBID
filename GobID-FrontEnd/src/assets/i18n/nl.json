@@ -1,0 +1,138 @@
+{
+  "language": {
+    "select": "Taal selecteren"
+  },
+  "common": {
+    "help": "Help",
+    "email": "E-mailadres",
+    "emailPlaceholder": "voorbeeld@email.gob.do",
+    "emailInvalid": "Ongeldig e-mailadres",
+    "password": "Wachtwoord",
+    "confirmPassword": "Wachtwoord bevestigen",
+    "passwordsMismatch": "De wachtwoorden komen niet overeen",
+    "docType": "Type identiteitsdocument",
+    "docNumber": "Identiteitsdocument",
+    "phone": "Telefoonnummer",
+    "loading": "Informatie laden...",
+    "close": "Sluiten",
+    "yes": "Ja",
+    "no": "Nee",
+    "cedula": "Nationale identiteitskaart",
+    "passport": "Paspoort",
+    "country": "Dominicaanse Republiek",
+    "terms": "Voorwaarden",
+    "privacy": "Privacy",
+    "contact": "Contact"
+  },
+  "footer": {
+    "copyright": "© 2026 Alle rechten voorbehouden."
+  },
+  "auth": {
+    "welcome": "Welkom",
+    "selectOrg": "Selecteer een organisatie",
+    "selectOrgHint": "Uw account heeft toegang tot meer dan één organisatie.",
+    "policyDenied": "Toegang geweigerd door beveiligingsbeleid",
+    "forgotPassword": "Wachtwoord vergeten?",
+    "rememberDevice": "Dit apparaat onthouden",
+    "signIn": "Inloggen",
+    "noAccount": "Nog geen account?",
+    "registerHere": "Registreer hier",
+    "passwordInvalid": "Ongeldig wachtwoord",
+    "toasts": {
+      "missingFields": "Ontbrekende velden",
+      "invalidCredentials": "Ongeldig e-mailadres en/of wachtwoord",
+      "loginError": "Er is een fout opgetreden bij het inloggen"
+    }
+  },
+  "register": {
+    "title": "Account aanmaken",
+    "step1Intro": "Voer uw documentnummer in om uw identiteit te verifiëren en de registratie te voltooien.",
+    "selectDocType": "Selecteer een type identiteitsdocument",
+    "docNumberPlaceholder": "Voer uw documentnummer in",
+    "searching": "Zoeken...",
+    "change": "Wijzigen",
+    "searchAnother": "Zoek een ander document",
+    "backToLogin": "Terug naar inloggen",
+    "phonePlaceholder": "Voer uw telefoonnummer in",
+    "phoneRequired": "Telefoonnummer vereist",
+    "passwordPlaceholder": "Minimaal 6 tekens",
+    "passwordRule": "Het wachtwoord moet minstens 6 tekens lang zijn en ten minste één hoofdletter, één kleine letter, één cijfer en één speciaal teken bevatten.",
+    "confirmPasswordPlaceholder": "Herhaal uw wachtwoord",
+    "registering": "Registreren...",
+    "submit": "Registreren",
+    "detailsTitle": "Gebruikersgegevens",
+    "detailsDesc": "Vul de hieronder gevraagde informatie in.",
+    "firstName": "Voornaam",
+    "firstNameRequired": "Voornaam is verplicht",
+    "firstNamePlaceholder": "bijv.: Jan",
+    "lastName": "Achternaam",
+    "lastNameRequired": "Achternaam is verplicht",
+    "lastNamePlaceholder": "bijv.: Jansen",
+    "docNumberRequired": "Het nummer van het identiteitsdocument is verplicht",
+    "docNumberPlaceholder2": "Voer het nummer van het identiteitsdocument in",
+    "birthdate": "Geboortedatum",
+    "birthdateRequired": "De datum is verplicht",
+    "birthdatePlaceholder": "bijv.: 18-08-1998",
+    "genderLabel": "Geslacht",
+    "genderRequired": "Selecteer een geslacht",
+    "emailRequired": "E-mail is verplicht of heeft een ongeldig formaat",
+    "emailPlaceholder2": "bijv.: gebruiker@example.com",
+    "phonePlaceholder2": "bijv.: 8090000000",
+    "isExternal": "Is extern",
+    "selectOption": "Selecteer een optie",
+    "passwordRequired": "Wachtwoord is verplicht",
+    "passwordPlaceholder2": "Voer uw wachtwoord in",
+    "confirmPasswordPlaceholder2": "Bevestig uw wachtwoord",
+    "submitStep2": "Registreren",
+    "gender": {
+      "male": "Man",
+      "female": "Vrouw",
+      "other": "Anders"
+    },
+    "modal": {
+      "title": "E-mail bevestigen",
+      "body": "Gebruiker succesvol geregistreerd. Controleer uw e-mail om uw account te bevestigen."
+    },
+    "toasts": {
+      "personNotFound": "Er is niemand gevonden met dit identificatienummer",
+      "completeFields": "Vul alle velden correct in",
+      "registerError": "Fout bij het registreren van de gebruiker",
+      "completeFieldsCorrectly": "Vul alle verplichte velden correct in.",
+      "formError": "Er is een fout opgetreden bij het verwerken van het formulier."
+    }
+  },
+  "forgot": {
+    "intro": "Voer uw e-mailadres in en we sturen u de instructies om uw wachtwoord opnieuw in te stellen.",
+    "submit": "Instructies verzenden",
+    "toasts": {
+      "emailInvalid": "Het e-mailadres is ongeldig",
+      "resetError": "Fout bij het opnieuw instellen van het wachtwoord"
+    },
+    "modal": {
+      "title": "Wachtwoord opnieuw instellen",
+      "body": "Er is een e-mail om het wachtwoord opnieuw in te stellen verzonden naar"
+    }
+  },
+  "changePwd": {
+    "heading": "Wachtwoord wijzigen",
+    "intro": "Voordat u verdergaat, moet u uw wachtwoord bijwerken.",
+    "newPassword": "Nieuw wachtwoord",
+    "newPasswordPlaceholder": "Voer uw nieuwe wachtwoord in",
+    "passwordRule": "Het wachtwoord moet ten minste één hoofdletter, één kleine letter, één cijfer en één speciaal teken bevatten.",
+    "confirmNewPassword": "Nieuw wachtwoord bevestigen",
+    "confirmNewPasswordPlaceholder": "Bevestig uw nieuwe wachtwoord",
+    "submit": "Bevestigen",
+    "toasts": {
+      "success": "Wachtwoord succesvol opnieuw ingesteld",
+      "error": "Fout bij het wijzigen van het wachtwoord"
+    }
+  },
+  "verify": {
+    "verifying": "Uw e-mailadres wordt geverifieerd...",
+    "success": "E-mail geverifieerd!",
+    "successBody": "Uw e-mailadres is succesvol bevestigd. U kunt nu inloggen met uw account.",
+    "goToLogin": "Naar inloggen",
+    "failed": "Verificatie mislukt",
+    "invalidLink": "De verificatielink is ongeldig of verlopen."
+  }
+}

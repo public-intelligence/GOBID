@@ -1,0 +1,18 @@
+<div class="relative">
+  <label for="{{ name }}" class="label">{{ label | titlecase }}</label>
+  @if (!loading) {
+  <textarea
+    name="{{ name }}"
+    id="{{ name }}"
+    class="w-full py-2 min-h-[10rem] {{ className }}"
+    placeholder="{{ placeholder }}"
+    [ngClass]="{ 'error-input': control.invalid && isSubmitted }"
+    [formControl]="control"
+    aria-required="true"
+  ></textarea>
+  } @else {
+  <div class="skeleton h-[10rem] {{ className }}"></div>
+  } @let show = control.getError("server") || (control.invalid && isSubmitted);
+
+  <app-error-label [show]="show" [errors]="onError()" />
+</div>

@@ -1,0 +1,301 @@
+@if(!isLoading()) {
+<!-- Navbar -->
+<nav
+  class="fixed top-0 right-0 left-0 z-50 flex h-[3.5rem] items-center justify-between border-b border-gray-200 bg-white px-6 shadow-sm"
+>
+  <div class="flex items-center gap-3">
+    <img
+      src="assets/images/cupula-gob-azul.webp"
+      class="h-[1.8rem] w-auto"
+      alt="Logo"
+    />
+    <!-- <span class="font-poppins text-primary-blue text-[0.95rem] font-semibold">
+      {{organization().name}}
+    </span> -->
+  </div>
+  <div class="flex items-center gap-3">
+    <a
+      href=""
+      class="bg-primary-blue rounded-lg px-4 py-[0.45rem] text-[0.82rem] font-semibold !text-white hover:text-white no-underline transition-colors hover:bg-primary-blue-dark primary-button"
+    >
+      {{ 'common.help' | transloco }}
+    </a>
+  </div>
+</nav>
+
+<!-- Página -->
+<div class="flex min-h-screen flex-col bg-[#e4e6eb] pt-[3.5rem]">
+  <div class="flex flex-1 items-center justify-center px-4 py-12">
+    <!-- Card -->
+    <div
+      class="slide-in-bottom w-full max-w-[28rem] rounded-2xl bg-white p-8 shadow-md"
+    >
+      <!-- Avatar con icono de candado -->
+      <div
+        class="mx-auto mb-5 flex h-[4rem] w-[4rem] items-center justify-center rounded-full bg-blue-50"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="text-primary-blue h-[2rem] w-[2rem]"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+          />
+        </svg>
+      </div>
+
+      <!-- Encabezado -->
+      <h1
+        class="font-poppins mb-1 text-center text-[1.6rem] font-bold text-gray-900"
+      >
+        {{ 'auth.welcome' | transloco }}
+      </h1>
+      <p class="mb-7 text-center text-[0.88rem] text-gray-500">
+        {{application().name}}
+      </p>
+
+      <!-- Selector de organización -->
+      @if(showOrgSelector()) {
+      <div class="relative">
+        <h2
+          class="font-poppins mb-1 text-center text-[1.1rem] font-semibold text-gray-800"
+        >
+          {{ 'auth.selectOrg' | transloco }}
+        </h2>
+        <p class="mb-5 text-center text-[0.82rem] text-gray-500">
+          {{ 'auth.selectOrgHint' | transloco }}
+        </p>
+        <div class="flex flex-col gap-3">
+          @for(orgApp of userOrgApps(); track orgApp.organizationApplicationId)
+          {
+          <button
+            type="button"
+            class="flex w-full flex-col items-start gap-0.5 !rounded-xl border border-gray-200 !bg-white !px-4 !py-3 text-left !tracking-normal !normal-case hover:border-blue-400 hover:!bg-blue-50 disabled:!bg-gray-100"
+            [disabled]="!orgApp.policyAccess || isPending()"
+            (click)="selectOrgApp(orgApp)"
+            [ngClass]="
+              !orgApp.policyAccess ? 'cursor-not-allowed' : ''
+            "
+          >
+            <span class="text-[0.9rem] font-semibold text-gray-800"
+              >{{ orgApp.organizationName }}</span
+            >
+            <span class="text-[0.78rem] text-gray-400"
+              >{{ orgApp.applicationName }}</span
+            >
+            <span class="mt-2 text-[0.75rem] text-red-500"
+              >{{ orgApp.policyMessage === '' ? ('auth.policyDenied' | transloco) : (orgApp.policyMessage | titlecase) }}</span
+            >
+          </button>
+          }
+        </div>
+        @if (appSelected()) {
+        <div
+          class="absolute top-0 left-0 flex h-full w-full flex-col items-center justify-center gap-3 rounded-xl bg-white"
+        >
+          <div class="loader"></div>
+          <p class="text-[0.9rem]">{{ 'common.loading' | transloco }}</p>
+        </div>
+        }
+      </div>
+      } @else {
+
+      <!-- Formulario -->
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <!-- Email -->
+        <div class="mb-4">
+          <label class="label">{{ 'common.email' | transloco }}</label>
+          <div class="relative">
+            <span
+              class="pointer-events-none absolute inset-y-0 left-3 flex items-center text-gray-400"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                />
+              </svg>
+            </span>
+            <input
+              type="email"
+              formControlName="email"
+              [placeholder]="'common.emailPlaceholder' | transloco"
+              class="w-full pl-9"
+              [class.error-input]="submitted && loginForm.controls['email'].invalid"
+            />
+          </div>
+          @if(submitted && loginForm.controls['email'].invalid) {
+          <p class="text-alert-error mt-1 text-[0.75rem]">
+            {{ 'common.emailInvalid' | transloco }}
+          </p>
+          }
+        </div>
+
+        <!-- Contraseña + link -->
+        <div class="mb-5">
+          <div class="mb-1 flex items-center justify-between">
+            <label class="label !mb-0">{{ 'common.password' | transloco }}</label>
+            <a
+              class="text-primary-blue text-[0.8rem] font-medium no-underline hover:underline"
+              routerLink="{{forgotPasswordPath}}"
+              >{{ 'auth.forgotPassword' | transloco }}</a
+            >
+          </div>
+          <div class="relative">
+            <span
+              class="pointer-events-none absolute inset-y-0 left-3 flex items-center text-gray-400"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"
+                />
+              </svg>
+            </span>
+            <input
+              [type]="showPassword() ? 'text' : 'password'"
+              formControlName="password"
+              placeholder="••••••••"
+              class="w-full pl-9 pr-10"
+              [class.error-input]="submitted && loginForm.controls['password'].invalid"
+            />
+            <button
+              type="button"
+              class="absolute inset-y-0 right-3 flex items-center border-0 bg-transparent p-0 text-gray-400 shadow-none hover:bg-transparent hover:text-gray-600"
+              (mousedown)="showPassword.set(true)"
+              (mouseup)="showPassword.set(false)"
+              (mouseleave)="showPassword.set(false)"
+            >
+              @if(showPassword()) {
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+              </svg>
+              } @else {
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+              }
+            </button>
+          </div>
+          @if(submitted && loginForm.controls['password'].invalid) {
+          <p class="text-alert-error mt-1 text-[0.75rem]">
+            {{ 'auth.passwordInvalid' | transloco }}
+          </p>
+          }
+        </div>
+
+        <!-- Recordar sesión -->
+        <label class="!flex !flex-row cursor-pointer items-center gap-2.5">
+          <div
+            class="relative h-[1.35rem] w-[2.4rem] rounded-full transition-colors duration-200"
+            [class.bg-primary-blue]="loginForm.get('isTrustedDevice')?.value"
+            [class.bg-gray-300]="!loginForm.get('isTrustedDevice')?.value"
+            (click)="loginForm.get('isTrustedDevice')?.setValue(!loginForm.get('isTrustedDevice')?.value)"
+          >
+            <span
+              class="absolute top-[3px] left-[3px] h-[1rem] w-[1rem] rounded-full bg-white shadow-sm transition-transform duration-200"
+              [style.transform]="loginForm.get('isTrustedDevice')?.value ? 'translateX(1rem)' : 'translateX(0)'"
+            ></span>
+          </div>
+          <span class="text-[0.85rem] text-gray-600 select-none"
+            >{{ 'auth.rememberDevice' | transloco }}</span
+          >
+        </label>
+
+        <!-- Botón -->
+        <button
+          type="submit"
+          class="mt-6 w-full !rounded-lg py-[0.75rem] text-[0.9rem] font-bold tracking-widest uppercase"
+          [attr.aria-label]="'auth.signIn' | transloco"
+          [disabled]="isPending()"
+        >
+          {{ 'auth.signIn' | transloco }}
+        </button>
+
+        @if (isPublic()) {<!-- Link registro -->
+        <p class="mt-5 text-center text-[.9rem] text-gray-500">
+          {{ 'auth.noAccount' | transloco }}
+          <a
+            class="text-primary-blue text-[.9rem] font-medium no-underline hover:underline"
+            routerLink="{{registerPath}}"
+          >
+            {{ 'auth.registerHere' | transloco }}
+          </a>
+        </p>
+        }
+      </form>
+      }
+      <!-- end @else -->
+
+      <!-- Footer de card -->
+      <!-- <p class="mt-6 text-center text-[0.75rem] leading-relaxed text-gray-400">
+        {{organization().name}}
+      </p> -->
+    </div>
+  </div>
+
+  <!-- Footer global -->
+  <footer
+    class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 py-4 text-[0.78rem] text-gray-400"
+  >
+    <span class="flex items-center gap-1">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-3.5 w-3.5"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"
+        />
+      </svg>
+      {{ 'common.country' | transloco }}
+    </span>
+    <span class="text-gray-300">•</span>
+    <a class="hover:text-primary-blue text-gray-400 no-underline" href="#"
+      >{{ 'common.terms' | transloco }}</a
+    >
+    <a class="hover:text-primary-blue text-gray-400 no-underline" href="#"
+      >{{ 'common.privacy' | transloco }}</a
+    >
+    <a class="hover:text-primary-blue text-gray-400 no-underline" href="#"
+      >{{ 'common.contact' | transloco }}</a
+    >
+  </footer>
+</div>
+} @else {
+<div class="grid h-screen place-items-center bg-[#f0f2f5]">
+  <span class="loader"></span>
+</div>
+}
+
+@if(isRedirecting()) {
+  <app-credentials-loader/>
+}

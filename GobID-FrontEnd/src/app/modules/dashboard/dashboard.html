@@ -1,0 +1,107 @@
+<div class="">
+  <!-- Header -->
+  <div
+    class="mb-8 rounded-xl border border-gray-100 bg-white px-6 py-4 shadow-sm"
+  >
+    <div
+      class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"
+    >
+      <div>
+        <h1 class="text-2xl font-semibold text-gray-900">Dashboard</h1>
+        <p class="mt-1 text-[.9rem] text-gray-600">
+          Resumen general del sistema GobID
+        </p>
+      </div>
+      <div class="flex gap-3">
+        <button
+          class="inline-flex items-center gap-2 rounded-lg border border-blue-600 bg-white px-4 py-2 text-sm font-medium text-blue-600 transition-colors hover:border-blue-700 hover:bg-blue-50 disabled:cursor-not-allowed disabled:opacity-60"
+          (click)="refreshData()"
+          [disabled]="isLoading()"
+        >
+          <i
+            class="fas fa-sync-alt text-sm"
+            [class.animate-spin]="isLoading()"
+          ></i>
+          Actualizar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  @if (isLoading()) {
+  <div class="flex flex-col items-center justify-center py-20">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+  }
+
+  <!-- Error State -->
+  @if (hasError() && !isLoading()) {
+  <div class="flex items-center justify-center py-20">
+    <div
+      class="max-w-md rounded-xl border border-gray-100 bg-white p-10 text-center shadow-sm"
+    >
+      <i class="fas fa-exclamation-triangle mb-4 text-5xl text-red-500"></i>
+      <h3 class="mb-3 text-xl font-semibold text-gray-900">
+        Error al cargar el dashboard
+      </h3>
+      <p class="mb-6 text-gray-600">{{ errorMessage() }}</p>
+      <button
+        class="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700"
+        (click)="retryLoad()"
+      >
+        <i class="fas fa-redo text-sm"></i>
+        Reintentar
+      </button>
+    </div>
+  </div>
+  }
+
+  <!-- Dashboard Content -->
+  @if (!isLoading() && !hasError()) {
+  <div class="space-y-8">
+    <!-- Metrics Cards -->
+    <section>
+      <div class="mb-6">
+        <h2 class="text-xl font-semibold text-gray-900">
+          Métricas Principales
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        @for (card of cards(); track card.id) {
+
+        <app-dashboard-card [card]="card"></app-dashboard-card>
+        }
+      </div>
+    </section>
+
+    <!-- Charts Section -->
+    <section>
+      <div class="mb-6">
+        <h2 class="text-xl font-semibold text-gray-900">
+          Análisis y Estadísticas
+        </h2>
+      </div>
+      <div class="">
+        @for (chart of charts(); track chart.id) {
+        <app-dashboard-chart [chart]="chart"></app-dashboard-chart>
+        }
+      </div>
+    </section>
+
+    <!-- Recent Activity -->
+    <!-- <section>
+      <div class="mb-6">
+        <h2 class="text-xl font-semibold text-gray-900">
+          Actividad del Sistema
+        </h2>
+      </div>
+      <div class="mx-auto max-w-4xl">
+        <app-recent-activity
+          [activities]="recentActivity()"
+        ></app-recent-activity>
+      </div>
+    </section> -->
+  </div>
+  }
+</div>

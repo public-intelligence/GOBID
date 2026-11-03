@@ -1,0 +1,155 @@
+@if(!isLoading) { @if (data().length > 0) {
+<div
+  class="relative h-full overflow-x-auto rounded-lg border border-gray-200 pb-[4rem]"
+>
+  <table class="w-full text-left text-sm text-gray-500 rtl:text-right">
+    <thead
+      class="sticky top-0 z-[11] bg-slate-100 text-xs text-gray-700 uppercase"
+    >
+      <tr>
+        @for (header of headers; track header.value) {
+        <th
+          scope="col"
+          [ngClass]="{
+                'text-left': header.justify === 'left',
+                'text-center': header.justify === 'center',
+                'text-right': header.justify === 'right',
+              }"
+          class="truncate px-6 py-3"
+        >
+          {{ header.value }}
+        </th>
+        } @if (actions) {
+        <th class="truncate px-6 py-3 text-center">Acciones</th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (data of data(); track `${data.id}-${$index}` ) {
+      <tr
+        class="cursor-pointer border-b border-gray-200 duration-200 last-of-type:border-b-0 hover:bg-slate-50"
+      >
+        @for (cell of data.columns; track $index) { @switch(cell.dataType) {
+        @case ('link') {
+        <td
+          title="{{ cell.value }}"
+          (click)="onViewInfo(data.displayData ?? [], data.editPath ?? '')"
+          class="px-6 py-2 text-ellipsis"
+        >
+          <a
+            class="text-blue-500 duration-200 hover:text-blue-400"
+            href="{{ cell.value }}"
+            target="_blank"
+            >{{ cell.value }}</a
+          >
+        </td>
+        } @default {
+        <td
+          title="{{ cell.value }}"
+          (click)="onViewInfo(data.displayData ?? [], data.editPath ?? '')"
+          class="px-6 py-2 text-ellipsis"
+          [ngClass]="{
+                  'text-left': cell.justify === 'left',
+                  'text-center': cell.justify === 'center',
+                  'text-green-600': cell.value === 'Activo',
+                  'text-orange-500': cell.value === 'Inactivo',
+                  'text-right': cell.justify === 'right',
+                }"
+        >
+          {{ cell.value }}
+        </td>
+        }
+        <!-- / -->
+        } } @if (actions) {
+        <td
+          class="px-6 py-2 text-center"
+          (click)="
+                  !showIcons && toggleActions({ id: `${data.id}-${$index}`, bool: true, event: $event })
+                "
+        >
+          @if (!showIcons) {
+          <div class="relative h-full cursor-pointer">
+            <fa-icon
+              [icon]="faEllipsis"
+              class="text-primary-blue rotate-90 cursor-pointer text-[1.1rem]"
+            />
+            @if (data.showActions) {
+            <div
+              (appClickOutside)="
+                          toggleActions({ id: data.id, bool: false })
+                        "
+              class="fixed z-[9999] -translate-x-full rounded-lg border border-gray-200 bg-white shadow-md"
+              [style.top.px]="dropdownPosition().top"
+              [style.left.px]="dropdownPosition().left"
+            >
+              <ul class="text-sm">
+                @if(data.displayData) {
+                <li
+                  (click)="onViewInfo(data.displayData, data.editPath ?? '')"
+                  (keydown)="onViewInfo(data.displayData, data.editPath ?? '')"
+                  tabindex="0"
+                  class="truncate px-4 py-2 hover:bg-slate-100"
+                >
+                  Ver detalles
+                </li>
+                } @for ( action of data.actionsOptions; track action.name ) {
+                <li
+                  (click)="action.function(data.id)"
+                  (keydown)="action.function(data.id)"
+                  tabindex="0"
+                  class="truncate px-4 py-2 hover:bg-slate-100"
+                  [ngClass]="{
+                                'text-green-600': action.color === 'green',
+                                'text-orange-600': action.color === 'orange',
+                                'text-red-600': action.color === 'red',
+                              }"
+                >
+                  {{ action.name }}
+                </li>
+                }
+              </ul>
+            </div>
+            }
+          </div>
+          } @else {
+          <div class="flex justify-center gap-4">
+            @for (action of data.actionsOptions; track action.name) {
+            <div title="{{ action.name }}">
+              <fa-icon
+                [icon]="action.icon ? action.icon : faNotdef"
+                (click)="action.function(data.id)"
+                class="icons cursor-pointer text-[1.1rem]"
+                [ngClass]="{'text-alert-error hover:text-red-500 duration-200': action.color === 'red'}"
+              />
+            </div>
+            }
+          </div>
+          }
+        </td>
+        }
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
+} @else {
+<div class="flex h-full items-center justify-center">
+  <div class="grid place-items-center">
+    <svg
+      id="Icons"
+      xmlns="http://www.w3.org/2000/svg"
+      version="1.1"
+      viewBox="0 0 24 24"
+      class="mb-2 h-[2.5rem] w-[2.5rem] rotate-45 text-gray-400"
+      fill="currentColor"
+    >
+      <path
+        d="M20,3H4c-.552,0-1,.448-1,1v16c0,.552.448,1,1,1h16c.552,0,1-.448,1-1V4c0-.552-.448-1-1-1ZM17.354,8.061l-9.293,9.293c-.195.195-.512.195-.707,0l-.707-.707c-.195-.195-.195-.512,0-.707L15.939,6.647c.195-.195.512-.195.707,0l.707.707c.195.195.195.512,0,.707Z"
+      />
+    </svg>
+    <p class="text-gray-400">{{ noDataDescription }}</p>
+  </div>
+</div>
+} } @else {
+<div class="skeleton h-full w-full"></div>
+}

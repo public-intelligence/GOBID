@@ -1,0 +1,343 @@
+<app-confirmation-modal />
+
+<section class="mx-4 my-6">
+  <!-- Header -->
+  <div class="mb-8 flex flex-wrap items-center gap-4">
+    <button (click)="goBack()" class="secondary-button">
+      <fa-icon [icon]="faArrowLeft" class="mr-2"></fa-icon>
+      Volver
+    </button>
+    <div>
+      <h1 class="text-2xl font-bold">
+        {{ id ? 'Editar Organización' : 'Registrar Organización' }}
+      </h1>
+      <p class="mt-0.5 text-sm text-gray-500">
+        {{ id ? 'Modifica la información de la organización' : 'Completa el
+        formulario para registrar una nueva organización' }}
+      </p>
+    </div>
+  </div>
+
+  <form [formGroup]="organizationForm" (ngSubmit)="onSubmit()">
+    <!-- Step 1: Entidad Legal -->
+    <div class="mb-6 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+      <div class="mb-5 flex items-center gap-3">
+        <span
+          class="flex h-7 w-7 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-600"
+          >1</span
+        >
+        <h2 class="text-base font-semibold">Entidad Legal</h2>
+      </div>
+
+      @if (!id) {
+      <div class="mb-4">
+        <label class="label mb-1 block"
+          >Buscar por RNC / Número de identificación</label
+        >
+        <app-search
+          placeholder="Ej: 131123456"
+          [mask]="'00000000000'"
+          (searchValue)="onSearchLegalEntity($event)"
+        />
+        @if (submitted() && organizationForm.controls['legalEntityId'].invalid)
+        {
+        <span class="mt-1 block text-sm text-red-500">
+          Debe seleccionar una entidad legal válida
+        </span>
+        }
+      </div>
+      } @if (legalEntityFound(); as entity) {
+      <div class="mt-2 rounded-lg border border-blue-100 bg-blue-50 p-4">
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div>
+            <span
+              class="text-xs font-medium tracking-wide text-gray-500 uppercase"
+              >Nombre Legal</span
+            >
+            <p class="mt-1 text-sm font-semibold text-gray-800">
+              {{ entity.legalName }}
+            </p>
+          </div>
+          <div>
+            <span
+              class="text-xs font-medium tracking-wide text-gray-500 uppercase"
+              >Nombre Social</span
+            >
+            <p class="mt-1 text-sm font-semibold text-gray-800">
+              {{ entity.socialName }}
+            </p>
+          </div>
+          <div>
+            <span
+              class="text-xs font-medium tracking-wide text-gray-500 uppercase"
+              >RNC</span
+            >
+            <p class="mt-1 text-sm font-semibold text-gray-800">
+              {{ entity.identificationNumber }}
+            </p>
+          </div>
+          <div>
+            <span
+              class="text-xs font-medium tracking-wide text-gray-500 uppercase"
+              >Estado</span
+            >
+            <span
+              class="mt-1 inline-block rounded-full px-2.5 py-0.5 text-xs font-medium"
+              [class.bg-green-100]="entity.status === 'Active'"
+              [class.text-green-700]="entity.status === 'Active'"
+              [class.bg-gray-100]="entity.status !== 'Active'"
+              [class.text-gray-600]="entity.status !== 'Active'"
+            >
+              {{ entity.status }}
+            </span>
+          </div>
+        </div>
+      </div>
+      } @else if (!id) {
+      <div
+        class="rounded-lg border-2 border-dashed border-gray-200 p-6 text-center text-sm text-gray-400"
+      >
+        Busca una entidad legal por número de identificación para continuar
+      </div>
+      }
+    </div>
+
+    <!-- Step 2: Información de la Organización -->
+    <div class="mb-6 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+      <div class="mb-5 flex items-center gap-3">
+        <span
+          class="flex h-7 w-7 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-600"
+          >2</span
+        >
+        <h2 class="text-base font-semibold">Información de la Organización</h2>
+      </div>
+
+      <div class="grid gap-8 pb-4 sm:grid-cols-2">
+        <app-input
+          [formControlName]="'name'"
+          [label]="'Nombre'"
+          [type]="'text'"
+          [name]="'name'"
+          [isSubmitted]="submitted()"
+          [formControl]="organizationForm.controls['name']"
+          [className]="'w-full'"
+          [errMsg]="'Nombre inválido'"
+          [placeholder]="'Nombre de la organización'"
+          [loading]="isLoading()"
+          class="sm:col-span-2"
+          ngDefaultControl
+        />
+        <app-input
+          [formControlName]="'acronym'"
+          [label]="'Acrónimo'"
+          [type]="'text'"
+          [name]="'acronym'"
+          [isSubmitted]="submitted()"
+          [formControl]="organizationForm.controls['acronym']"
+          [className]="'w-full'"
+          [errMsg]="'Acrónimo inválido'"
+          [placeholder]="'Ej: MINERD'"
+          [loading]="isLoading()"
+          ngDefaultControl
+        />
+        <app-input
+          [formControlName]="'slogan'"
+          [label]="'Eslogan'"
+          [type]="'text'"
+          [name]="'slogan'"
+          [isSubmitted]="submitted()"
+          [formControl]="organizationForm.controls['slogan']"
+          [className]="'w-full'"
+          [errMsg]="'Eslogan inválido'"
+          [placeholder]="'Eslogan de la organización'"
+          [loading]="isLoading()"
+          ngDefaultControl
+        />
+        <app-input
+          [formControlName]="'organizationAddress'"
+          [label]="'Dirección'"
+          [type]="'text'"
+          [name]="'organizationAddress'"
+          [isSubmitted]="submitted()"
+          [formControl]="organizationForm.controls['organizationAddress']"
+          [className]="'w-full'"
+          [errMsg]="'Dirección inválida'"
+          [placeholder]="'Dirección completa de la organización'"
+          [loading]="isLoading()"
+          class="sm:col-span-2"
+          ngDefaultControl
+        />
+        <app-input
+          [formControlName]="'email'"
+          [label]="'Correo Electrónico'"
+          [type]="'email'"
+          [name]="'email'"
+          [isSubmitted]="submitted()"
+          [formControl]="organizationForm.controls['email']"
+          [className]="'w-full'"
+          [errMsg]="'Correo inválido'"
+          [placeholder]="'correo@organizacion.com'"
+          [loading]="isLoading()"
+          ngDefaultControl
+        />
+        <app-input
+          [formControlName]="'phone'"
+          [label]="'Teléfono'"
+          [type]="'text'"
+          [name]="'phone'"
+          [isSubmitted]="submitted()"
+          [formControl]="organizationForm.controls['phone']"
+          [className]="'w-full'"
+          [errMsg]="'Teléfono inválido'"
+          [placeholder]="'000-000-0000'"
+          [loading]="isLoading()"
+          mask="999-999-9999"
+          ngDefaultControl
+        />
+        <app-input
+          [formControlName]="'website'"
+          [label]="'Sitio Web'"
+          [type]="'text'"
+          [name]="'website'"
+          [isSubmitted]="submitted()"
+          [formControl]="organizationForm.controls['website']"
+          [className]="'w-full'"
+          [errMsg]="'Sitio web inválido'"
+          [placeholder]="'https://www.organizacion.com'"
+          [loading]="isLoading()"
+          class="sm:col-span-2"
+          ngDefaultControl
+        />
+        <app-textarea
+          [formControlName]="'description'"
+          [label]="'Descripción'"
+          [isSubmitted]="submitted()"
+          [formControl]="organizationForm.controls['description']"
+          [errMsg]="'Descripción inválida'"
+          [placeholder]="'Describe brevemente la organización'"
+          [loading]="isLoading()"
+          class="sm:col-span-2"
+          ngDefaultControl
+        />
+      </div>
+    </div>
+
+    <!-- Step 3: Contactos -->
+    <div class="mb-6 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+      <div class="mb-5 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span
+            class="flex h-7 w-7 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-600"
+            >3</span
+          >
+          <h2 class="text-base font-semibold">Contactos</h2>
+          <span
+            class="rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600"
+          >
+            {{ organizationContacts.length }} / 5
+          </span>
+        </div>
+        <button type="button" class="secondary-button" (click)="addContact()">
+          <fa-icon [icon]="faPlus" class="sm:mr-1.5" />
+          <span class="hidden sm:inline"> Agregar contacto</span>
+        </button>
+      </div>
+
+      <div formArrayName="organizationContacts" class="grid gap-4">
+        @for ( item of organizationContacts.controls; let i = $index; track
+        item.get('contactId')?.value ) {
+        <div
+          [formGroupName]="$index"
+          class="rounded-lg border border-gray-200 bg-gray-50 p-4"
+        >
+          <div class="mb-4 flex items-center justify-between">
+            <span
+              class="rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-semibold text-blue-700"
+            >
+              Contacto {{ i + 1 }}
+            </span>
+            <button
+              type="button"
+              class="flex h-7 w-7 items-center justify-center rounded-full bg-transparent text-red-400 transition-colors hover:bg-red-50 hover:text-red-600"
+              (click)="deleteType(i)"
+            >
+              <fa-icon [icon]="faTrash" />
+            </button>
+          </div>
+
+          <div class="grid gap-8 sm:grid-cols-2">
+            <app-input
+              [formControlName]="'organizationContactName'"
+              [label]="'Nombre del contacto'"
+              [type]="'text'"
+              [name]="'organizationContactName'"
+              [isSubmitted]="submitted()"
+              [className]="'w-full'"
+              [errMsg]="'Nombre inválido'"
+              [placeholder]="'Nombre completo'"
+              [loading]="isLoading()"
+              ngDefaultControl
+            />
+            <app-input
+              [formControlName]="'position'"
+              [label]="'Cargo'"
+              [type]="'text'"
+              [name]="'position'"
+              [isSubmitted]="submitted()"
+              [className]="'w-full'"
+              [errMsg]="'Cargo inválido'"
+              [placeholder]="'Cargo del contacto'"
+              [loading]="isLoading()"
+              ngDefaultControl
+            />
+            <app-input
+              [formControlName]="'email'"
+              [label]="'Correo Electrónico'"
+              [type]="'email'"
+              [name]="'email'"
+              [isSubmitted]="submitted()"
+              [className]="'w-full'"
+              [errMsg]="'Correo inválido'"
+              [placeholder]="'correo@ejemplo.com'"
+              [loading]="isLoading()"
+              ngDefaultControl
+            />
+            <app-input
+              [formControlName]="'phone'"
+              [label]="'Teléfono'"
+              [type]="'text'"
+              [name]="'phone'"
+              [isSubmitted]="submitted()"
+              [className]="'w-full'"
+              [errMsg]="'Teléfono inválido'"
+              [placeholder]="'000-000-0000'"
+              [loading]="isLoading()"
+              mask="999-999-9999"
+              ngDefaultControl
+            />
+            <div class="sm:col-span-2">
+              <app-checkbox
+                [formControlName]="'isActive'"
+                label="Contacto activo"
+              />
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex justify-end gap-3">
+      <button
+        type="button"
+        class="secondary-button"
+        (click)="goBack()"
+        [disabled]="isPending()"
+      >
+        Cancelar
+      </button>
+      <button type="submit">{{ id ? 'Actualizar' : 'Registrar' }}</button>
+    </div>
+  </form>
+</section>

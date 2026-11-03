@@ -1,0 +1,230 @@
+@let container = 'border border-gray-300 bg-white p-8 rounded-lg';
+<app-confirmation-modal />
+<div class="mt-4">
+  <app-steps-form [data]="steps"></app-steps-form>
+</div>
+<form class="my-[2rem] rounded-lg" action="" [formGroup]="form">
+  @switch (currentStep) { @case (1) {
+  <div>
+    <section class="my-[2rem] {{ container }}">
+      <app-details-panel
+        [title]="'Detalles de la Aplicación'"
+        [description]="'Complete los detalles de la aplicación para continuar con la configuración.'"
+      />
+      <div class="my-8 grid gap-8">
+        <div class="col-span-2 md:col-span-1">
+          <app-input
+            [formControlName]="'name'"
+            [label]="'Nombre'"
+            [type]="'text'"
+            [name]="'name'"
+            [className]="'w-full'"
+            [formControl]="form.controls['name']"
+            [errMsg]="'Nombre inválido'"
+            [placeholder]="'Ingrese el nombre de la aplicación'"
+            [loading]="isLoading()"
+            ngDefaultControl
+          />
+        </div>
+        <div class="col-span-2 md:col-span-1">
+          <app-input
+            [formControlName]="'code'"
+            [label]="'Código'"
+            [type]="'text'"
+            [name]="'code'"
+            [className]="'w-full'"
+            [formControl]="form.controls['code']"
+            [errMsg]="'Código inválido'"
+            [placeholder]="'Ingrese el código de la aplicación'"
+            [loading]="isLoading()"
+            ngDefaultControl
+          />
+        </div>
+        <div class="col-span-2">
+          <app-input
+            [formControlName]="'redirectUrl'"
+            [label]="'URL de Redirección'"
+            [type]="'text'"
+            [name]="'redirectUrl'"
+            [formControl]="form.controls['redirectUrl']"
+            [className]="'w-full'"
+            [errMsg]="'URL inválida'"
+            [placeholder]="'Ingrese la URL de redirección'"
+            [loading]="isLoading()"
+            ngDefaultControl
+          />
+        </div>
+        <div class="col-span-2">
+          <app-textarea
+            [formControlName]="'description'"
+            [label]="'Descripción'"
+            [type]="'text'"
+            [name]="'description'"
+            [formControl]="form.controls['description']"
+            [errMsg]="'Descripción inválida'"
+            [placeholder]="'Ingrese la descripción de la aplicación'"
+            [loading]="isLoading()"
+            ngDefaultControl
+          />
+        </div>
+        <div class="col-span-2">
+          <app-checkbox
+            [formControlName]="'isPublic'"
+            [label]="'¿Es para acceso público?'"
+            [name]="'isPublic'"
+            [formControl]="form.controls['isPublic']"
+            ngDefaultControl
+          />
+        </div>
+      </div>
+    </section>
+  </div>
+  <section class="mt-8 flex justify-end gap-4">
+    <button (click)="goBackToList()" class="secondary-button">Cancelar</button>
+    <button (click)="nextStep()">
+      <span>Siguiente</span>
+    </button>
+  </section>
+  } @case (2) {
+  <div>
+    <div class="grid gap-8 lg:grid-cols-3">
+      <div class="{{ container }}">
+        <app-details-panel [title]="'Agregar Permisos'" [description]="''" />
+        <div class="col-span-1 grid gap-8">
+          <app-input
+            [formControlName]="'permissionCode'"
+            [label]="'Código'"
+            [type]="'text'"
+            [name]="'permissionCode'"
+            [className]="'w-full'"
+            [formControl]="form.controls['permissionCode']"
+            [errMsg]="'Código inválido'"
+            [placeholder]="'Ingrese el código del permiso'"
+            [loading]="isLoading()"
+            ngDefaultControl
+          />
+          <app-input
+            [formControlName]="'permissionName'"
+            [label]="'Nombre'"
+            [type]="'text'"
+            [name]="'permissionName'"
+            [className]="'w-full'"
+            [formControl]="form.controls['permissionName']"
+            [errMsg]="'Nombre inválido'"
+            [placeholder]="'Ingrese el nombre del permiso'"
+            [loading]="isLoading()"
+            ngDefaultControl
+          />
+          <app-textarea
+            [formControlName]="'permissionDescription'"
+            [label]="'Descripción'"
+            [type]="'text'"
+            [name]="'permissionDescription'"
+            [formControl]="form.controls['permissionDescription']"
+            [errMsg]="'Descripción inválida'"
+            [placeholder]="'Ingrese la descripción de la aplicación'"
+            [loading]="isLoading()"
+            ngDefaultControl
+          />
+          <app-checkbox
+            [formControlName]="'permissionIsAutomatic'"
+            [label]="'Automático'"
+            [name]="'permissionIsAutomatic'"
+            [formControl]="form.controls['permissionIsAutomatic']"
+            ngDefaultControl
+          />
+        </div>
+        <div class="mt-8 flex justify-end">
+          <button class="secondary-button" (click)="addPermission()">
+            Agregar Permiso
+          </button>
+        </div>
+      </div>
+      <div
+        class="min-w-0 rounded-lg border border-gray-300 bg-white p-8 lg:col-span-2"
+      >
+        <app-details-panel [title]="'Listado de Permisos'" [description]="''" />
+        <div class="h-[50vh] overflow-x-hidden">
+          <app-table
+            [headers]="permissionHeaders"
+            [columnData]="permissionsData"
+            [showIcons]="true"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <section class="mt-8 flex justify-end gap-4">
+    <button (click)="previousStep()" class="secondary-button">Volver</button>
+    <button (click)="nextStep()">
+      <span>Siguiente</span>
+    </button>
+  </section>
+  } @case (3) {
+  <div class="grid gap-8 sm:grid-cols-2">
+    <div class="relative {{ container }}">
+      <div
+        tabindex="0"
+        role="button"
+        (click)="goToStep(1)"
+        (keyup)="goToStep(1)"
+        class="cursor-pointer"
+        aria-label="Editar detalles de la aplicación"
+      >
+        <fa-icon [icon]="faPen" class="absolute top-2 right-2" />
+      </div>
+      @let heading = 'text-[1rem] font-semibold mb-1'; @let paragraph =
+      'text-[0.875rem] text-gray-600 ';
+      <ul class="grid gap-4">
+        <li>
+          <h4 class="{{ heading }}">Código</h4>
+          <p class="{{ paragraph }}">{{ form.controls['code'].value }}</p>
+        </li>
+        <li>
+          <h4 class="{{ heading }}">Nombre</h4>
+          <p class="{{ paragraph }}">{{ form.controls['name'].value }}</p>
+        </li>
+        <li>
+          <h4 class="{{ heading }}">URL de Redirección</h4>
+          <p class="{{ paragraph }}">
+            {{ form.controls['redirectUrl'].value }}
+          </p>
+        </li>
+        @if(form.controls['description'].value) {
+        <li>
+          <h4 class="{{ heading }}">Descripción</h4>
+          <p class="{{ paragraph }}">
+            {{ form.controls['description'].value }}
+          </p>
+        </li>
+        }
+      </ul>
+    </div>
+    <div class="relative {{ container }}  min-w-0">
+      <div
+        tabindex="0"
+        role="button"
+        (click)="goToStep(2)"
+        (keyup)="goToStep(2)"
+        class="cursor-pointer"
+        aria-label="Editar detalles de la aplicación"
+      >
+        <fa-icon [icon]="faPen" class="absolute top-2 right-2" />
+      </div>
+      <div class="h-[50vh] overflow-x-hidden">
+        <app-table
+          [headers]="permissionHeaders"
+          [columnData]="permissionsDataNoActions"
+          [actions]="false"
+        />
+      </div>
+    </div>
+  </div>
+  <section class="mt-8 flex justify-end gap-4">
+    <button (click)="previousStep()" class="secondary-button">Volver</button>
+    <button (click)="onSubmit()" [disabled]="isPending()">
+      {{isEdit ? 'Actualizar Aplicación' : 'Registrar Aplicación'}}
+    </button>
+  </section>
+  } }
+</form>

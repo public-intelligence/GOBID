@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11520.95 d18.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityHub", "IdentityHub\IdentityHub.csproj", "{669E7405-27C5-4417-877D-01D36ACBBAAA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01. Domain", "01. Domain", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02. Application", "02. Application", "{41013B1E-FE43-483B-9F7A-66630C699069}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03. Service", "03. Service", "{445F1C5C-9445-4386-8EA5-0DBBD3D56888}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04. Presentation", "04. Presentation", "{E41D20E1-5B96-428D-8911-8AD2EAD2D54A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityHub.Domain", "domain\IdentityHub.Domain.csproj", "{F48463A2-B20E-41B1-8951-0AE90C73878A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityHub.Application", "application\IdentityHub.Application.csproj", "{F1CECF54-0475-410D-931F-9D1D7CDBDCE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityHub.Service", "IdentityHub.Service\IdentityHub.Service.csproj", "{1A05C26B-C610-40C4-B8C8-37464853302A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{669E7405-27C5-4417-877D-01D36ACBBAAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{669E7405-27C5-4417-877D-01D36ACBBAAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{669E7405-27C5-4417-877D-01D36ACBBAAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{669E7405-27C5-4417-877D-01D36ACBBAAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F48463A2-B20E-41B1-8951-0AE90C73878A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F48463A2-B20E-41B1-8951-0AE90C73878A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F48463A2-B20E-41B1-8951-0AE90C73878A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F48463A2-B20E-41B1-8951-0AE90C73878A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1CECF54-0475-410D-931F-9D1D7CDBDCE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1CECF54-0475-410D-931F-9D1D7CDBDCE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1CECF54-0475-410D-931F-9D1D7CDBDCE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1CECF54-0475-410D-931F-9D1D7CDBDCE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A05C26B-C610-40C4-B8C8-37464853302A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A05C26B-C610-40C4-B8C8-37464853302A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A05C26B-C610-40C4-B8C8-37464853302A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A05C26B-C610-40C4-B8C8-37464853302A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{669E7405-27C5-4417-877D-01D36ACBBAAA} = {E41D20E1-5B96-428D-8911-8AD2EAD2D54A}
+		{F48463A2-B20E-41B1-8951-0AE90C73878A} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{F1CECF54-0475-410D-931F-9D1D7CDBDCE1} = {41013B1E-FE43-483B-9F7A-66630C699069}
+		{1A05C26B-C610-40C4-B8C8-37464853302A} = {445F1C5C-9445-4386-8EA5-0DBBD3D56888}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {26E75BE3-E0BA-4A83-90C4-B8371D9A5C54}
+	EndGlobalSection
+EndGlobal

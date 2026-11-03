@@ -1,0 +1,38 @@
+@if (show()) {
+<div
+  data-testid="modal-background"
+  class="fixed inset-0 z-20 bg-black opacity-10"
+  tabindex="0"
+  (click)="hideOnClickOutside && closeModal()"
+  (keydown)="($event.key === 'Enter' || $event.key === ' ') && hideOnClickOutside && closeModal()"
+  role="button"
+  aria-label="Cerrar modal"
+></div>
+<div
+  (appClickOutside)="closeModal()"
+  class="scale-in-ver-center fixed inset-0 z-30 m-auto h-fit w-fit rounded-lg bg-white p-6"
+>
+  <div class="flex items-center justify-between">
+    @if(title) {
+    <div class="mb-4">
+      <h2 class="text-[1rem] font-semibold md:text-[1.2rem]">{{ title }}</h2>
+    </div>
+    }
+    <!-- /// -->
+    @if (!isConfirmation && showCloseIcon) {
+    <div
+      title="Cerrar"
+      (click)="closeModal()"
+      (keydown)="closeModal()"
+      tabindex="0"
+      class="absolute top-2 right-4"
+    >
+      <fa-icon class="cursor-pointer text-[1.4rem]" [icon]="faXmark" />
+    </div>
+    }
+  </div>
+  <div class="max-h-[50rem] overflow-auto">
+    <ng-content></ng-content>
+  </div>
+</div>
+}

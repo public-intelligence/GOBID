@@ -1,0 +1,10 @@
+<app-modal [title]="title()" [isConfirmation]="true">
+  <div>
+    <p class="max-w-[24rem] text-[1rem] text-gray-500">
+      {{ paragraph() }} <strong>{{ name() }}</strong>
+    </p>
+  </div>
+  <div class="mt-8 flex justify-end">
+    <button (click)="onConfirm()">{{ confirmButton() }}</button>
+  </div>
+</app-modal>

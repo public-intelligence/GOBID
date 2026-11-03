@@ -1,0 +1,138 @@
+{
+  "language": {
+    "select": "언어 선택"
+  },
+  "common": {
+    "help": "도움말",
+    "email": "이메일",
+    "emailPlaceholder": "example@email.gob.do",
+    "emailInvalid": "유효하지 않은 이메일입니다",
+    "password": "비밀번호",
+    "confirmPassword": "비밀번호 확인",
+    "passwordsMismatch": "비밀번호가 일치하지 않습니다",
+    "docType": "신분증 유형",
+    "docNumber": "신분증",
+    "phone": "전화번호",
+    "loading": "정보를 불러오는 중...",
+    "close": "닫기",
+    "yes": "예",
+    "no": "아니요",
+    "cedula": "국가 신분증",
+    "passport": "여권",
+    "country": "도미니카 공화국",
+    "terms": "약관",
+    "privacy": "개인정보 처리방침",
+    "contact": "문의"
+  },
+  "footer": {
+    "copyright": "© 2026 모든 권리 보유."
+  },
+  "auth": {
+    "welcome": "환영합니다",
+    "selectOrg": "조직을 선택하세요",
+    "selectOrgHint": "귀하의 계정은 둘 이상의 조직에 접근할 수 있습니다.",
+    "policyDenied": "보안 정책에 의해 접근이 거부되었습니다",
+    "forgotPassword": "비밀번호를 잊으셨나요?",
+    "rememberDevice": "이 기기 기억하기",
+    "signIn": "로그인",
+    "noAccount": "계정이 없으신가요?",
+    "registerHere": "여기에서 가입하세요",
+    "passwordInvalid": "유효하지 않은 비밀번호입니다",
+    "toasts": {
+      "missingFields": "누락된 항목이 있습니다",
+      "invalidCredentials": "이메일 또는 비밀번호가 올바르지 않습니다",
+      "loginError": "로그인 중 오류가 발생했습니다"
+    }
+  },
+  "register": {
+    "title": "계정 만들기",
+    "step1Intro": "신원을 확인하고 등록을 완료하려면 문서 번호를 입력하세요.",
+    "selectDocType": "신분증 유형을 선택하세요",
+    "docNumberPlaceholder": "문서 번호를 입력하세요",
+    "searching": "검색 중...",
+    "change": "변경",
+    "searchAnother": "다른 신분증 검색",
+    "backToLogin": "로그인으로 돌아가기",
+    "phonePlaceholder": "전화번호를 입력하세요",
+    "phoneRequired": "전화번호는 필수입니다",
+    "passwordPlaceholder": "최소 6자",
+    "passwordRule": "비밀번호는 6자 이상이어야 하며 대문자, 소문자, 숫자, 특수 문자를 각각 하나 이상 포함해야 합니다.",
+    "confirmPasswordPlaceholder": "비밀번호를 다시 입력하세요",
+    "registering": "등록 중...",
+    "submit": "가입",
+    "detailsTitle": "사용자 세부 정보",
+    "detailsDesc": "아래 요청된 정보를 입력하세요.",
+    "firstName": "이름",
+    "firstNameRequired": "이름은 필수입니다",
+    "firstNamePlaceholder": "예: 민수",
+    "lastName": "성",
+    "lastNameRequired": "성은 필수입니다",
+    "lastNamePlaceholder": "예: 김",
+    "docNumberRequired": "신분증 번호는 필수입니다",
+    "docNumberPlaceholder2": "신분증 번호를 입력하세요",
+    "birthdate": "생년월일",
+    "birthdateRequired": "날짜는 필수입니다",
+    "birthdatePlaceholder": "예: 1998/08/18",
+    "genderLabel": "성별",
+    "genderRequired": "성별을 선택하세요",
+    "emailRequired": "이메일은 필수이거나 형식이 올바르지 않습니다",
+    "emailPlaceholder2": "예: user@example.com",
+    "phonePlaceholder2": "예: 8090000000",
+    "isExternal": "외부 사용자 여부",
+    "selectOption": "옵션을 선택하세요",
+    "passwordRequired": "비밀번호는 필수입니다",
+    "passwordPlaceholder2": "비밀번호를 입력하세요",
+    "confirmPasswordPlaceholder2": "비밀번호를 확인하세요",
+    "submitStep2": "등록",
+    "gender": {
+      "male": "남성",
+      "female": "여성",
+      "other": "기타"
+    },
+    "modal": {
+      "title": "이메일 확인",
+      "body": "사용자가 성공적으로 등록되었습니다. 계정을 확인하려면 이메일을 확인하세요."
+    },
+    "toasts": {
+      "personNotFound": "이 식별 번호로 등록된 사람을 찾을 수 없습니다",
+      "completeFields": "모든 항목을 올바르게 입력하세요",
+      "registerError": "사용자 등록 중 오류가 발생했습니다",
+      "completeFieldsCorrectly": "모든 필수 항목을 올바르게 입력하세요.",
+      "formError": "양식을 처리하는 중 오류가 발생했습니다."
+    }
+  },
+  "forgot": {
+    "intro": "이메일을 입력하시면 비밀번호 재설정 안내를 보내드립니다.",
+    "submit": "안내 보내기",
+    "toasts": {
+      "emailInvalid": "이메일이 유효하지 않습니다",
+      "resetError": "비밀번호 재설정 중 오류가 발생했습니다"
+    },
+    "modal": {
+      "title": "비밀번호 재설정",
+      "body": "비밀번호 재설정 이메일이 다음 주소로 전송되었습니다"
+    }
+  },
+  "changePwd": {
+    "heading": "비밀번호 변경",
+    "intro": "계속하기 전에 비밀번호를 업데이트해야 합니다.",
+    "newPassword": "새 비밀번호",
+    "newPasswordPlaceholder": "새 비밀번호를 입력하세요",
+    "passwordRule": "비밀번호는 대문자, 소문자, 숫자, 특수 문자를 각각 하나 이상 포함해야 합니다.",
+    "confirmNewPassword": "새 비밀번호 확인",
+    "confirmNewPasswordPlaceholder": "새 비밀번호를 확인하세요",
+    "submit": "확인",
+    "toasts": {
+      "success": "비밀번호가 성공적으로 재설정되었습니다",
+      "error": "비밀번호 변경 중 오류가 발생했습니다"
+    }
+  },
+  "verify": {
+    "verifying": "이메일을 확인하는 중...",
+    "success": "이메일이 확인되었습니다!",
+    "successBody": "이메일이 성공적으로 확인되었습니다. 이제 계정으로 로그인할 수 있습니다.",
+    "goToLogin": "로그인으로 이동",
+    "failed": "확인 실패",
+    "invalidLink": "확인 링크가 유효하지 않거나 만료되었습니다."
+  }
+}

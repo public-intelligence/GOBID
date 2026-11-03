@@ -1,0 +1,28 @@
+<nav class="">
+  <ul class="flex place-items-center gap-2">
+    @for (breadcrumb of breadcrumbs; track breadcrumb.label) { @if
+    (breadcrumb.icon) {
+    <fa-icon [icon]="breadcrumb.icon" class="text-[1.5rem] text-gray-700" />
+    }
+    <li
+      [ngClass]="{
+          'max-w-[150px] truncate lg:max-w-none': !breadcrumb.active,
+        }"
+    >
+      <button
+        [ngClass]="
+            breadcrumb.active ? 'font-bold hover:text-gray-700' : 'font-normal hover:text-gray-500'
+          "
+        class="base-button bg-transparent p-0 pr-2 text-[.9rem] text-gray-700 no-underline md:text-[1rem]"
+        (click)="navigateTo(breadcrumb)"
+      >
+        {{ breadcrumb.label | titlecase }}
+      </button>
+    </li>
+    @if (breadcrumb !== breadcrumbs[breadcrumbs.length - 1]) {
+    <li>
+      <fa-icon [icon]="faChevronRight" class="text-[.8rem] text-gray-700" />
+    </li>
+    } }
+  </ul>
+</nav>

@@ -1,0 +1,268 @@
+@import "tailwindcss";
+@source "../node_modules/@public-intelligence/ui-core/fesm2022/public-intelligence-ui-core.mjs";
+
+@theme {
+  --font-roboto: "Roboto", sans-serif;
+  --font-poppins: "Poppins", sans-serif;
+
+  --color-primary-blue: #003876;
+  --color-primary-blue-dark: #1a579a;
+  --color-primary-blue-disabled: #102742;
+  --color-primary-blue-lighter: #7e9ef857;
+  --color-primary-red: #ee2a24;
+  --color-primary-red-dark: #c0392b;
+
+  --color-text-darkgray: #707070;
+  --color-text-black: #000000;
+  --color-text-light-gray: #e6e7e8;
+  --color-text-light-blue: #0087ff;
+
+  --color-alert-important: #0087ff;
+  --color-alert-warning: #ebc342;
+  --color-alert-error: #ff6568;
+  --color-alert-success: #2ecc71;
+  --color-alert-additional-info: #0087ff;
+
+  --color-bg-principal: #ffffff;
+  --color-bg-secondary: #f8f8f8;
+  --color-bg-light-blue: #eff7ff;
+  --color-bg-dividers: #d3d3d3;
+  --color-input-hover-border: #b9ddfd;
+  --color-secondary-hover: #6da2db;
+}
+
+html,
+body {
+  font-family: "Roboto";
+  @apply text-[14px] lg:text-[16px];
+}
+
+@layer base {
+  button {
+    @apply bg-primary-blue font-roboto hover:bg-primary-blue-dark disabled:bg-primary-blue-disabled cursor-pointer rounded-[3rem] px-[2rem] pt-[0.625rem] pb-[0.625rem] text-[0.875rem] font-[700] text-white uppercase transition-colors duration-200;
+  }
+  app-header button,
+  app-sidebar button {
+    background-color: transparent;
+    color: inherit;
+    text-transform: none;
+    padding: 0.375rem;
+    border-radius: 0.5rem;
+    font-weight: inherit;
+    font-size: inherit;
+    box-shadow: none;
+    transition: background-color 150ms;
+  }
+
+  app-header button:hover,
+  app-sidebar button:hover {
+    background-color: #f9fafb;
+  }
+
+  input,
+  textarea {
+    @apply border-bg-dividers font-roboto text-text-darkgray disabled:bg-text-light-gray hover:border-input-hover-border hover:bg-bg-light-blue focus:border-input-hover-border h-[2.6875rem] rounded-[0.3125rem] border bg-white px-3 outline-none disabled:cursor-not-allowed;
+  }
+
+  select {
+    @apply border-bg-dividers font-roboto text-text-darkgray disabled:bg-text-light-gray hover:border-input-hover-border hover:bg-bg-light-blue focus:border-input-hover-border h-[2.6875rem] rounded-[0.3125rem] border px-3 outline-none disabled:cursor-not-allowed;
+  }
+  option {
+    @apply rounded-lg bg-white;
+  }
+  a:not(app-header a){
+    @apply font-roboto text-[1rem] text-blue-600 underline duration-200 hover:text-blue-400;
+  }
+
+  p {
+    @apply text-[1.1669rem];
+  }
+
+  h1 {
+    @apply font-poppins text-[5.3331rem];
+  }
+
+  h2 {
+    @apply font-poppins text-[4.6662rem];
+  }
+
+  h3 {
+    @apply font-poppins text-[4rem];
+  }
+
+  h4 {
+    @apply font-poppins text-[3.3331rem];
+  }
+
+  h5 {
+    @apply font-poppins text-[2.6669rem];
+  }
+
+  h6 {
+    @apply font-poppins text-[2rem];
+  }
+}
+
+@layer components {
+  .base-button {
+    @apply hover:bg-primary-blue-lighter relative flex w-full cursor-pointer place-items-center gap-4 rounded-none bg-transparent px-[2rem] py-3 text-[1rem] text-gray-600 normal-case no-underline duration-200;
+  }
+
+  .sidebar-button {
+    @apply font-roboto flex w-full cursor-pointer items-center rounded-lg bg-transparent px-3 py-[0.6rem] text-left text-[0.88rem] font-medium text-gray-600 normal-case transition-colors duration-200 hover:bg-gray-100;
+  }
+  .secondary-button {
+    @apply border-primary-blue text-primary-blue disabled:hover:border-primary-blue disabled:hover:text-primary-blue hover:border-secondary-hover hover:text-secondary-hover border bg-white hover:bg-transparent disabled:bg-slate-400;
+  }
+
+  .secondary-full-button {
+    @apply bg-primary-red hover:bg-primary-red-dark;
+  }
+
+  .error-input {
+    @apply border-alert-error bg-[#ffeeed];
+  }
+
+  .subtitle1 {
+    @apply font-poppins text-[1.6669rem];
+  }
+
+  .subtitle2 {
+    @apply font-poppins text-[1.3331rem];
+  }
+
+  .widget-heading {
+    @apply text-[1.2rem] font-normal;
+  }
+
+  .panel-container {
+    @apply h-full overflow-auto bg-white !max-w-none;
+  }
+
+  .label {
+    @apply mb-1 ml-[3px] block truncate overflow-hidden text-left text-[1rem] font-normal text-gray-700;
+  }
+
+  .icons {
+    @apply text-primary-blue duration-200 hover:text-[#3267a5];
+  }
+
+  .container {
+    @apply rounded-lg border border-gray-300 bg-white py-4 px-8 !max-w-none;
+  }
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.cdk-drag-preview {
+  background: white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  opacity: 0.8;
+  overflow: hidden;
+}
+
+/* Animations */
+
+.fade-in {
+  -webkit-animation: fade-in 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: fade-in 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.slide-in-bottom {
+  -webkit-animation: slide-in-bottom 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    both;
+  animation: slide-in-bottom 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@-webkit-keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(100px);
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(100px);
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.skeleton {
+  background: #eee;
+  background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+  border-radius: 5px;
+  background-size: 200% 100%;
+  animation: 1.5s shine linear infinite;
+}
+
+@keyframes shine {
+  to {
+    background-position-x: -200%;
+  }
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid var(--color-primary-blue);
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

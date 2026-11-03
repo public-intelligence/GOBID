@@ -1,0 +1,26 @@
+<app-confirmation-modal></app-confirmation-modal>
+<section>
+  <div class="my-4">
+    <button class="secondary-button" (click)="goBack()">
+      <fa-icon [icon]="faArrowLeft" class="mr-2"></fa-icon>
+      Volver
+    </button>
+  </div>
+  <app-maintenance
+    [createPath]="`organization-application/organization/${id}/linkup-app/`"
+    [headers]="headers"
+    [columnData]="tableData()"
+    [title]="title()"
+    [subTitle]="subTitle"
+    [buttonText]="'Vincular Aplicación'"
+    [isLoading]="isLoading()"
+    (searchValue)="onSearchChange($event)"
+    [showPaginator]="true"
+    [pageNumber]="appsFilter().pageNumber || 1"
+    (pageSize)="onPageSizeChange($event)"
+    [totalCount]="totalCount()"
+    [totalPages]="totalPages()"
+    (actualPage)="onPageChange($event)"
+    [pageSizeInput]="appsFilter().pageSize || 10"
+  />
+</section>

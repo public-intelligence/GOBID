@@ -1,0 +1,32 @@
+<div class="mb-8 flex flex-col gap-6 p-2">
+  <h3 class="text-[1rem] font-medium">Información de la Aplicación</h3>
+  <div>
+    <h4 class="font-roboto mb-1 text-[1rem] font-light text-gray-700">
+      Código
+    </h4>
+    <p class="text-[1rem]">{{this.application?.code}}</p>
+  </div>
+  <div>
+    <h4 class="font-roboto mb-1 text-[1rem] font-light text-gray-700">
+      Nombre de la Aplicación
+    </h4>
+    <p class="text-[1rem]">{{this.application?.name}}</p>
+  </div>
+  <div>
+    <h4 class="font-roboto mb-1 text-[1rem] font-light text-gray-700">
+      Descripción
+    </h4>
+    <p class="text-[1rem]">{{this.application?.description}}</p>
+  </div>
+  <div>
+    <h4 class="font-roboto mb-1 text-[1rem] font-light text-gray-700">
+      Url de la Aplicación
+    </h4>
+    <a
+      target="_blank"
+      [href]="this.application?.redirectUrl"
+      class="text-[1rem] break-words"
+      >{{this.application?.redirectUrl}}</a
+    >
+  </div>
+</div>

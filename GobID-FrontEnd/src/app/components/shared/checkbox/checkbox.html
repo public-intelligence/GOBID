@@ -1,0 +1,13 @@
+<div class="relative flex w-fit place-items-center gap-4">
+  <div class="ml-auto translate-y-1">
+    <label class="inline-flex cursor-pointer items-center">
+      <input type="checkbox" class="peer sr-only" [formControl]="control" />
+      <div
+        class="peer peer-checked:bg-primary-blue relative h-6 w-11 rounded-full bg-gray-200 peer-focus:outline-none after:absolute after:top-[2px] after:left-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:after:translate-x-full peer-checked:after:border-white rtl:peer-checked:after:-translate-x-full"
+      ></div>
+    </label>
+  </div>
+  <label for="{{ name }}" class="truncate text-gray-600"
+    >{{ label | titlecase }}</label
+  >
+</div>

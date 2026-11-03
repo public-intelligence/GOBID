@@ -1,0 +1,138 @@
+{
+  "language": {
+    "select": "Chwazi lang"
+  },
+  "common": {
+    "help": "Èd",
+    "email": "Adrès imèl",
+    "emailPlaceholder": "egzanp@imel.gob.do",
+    "emailInvalid": "Adrès imèl pa valab",
+    "password": "Modpas",
+    "confirmPassword": "Konfime modpas",
+    "passwordsMismatch": "Modpas yo pa menm",
+    "docType": "Kalite dokiman idantite",
+    "docNumber": "Dokiman idantite",
+    "phone": "Nimewo telefòn",
+    "loading": "N ap chaje enfòmasyon...",
+    "close": "Fèmen",
+    "yes": "Wi",
+    "no": "Non",
+    "cedula": "Kat idantite nasyonal",
+    "passport": "Paspò",
+    "country": "Repiblik Dominikèn",
+    "terms": "Kondisyon",
+    "privacy": "Konfidansyalite",
+    "contact": "Kontak"
+  },
+  "footer": {
+    "copyright": "© 2026 Tout dwa rezève."
+  },
+  "auth": {
+    "welcome": "Byenveni",
+    "selectOrg": "Chwazi yon òganizasyon",
+    "selectOrgHint": "Kont ou gen aksè a plis pase yon òganizasyon.",
+    "policyDenied": "Aksè refize dapre règleman sekirite yo",
+    "forgotPassword": "Ou bliye modpas ou?",
+    "rememberDevice": "Sonje aparèy sa a",
+    "signIn": "Konekte",
+    "noAccount": "Ou pa gen kont?",
+    "registerHere": "Enskri isit la",
+    "passwordInvalid": "Modpas pa valab",
+    "toasts": {
+      "missingFields": "Gen chan ki manke",
+      "invalidCredentials": "Imèl ak/oswa modpas pa valab",
+      "loginError": "Yon erè te rive pandan koneksyon an"
+    }
+  },
+  "register": {
+    "title": "Kreye yon kont",
+    "step1Intro": "Antre nimewo dokiman ou pou verifye idantite ou epi konplete enskripsyon an.",
+    "selectDocType": "Chwazi yon kalite dokiman idantite",
+    "docNumberPlaceholder": "Antre nimewo dokiman ou",
+    "searching": "N ap chèche...",
+    "change": "Chanje",
+    "searchAnother": "Chèche yon lòt dokiman",
+    "backToLogin": "Retounen nan koneksyon",
+    "phonePlaceholder": "Antre nimewo telefòn ou",
+    "phoneRequired": "Nimewo telefòn obligatwa",
+    "passwordPlaceholder": "Minimòm 6 karaktè",
+    "passwordRule": "Modpas la dwe gen omwen 6 karaktè epi li dwe genyen omwen yon lèt majiskil, yon lèt miniskil, yon chif ak yon karaktè espesyal.",
+    "confirmPasswordPlaceholder": "Repete modpas ou",
+    "registering": "N ap enskri...",
+    "submit": "Enskri",
+    "detailsTitle": "Detay itilizatè",
+    "detailsDesc": "Konplete enfòmasyon yo mande anba a.",
+    "firstName": "Non",
+    "firstNameRequired": "Non an obligatwa",
+    "firstNamePlaceholder": "Egz.: Jan",
+    "lastName": "Siyati",
+    "lastNameRequired": "Siyati a obligatwa",
+    "lastNamePlaceholder": "Egz.: Pyè",
+    "docNumberRequired": "Nimewo dokiman idantite a obligatwa",
+    "docNumberPlaceholder2": "Antre nimewo dokiman idantite a",
+    "birthdate": "Dat nesans",
+    "birthdateRequired": "Dat la obligatwa",
+    "birthdatePlaceholder": "Egz.: 18/08/1998",
+    "genderLabel": "Sèks",
+    "genderRequired": "Chwazi yon sèks",
+    "emailRequired": "Imèl la obligatwa oswa li gen yon fòma ki pa valab",
+    "emailPlaceholder2": "Egz.: itilizate@example.com",
+    "phonePlaceholder2": "Egz.: 8090000000",
+    "isExternal": "Se ekstèn",
+    "selectOption": "Chwazi yon opsyon",
+    "passwordRequired": "Modpas la obligatwa",
+    "passwordPlaceholder2": "Antre modpas ou",
+    "confirmPasswordPlaceholder2": "Konfime modpas ou",
+    "submitStep2": "Enskri",
+    "gender": {
+      "male": "Gason",
+      "female": "Fi",
+      "other": "Lòt"
+    },
+    "modal": {
+      "title": "Konfime imèl",
+      "body": "Itilizatè a anrejistre avèk siksè. Tanpri tcheke imèl ou pou konfime kont ou."
+    },
+    "toasts": {
+      "personNotFound": "Nou pa jwenn okenn moun ak nimewo idantifikasyon sa a",
+      "completeFields": "Tanpri ranpli tout chan yo kòrèkteman",
+      "registerError": "Erè pandan anrejistreman itilizatè a",
+      "completeFieldsCorrectly": "Tanpri ranpli tout chan obligatwa yo kòrèkteman.",
+      "formError": "Yon erè te rive pandan tretman fòm nan."
+    }
+  },
+  "forgot": {
+    "intro": "Antre adrès imèl ou epi n ap voye enstriksyon yo ba ou pou reyajiste modpas ou.",
+    "submit": "Voye enstriksyon yo",
+    "toasts": {
+      "emailInvalid": "Adrès imèl la pa valab",
+      "resetError": "Erè pandan reyajisteman modpas la"
+    },
+    "modal": {
+      "title": "Reyajiste modpas",
+      "body": "Yo voye yon imèl pou reyajiste modpas la bay"
+    }
+  },
+  "changePwd": {
+    "heading": "Chanje modpas",
+    "intro": "Anvan ou kontinye, ou dwe mete modpas ou ajou.",
+    "newPassword": "Nouvo modpas",
+    "newPasswordPlaceholder": "Antre nouvo modpas ou",
+    "passwordRule": "Modpas la dwe genyen omwen yon lèt majiskil, yon lèt miniskil, yon chif ak yon karaktè espesyal.",
+    "confirmNewPassword": "Konfime nouvo modpas",
+    "confirmNewPasswordPlaceholder": "Konfime nouvo modpas ou",
+    "submit": "Konfime",
+    "toasts": {
+      "success": "Modpas reyajiste avèk siksè",
+      "error": "Erè pandan chanjman modpas la"
+    }
+  },
+  "verify": {
+    "verifying": "N ap verifye adrès imèl ou...",
+    "success": "Imèl verifye!",
+    "successBody": "Adrès imèl ou konfime avèk siksè. Kounye a ou ka konekte ak kont ou.",
+    "goToLogin": "Ale nan koneksyon",
+    "failed": "Verifikasyon echwe",
+    "invalidLink": "Lyen verifikasyon an pa valab oswa li ekspire."
+  }
+}

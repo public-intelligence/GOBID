@@ -1,0 +1,128 @@
+@if(!isCollapse()) {
+<div
+  class="fixed inset-0 z-10 bg-black opacity-20 md:hidden"
+  tabindex="0"
+  role="button"
+  aria-label="Close sidebar overlay"
+  (click)="handleToggleSidebar()"
+  (keydown)="handleToggleSidebar()"
+></div>
+}
+<aside
+  class="z-20 flex h-full flex-col bg-white shadow-md transition-all duration-300"
+  [ngClass]="isCollapse() ? '-translate-x-full w-[14rem] fixed md:relative md:translate-x-0 hidden md:flex md:w-[4.5rem]' : 'fixed md:relative translate-x-0 md:flex md:w-[14rem]'"
+>
+  <!-- Logo / Header -->
+  @if(isCollapse()) {
+  <div class="flex items-center justify-center border-b border-gray-100 py-5">
+    <button
+      class="sidebar-button hover:!text-primary-blue !w-auto !rounded-md !px-2 !py-1.5 text-gray-400"
+      (click)="handleToggleSidebar()"
+      title="Expandir"
+    >
+      <fa-icon [icon]="faAnglesRight" class="text-[0.85rem]" />
+    </button>
+  </div>
+  } @else {
+  <div
+    class="flex items-center justify-between border-b border-gray-100 px-4 py-5"
+  >
+    <div class="flex items-center gap-3">
+      <img
+        src="assets/images/cupula-gob-azul.webp"
+        class="h-[2.2rem] flex-shrink-0"
+        alt="Logo"
+      />
+      <div class="leading-tight">
+        <p
+          class="text-[0.62rem] font-medium tracking-widest text-gray-400 uppercase"
+        >
+          Módulo
+        </p>
+        <h3 class="text-primary-blue text-[1.05rem] font-bold">GobId</h3>
+      </div>
+    </div>
+    <button
+      class="sidebar-button hover:!text-primary-blue !w-auto !rounded-md !px-2 !py-1.5 text-gray-400"
+      (click)="handleToggleSidebar()"
+      title="Contraer"
+    >
+      <fa-icon [icon]="faAnglesLeft" class="text-[0.85rem]" />
+    </button>
+  </div>
+  }
+
+  <!-- Navigation items -->
+  <ul class="w-full flex-1 overflow-y-auto py-2">
+    @for(data of sideData(); track data.id) {
+    <li class="w-full px-2 py-[2px]" *appCheckPermissions="data.permissions">
+      <button
+        class="sidebar-button"
+        (click)="onNavigate(data.path, data.withElements, data.id)"
+        [ngClass]="[
+          currentPath() === data.path ? '!bg-primary-blue-lighter !text-primary-blue' : '',
+          isCollapse() ? '!justify-center !px-0' : ''
+        ]"
+        [title]="isCollapse() ? data.title : ''"
+      >
+        @if (data.icon) {
+        <fa-icon
+          [icon]="data.icon"
+          class="w-[1.1rem] flex-shrink-0 text-[1rem]"
+          class="text-primary-blue"
+        />
+        } @if(!isCollapse()) {
+        <span class="ml-3 flex-1 text-left text-[0.88rem] font-medium"
+          >{{ data.title | titlecase }}</span
+        >
+        <fa-icon
+          [icon]="faAngleRight"
+          class="text-[0.75rem] text-gray-400 transition-transform duration-200"
+          [ngClass]="{'rotate-90': data.withElements && !data.collapse}"
+        />
+        }
+      </button>
+
+      @if(!data.collapse && data.elements && data.elements.length > 0) {
+      <ul class="mt-1 space-y-[2px]">
+        @for(element of data.elements; track element.title) {
+        <li class="px-1" *appCheckPermissions="element.permissions">
+          <button
+            class="sidebar-button !text-[0.84rem]"
+            (click)="onNavigate(element.path, false, element.id)"
+            [ngClass]="currentPath() === element.path
+              ? '!bg-primary-blue-lighter !text-primary-blue'
+              : ''"
+          >
+            <span
+              class="mr-2 ml-5 h-1 w-1 flex-shrink-0 rounded-full bg-current opacity-50"
+            ></span>
+            <span class="truncate">{{ element.title | titlecase }}</span>
+          </button>
+        </li>
+        }
+      </ul>
+      }
+    </li>
+    }
+  </ul>
+
+  <!-- Logout -->
+  <div class="border-t border-gray-200 px-2 py-3">
+    <button
+      class="sidebar-button"
+      [ngClass]="isCollapse() ? '!justify-center !px-0' : ''"
+      (click)="onLogout()"
+    >
+      <fa-icon
+        [icon]="faArrowRightFromBracket"
+        class="text-primary-blue w-[1.1rem] flex-shrink-0 text-[1rem]"
+      />
+      @if(!isCollapse()) {
+      <span class="ml-3 text-[0.88rem] font-medium text-nowrap"
+        >Cerrar sesión</span
+      >
+      }
+    </button>
+  </div>
+</aside>

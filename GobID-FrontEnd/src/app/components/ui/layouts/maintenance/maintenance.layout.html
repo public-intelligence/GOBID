@@ -1,0 +1,76 @@
+<div class="animate-fade-in flex w-full flex-col gap-6 pb-4 text-gray-900">
+  <app-view-info [title]="titleInfo" [canEdit]="canEdit" />
+
+  <!-- Header Title Section -->
+ <!--  <div>
+    <h1 class="text-2xl font-bold tracking-tight text-gray-900">{{title}}</h1>
+    @if (subTitle) {
+    <p class="mt-1 text-sm text-gray-500">{{subTitle}}</p>
+    }
+  </div>
+ -->
+  <!-- Actions Card -->
+  <div
+    class="grid grid-cols-1 gap-6 rounded-xl border border-gray-100 bg-white p-4 shadow-sm lg:flex lg:flex-row lg:items-center lg:justify-between xl:grid-cols-2"
+  >
+    <div
+      class="flex w-full flex-col gap-4 sm:flex-row sm:items-center lg:w-auto"
+    >
+      <app-search
+        (searchValue)="searchedValue($event)"
+        class="w-full sm:w-[20rem]"
+      />
+      <app-filter
+        [filters]="filters"
+        (filterSelectedChange)="SelectedFilter($event)"
+        [ngClass]="{'hidden': !showFilters}"
+        class="w-full sm:w-auto"
+      />
+    </div>
+    <div
+      [ngClass]="{'hidden': !showButton}"
+      class="flex w-full justify-start sm:justify-end lg:w-auto"
+    >
+      @if (canCreate) {
+      <button
+        class="flex w-full items-center justify-center gap-2 sm:w-fit"
+        (click)="onCreate ? onCreate() : onNavigate()"
+      >
+        <fa-icon [icon]="faPlus" />
+        {{buttonText}}
+      </button>
+      }
+    </div>
+  </div>
+
+  <!-- Table Container -->
+  <div
+    class="h-[40dvh] overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm"
+  >
+    <app-table
+      [headers]="headers"
+      [columnData]="columnData"
+      [actions]="actions"
+      [editAction]="editAction"
+      [deleteAction]="deleteAction"
+      [showIcons]="showIcons"
+      [onViewInfo]="onViewInfo"
+      [isLoading]="isLoading"
+      class="block h-full w-full"
+    />
+  </div>
+
+  @if (showPaginator) { @if(!isLoading){
+  <!-- Paginator -->
+  <div class="mt-1 w-full">
+    <app-paginator
+      [pageNumber]="pageNumber"
+      [totalCount]="totalCount"
+      [totalPages]="totalPages"
+      [pageSizeInput]="pageSizeInput"
+      (pageSize)="pageSizeChange($event)"
+      (pageToEmit)="actalPageNumber($event)"
+    />
+  </div>
+  } }
+</div>

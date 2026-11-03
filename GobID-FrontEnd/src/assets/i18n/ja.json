@@ -1,0 +1,138 @@
+{
+  "language": {
+    "select": "言語を選択"
+  },
+  "common": {
+    "help": "ヘルプ",
+    "email": "メールアドレス",
+    "emailPlaceholder": "example@email.gob.do",
+    "emailInvalid": "メールアドレスが無効です",
+    "password": "パスワード",
+    "confirmPassword": "パスワードの確認",
+    "passwordsMismatch": "パスワードが一致しません",
+    "docType": "本人確認書類の種類",
+    "docNumber": "本人確認書類",
+    "phone": "電話番号",
+    "loading": "情報を読み込んでいます...",
+    "close": "閉じる",
+    "yes": "はい",
+    "no": "いいえ",
+    "cedula": "国民身分証明書",
+    "passport": "パスポート",
+    "country": "ドミニカ共和国",
+    "terms": "利用規約",
+    "privacy": "プライバシー",
+    "contact": "お問い合わせ"
+  },
+  "footer": {
+    "copyright": "© 2026 無断転載を禁じます。"
+  },
+  "auth": {
+    "welcome": "ようこそ",
+    "selectOrg": "組織を選択してください",
+    "selectOrgHint": "お使いのアカウントは複数の組織にアクセスできます。",
+    "policyDenied": "セキュリティポリシーによりアクセスが拒否されました",
+    "forgotPassword": "パスワードをお忘れですか？",
+    "rememberDevice": "このデバイスを記憶する",
+    "signIn": "ログイン",
+    "noAccount": "アカウントをお持ちではありませんか？",
+    "registerHere": "こちらから登録",
+    "passwordInvalid": "パスワードが無効です",
+    "toasts": {
+      "missingFields": "未入力の項目があります",
+      "invalidCredentials": "メールアドレスまたはパスワードが無効です",
+      "loginError": "ログイン中にエラーが発生しました"
+    }
+  },
+  "register": {
+    "title": "アカウントを作成",
+    "step1Intro": "本人確認と登録の完了のため、書類番号を入力してください。",
+    "selectDocType": "本人確認書類の種類を選択してください",
+    "docNumberPlaceholder": "書類番号を入力してください",
+    "searching": "検索中...",
+    "change": "変更",
+    "searchAnother": "別の書類を検索",
+    "backToLogin": "ログインに戻る",
+    "phonePlaceholder": "電話番号を入力してください",
+    "phoneRequired": "電話番号は必須です",
+    "passwordPlaceholder": "6文字以上",
+    "passwordRule": "パスワードは6文字以上で、大文字、小文字、数字、特殊文字をそれぞれ1文字以上含める必要があります。",
+    "confirmPasswordPlaceholder": "パスワードをもう一度入力してください",
+    "registering": "登録中...",
+    "submit": "登録",
+    "detailsTitle": "ユーザー詳細",
+    "detailsDesc": "以下の必要情報を入力してください。",
+    "firstName": "名",
+    "firstNameRequired": "名は必須です",
+    "firstNamePlaceholder": "例：太郎",
+    "lastName": "姓",
+    "lastNameRequired": "姓は必須です",
+    "lastNamePlaceholder": "例：山田",
+    "docNumberRequired": "本人確認書類の番号は必須です",
+    "docNumberPlaceholder2": "本人確認書類の番号を入力してください",
+    "birthdate": "生年月日",
+    "birthdateRequired": "日付は必須です",
+    "birthdatePlaceholder": "例：1998/08/18",
+    "genderLabel": "性別",
+    "genderRequired": "性別を選択してください",
+    "emailRequired": "メールアドレスは必須であるか、形式が無効です",
+    "emailPlaceholder2": "例：user@example.com",
+    "phonePlaceholder2": "例：8090000000",
+    "isExternal": "外部ユーザー",
+    "selectOption": "オプションを選択してください",
+    "passwordRequired": "パスワードは必須です",
+    "passwordPlaceholder2": "パスワードを入力してください",
+    "confirmPasswordPlaceholder2": "パスワードを確認してください",
+    "submitStep2": "登録",
+    "gender": {
+      "male": "男性",
+      "female": "女性",
+      "other": "その他"
+    },
+    "modal": {
+      "title": "メールの確認",
+      "body": "ユーザー登録が完了しました。アカウントを確認するため、メールをご確認ください。"
+    },
+    "toasts": {
+      "personNotFound": "この識別番号に該当する人物が見つかりませんでした",
+      "completeFields": "すべての項目を正しく入力してください",
+      "registerError": "ユーザー登録中にエラーが発生しました",
+      "completeFieldsCorrectly": "必須項目をすべて正しく入力してください。",
+      "formError": "フォームの処理中にエラーが発生しました。"
+    }
+  },
+  "forgot": {
+    "intro": "メールアドレスを入力してください。パスワードを再設定するための手順をお送りします。",
+    "submit": "手順を送信",
+    "toasts": {
+      "emailInvalid": "メールアドレスが無効です",
+      "resetError": "パスワードの再設定中にエラーが発生しました"
+    },
+    "modal": {
+      "title": "パスワードの再設定",
+      "body": "パスワード再設定用のメールを次の宛先に送信しました"
+    }
+  },
+  "changePwd": {
+    "heading": "パスワードの変更",
+    "intro": "続行する前に、パスワードを更新する必要があります。",
+    "newPassword": "新しいパスワード",
+    "newPasswordPlaceholder": "新しいパスワードを入力してください",
+    "passwordRule": "パスワードには、大文字、小文字、数字、特殊文字をそれぞれ1文字以上含める必要があります。",
+    "confirmNewPassword": "新しいパスワードの確認",
+    "confirmNewPasswordPlaceholder": "新しいパスワードを確認してください",
+    "submit": "確認",
+    "toasts": {
+      "success": "パスワードが正常に再設定されました",
+      "error": "パスワードの変更中にエラーが発生しました"
+    }
+  },
+  "verify": {
+    "verifying": "メールアドレスを確認しています...",
+    "success": "メールを確認しました！",
+    "successBody": "メールアドレスが正常に確認されました。アカウントでログインできるようになりました。",
+    "goToLogin": "ログインへ",
+    "failed": "確認に失敗しました",
+    "invalidLink": "確認リンクが無効か、有効期限が切れています。"
+  }
+}

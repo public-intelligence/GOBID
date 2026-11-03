@@ -1,0 +1,138 @@
+{
+  "language": {
+    "select": "Sélectionner la langue"
+  },
+  "common": {
+    "help": "Aide",
+    "email": "Adresse e-mail",
+    "emailPlaceholder": "exemple@email.gob.do",
+    "emailInvalid": "Adresse e-mail invalide",
+    "password": "Mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "passwordsMismatch": "Les mots de passe ne correspondent pas",
+    "docType": "Type de pièce d'identité",
+    "docNumber": "Pièce d'identité",
+    "phone": "Numéro de téléphone",
+    "loading": "Chargement des informations...",
+    "close": "Fermer",
+    "yes": "Oui",
+    "no": "Non",
+    "cedula": "Carte nationale d'identité",
+    "passport": "Passeport",
+    "country": "République dominicaine",
+    "terms": "Conditions",
+    "privacy": "Confidentialité",
+    "contact": "Contact"
+  },
+  "footer": {
+    "copyright": "© 2026 Tous droits réservés."
+  },
+  "auth": {
+    "welcome": "Bienvenue",
+    "selectOrg": "Sélectionnez une organisation",
+    "selectOrgHint": "Votre compte a accès à plus d'une organisation.",
+    "policyDenied": "Accès refusé par les politiques de sécurité",
+    "forgotPassword": "Mot de passe oublié ?",
+    "rememberDevice": "Se souvenir de cet appareil",
+    "signIn": "Se connecter",
+    "noAccount": "Vous n'avez pas de compte ?",
+    "registerHere": "Inscrivez-vous ici",
+    "passwordInvalid": "Mot de passe invalide",
+    "toasts": {
+      "missingFields": "Champs manquants",
+      "invalidCredentials": "E-mail et/ou mot de passe invalides",
+      "loginError": "Une erreur s'est produite lors de la connexion"
+    }
+  },
+  "register": {
+    "title": "Créer un compte",
+    "step1Intro": "Saisissez votre numéro de document pour vérifier votre identité et finaliser l'inscription.",
+    "selectDocType": "Sélectionnez un type de pièce d'identité",
+    "docNumberPlaceholder": "Saisissez votre numéro de document",
+    "searching": "Recherche...",
+    "change": "Modifier",
+    "searchAnother": "Rechercher une autre pièce",
+    "backToLogin": "Retour à la connexion",
+    "phonePlaceholder": "Saisissez votre numéro de téléphone",
+    "phoneRequired": "Numéro de téléphone requis",
+    "passwordPlaceholder": "Minimum 6 caractères",
+    "passwordRule": "Le mot de passe doit comporter au moins 6 caractères et contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.",
+    "confirmPasswordPlaceholder": "Répétez votre mot de passe",
+    "registering": "Inscription...",
+    "submit": "S'inscrire",
+    "detailsTitle": "Détails de l'utilisateur",
+    "detailsDesc": "Complétez les informations demandées ci-dessous.",
+    "firstName": "Prénom",
+    "firstNameRequired": "Le prénom est obligatoire",
+    "firstNamePlaceholder": "ex. : Jean",
+    "lastName": "Nom",
+    "lastNameRequired": "Le nom est obligatoire",
+    "lastNamePlaceholder": "ex. : Dupont",
+    "docNumberRequired": "Le numéro de pièce d'identité est obligatoire",
+    "docNumberPlaceholder2": "Saisissez le numéro de pièce d'identité",
+    "birthdate": "Date de naissance",
+    "birthdateRequired": "La date est obligatoire",
+    "birthdatePlaceholder": "ex. : 18/08/1998",
+    "genderLabel": "Sexe",
+    "genderRequired": "Sélectionnez un sexe",
+    "emailRequired": "L'e-mail est obligatoire ou a un format invalide",
+    "emailPlaceholder2": "ex. : utilisateur@example.com",
+    "phonePlaceholder2": "ex. : 8090000000",
+    "isExternal": "Est externe",
+    "selectOption": "Sélectionnez une option",
+    "passwordRequired": "Le mot de passe est obligatoire",
+    "passwordPlaceholder2": "Saisissez votre mot de passe",
+    "confirmPasswordPlaceholder2": "Confirmez votre mot de passe",
+    "submitStep2": "S'inscrire",
+    "gender": {
+      "male": "Homme",
+      "female": "Femme",
+      "other": "Autre"
+    },
+    "modal": {
+      "title": "Confirmer l'e-mail",
+      "body": "Utilisateur enregistré avec succès. Veuillez vérifier votre e-mail pour confirmer votre compte."
+    },
+    "toasts": {
+      "personNotFound": "Aucune personne trouvée avec ce numéro d'identification",
+      "completeFields": "Veuillez remplir correctement tous les champs",
+      "registerError": "Erreur lors de l'enregistrement de l'utilisateur",
+      "completeFieldsCorrectly": "Veuillez remplir correctement tous les champs obligatoires.",
+      "formError": "Une erreur s'est produite lors du traitement du formulaire."
+    }
+  },
+  "forgot": {
+    "intro": "Saisissez votre adresse e-mail et nous vous enverrons les instructions pour réinitialiser votre mot de passe.",
+    "submit": "Envoyer les instructions",
+    "toasts": {
+      "emailInvalid": "L'adresse e-mail est invalide",
+      "resetError": "Erreur lors de la réinitialisation du mot de passe"
+    },
+    "modal": {
+      "title": "Réinitialiser le mot de passe",
+      "body": "Un e-mail pour réinitialiser le mot de passe a été envoyé à"
+    }
+  },
+  "changePwd": {
+    "heading": "Changer le mot de passe",
+    "intro": "Avant de continuer, vous devez mettre à jour votre mot de passe.",
+    "newPassword": "Nouveau mot de passe",
+    "newPasswordPlaceholder": "Saisissez votre nouveau mot de passe",
+    "passwordRule": "Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.",
+    "confirmNewPassword": "Confirmer le nouveau mot de passe",
+    "confirmNewPasswordPlaceholder": "Confirmez votre nouveau mot de passe",
+    "submit": "Confirmer",
+    "toasts": {
+      "success": "Mot de passe réinitialisé avec succès",
+      "error": "Erreur lors du changement du mot de passe"
+    }
+  },
+  "verify": {
+    "verifying": "Vérification de votre adresse e-mail...",
+    "success": "E-mail vérifié !",
+    "successBody": "Votre adresse e-mail a été confirmée avec succès. Vous pouvez maintenant vous connecter avec votre compte.",
+    "goToLogin": "Aller à la connexion",
+    "failed": "Échec de la vérification",
+    "invalidLink": "Le lien de vérification est invalide ou a expiré."
+  }
+}

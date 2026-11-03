@@ -1,0 +1,37 @@
+<section class="">
+  <ul class="flex flex-wrap gap-6 md:gap-12">
+    @for(step of steps().steps; track $index) {
+    <li class="flex place-items-center">
+      <span
+        [ngClass]="{
+        'bg-primary-blue border-0 ': steps().current === $index + 1,
+        'border-primary-blue': steps().current > $index + 1,
+      }"
+        class="mr-4 flex min-h-[2rem] min-w-[2rem] items-center justify-center rounded-full border border-gray-300 text-[.9rem] font-semibold text-white"
+      >
+        @if(steps().current > $index + 1) {
+        <fa-icon
+          [icon]="faCheck"
+          class="text-primary-blue translate-y-0.5"
+        ></fa-icon>
+        } @else {
+        <p
+          [ngClass]="{
+          'text-white ': steps().current === $index + 1,
+        }"
+          class="font-normal text-gray-400"
+        >
+          {{ $index + 1 }}
+        </p>
+        }
+      </span>
+      <h4
+        [ngClass]="{'text-primary-blue': steps().current === $index + 1, 'text-gray-600': steps().current < $index + 1}"
+        class="text-[.9rem]"
+      >
+        {{ step.title }}
+      </h4>
+    </li>
+    }
+  </ul>
+</section>

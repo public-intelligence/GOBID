@@ -1,0 +1,20 @@
+<app-maintenance
+  [headers]="headers"
+  [columnData]="tableData()"
+  [title]="title"
+  [createPath]="createPath"
+  [isLoading]="isLoading()"
+  (searchValue)="valueToSearchChange($event)"
+  [filters]="filters"
+  (filterSelected)="statusValue($event)"
+  [showFilters]="true"
+  [showPaginator]="true"
+  [pageNumber]="filterArguments().pageNumber || 1"
+  (pageSize)="pageSize($event)"
+  [totalCount]="totalCount()"
+  [totalPages]="totalPages()"
+  (actualPage)="actualPage($event)"
+  [pageSizeInput]="filterArguments().pageSize || 10"
+></app-maintenance>
+
+<app-confirmation-modal></app-confirmation-modal>

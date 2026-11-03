@@ -1,0 +1,28 @@
+<app-modal [title]="title" [isConfirmation]="true">
+  <div>
+    <p class="max-w-[24rem] text-[1rem] text-gray-500">
+      ¿{{ paragraph }} <strong>{{ name }}</strong
+      >?
+    </p>
+  </div>
+  @if (warning !== "") {
+    <div>
+      <p
+        class="mt-4 max-w-[24rem] rounded-lg border border-[#d4b039] bg-[#fff9e8] px-3 py-2 text-[1rem] text-[#d4b039]"
+        #ebb94d
+      >
+        {{ warning }}
+      </p>
+    </div>
+  }
+  <div class="mt-8 grid gap-4 md:grid-cols-2 md:gap-4">
+    <button
+      [ngClass]="isDelete ? 'bg-primary-red hover:bg-red-400' : ''"
+      (click)="onConfirm()"
+      class=""
+    >
+      {{ confirmButton }}
+    </button>
+    <button class="secondary-button" (click)="closeModal()">Cancelar</button>
+  </div>
+</app-modal>

@@ -1,0 +1,152 @@
+<!-- Navbar -->
+<nav
+  class="fixed top-0 right-0 left-0 z-50 flex h-[3.5rem] items-center justify-between border-b border-gray-200 bg-white px-6 shadow-sm"
+>
+  <div class="flex items-center gap-3">
+    <img
+      src="assets/images/cupula-gob-azul.webp"
+      class="h-[1.8rem] w-auto"
+      alt="Logo"
+    />
+  </div>
+  <div class="flex items-center gap-3">
+    <a
+      href="mailto:soporte@example.com"
+      class="bg-primary-blue rounded-lg px-4 py-[0.45rem] text-[0.82rem] font-semibold text-white no-underline transition-colors hover:bg-primary-blue-dark"
+    >
+      {{ 'common.help' | transloco }}
+    </a>
+  </div>
+</nav>
+
+<!-- Página -->
+<div class="flex min-h-screen flex-col bg-[#f0f2f5] pt-[3.5rem]">
+  <div class="flex flex-1 items-center justify-center px-4 py-12">
+    <!-- Card -->
+    <div
+      class="slide-in-bottom w-full max-w-[28rem] rounded-2xl bg-white p-8 shadow-md"
+    >
+      @if(isLoading()) {
+      <!-- Estado: cargando -->
+      <div class="flex flex-col items-center gap-4 py-4">
+        <span class="loader"></span>
+        <p class="text-center text-[0.9rem] text-gray-500">
+          {{ 'verify.verifying' | transloco }}
+        </p>
+      </div>
+      } @else if(isSuccess()) {
+      <!-- Estado: éxito -->
+      <div class="flex flex-col items-center text-center">
+        <div
+          class="mb-5 flex h-[4rem] w-[4rem] items-center justify-center rounded-full bg-green-50"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-[2rem] w-[2rem] text-green-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        </div>
+        <h1
+          class="font-poppins mb-1 text-[1.5rem] font-bold text-gray-900"
+        >
+          {{ 'verify.success' | transloco }}
+        </h1>
+        <p class="mb-7 text-[0.88rem] leading-relaxed text-gray-500">
+          {{ 'verify.successBody' | transloco }}
+        </p>
+        <button
+          type="button"
+          class="w-full !rounded-lg py-[0.75rem] text-[0.9rem] font-bold tracking-widest uppercase"
+          (click)="navigateToLogin()"
+        >
+          {{ 'verify.goToLogin' | transloco }}
+        </button>
+      </div>
+      } @else {
+      <!-- Estado: error -->
+      <div class="flex flex-col items-center text-center">
+        <div
+          class="mb-5 flex h-[4rem] w-[4rem] items-center justify-center rounded-full bg-red-50"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="text-alert-error h-[2rem] w-[2rem]"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+            />
+          </svg>
+        </div>
+        <h1
+          class="font-poppins mb-1 text-[1.5rem] font-bold text-gray-900"
+        >
+          {{ 'verify.failed' | transloco }}
+        </h1>
+        <p class="mb-7 text-[0.88rem] leading-relaxed text-gray-500">
+          {{ errorMessage() }}
+        </p>
+        <button
+          type="button"
+          class="w-full !rounded-lg py-[0.75rem] text-[0.9rem] font-bold tracking-widest uppercase"
+          (click)="navigateToLogin()"
+        >
+          {{ 'verify.goToLogin' | transloco }}
+        </button>
+      </div>
+      }
+
+      <!-- Footer de card -->
+      <p class="mt-6 text-center text-[0.75rem] leading-relaxed text-gray-400">
+        {{ 'footer.copyright' | transloco }}
+      </p>
+    </div>
+  </div>
+
+  <!-- Footer global -->
+  <footer
+    class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 py-4 text-[0.78rem] text-gray-400"
+  >
+    <span class="flex items-center gap-1">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-3.5 w-3.5"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"
+        />
+      </svg>
+      {{ 'common.country' | transloco }}
+    </span>
+    <span class="text-gray-300">•</span>
+    <a class="hover:text-primary-blue text-gray-400 no-underline" href="#"
+      >{{ 'common.terms' | transloco }}</a
+    >
+    <a class="hover:text-primary-blue text-gray-400 no-underline" href="#"
+      >{{ 'common.privacy' | transloco }}</a
+    >
+    <a class="hover:text-primary-blue text-gray-400 no-underline" href="#"
+      >{{ 'common.contact' | transloco }}</a
+    >
+  </footer>
+</div>

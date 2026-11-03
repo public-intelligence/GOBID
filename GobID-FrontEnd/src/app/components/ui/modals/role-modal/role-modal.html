@@ -1,0 +1,94 @@
+<app-modal [showCloseIcon]="false">
+  <form
+    (submit)="onSubmit()"
+    class="w-[24rem]"
+    action=""
+    [formGroup]="roleForm"
+  >
+    <section class="">
+      <div class="text-primary-blue relative mb-8 flex place-items-center">
+        <fa-icon class="mr-2 text-[1.4rem]" [icon]="faEdit" />
+        <h4 class="text-[1.2rem]">
+          @if(this.roleId()) { Editar Rol } @else { Añadir Rol }
+        </h4>
+        <fa-icon
+          class="absolute right-0 cursor-pointer text-[1.2rem] hover:text-blue-400 hover:duration-200"
+          (click)="closeModal()"
+          [icon]="faX"
+        />
+      </div>
+      <div class="mt-4 mb-9 rounded-lg bg-slate-100 p-4 flex flex-col gap-3">
+        @if(roleId() === null){
+        <div class="mb-4">
+          <label class="label !mb-2">Tipo</label>
+          <select
+            class="input w-full"
+            [value]="tipo()"
+            (change)="tipo.set($any($event.target).value)"
+          >
+            <option value="rol">Rol</option>
+            <option value="cargo">Cargo</option>
+          </select>
+        </div>
+      }
+        @if (tipo() === 'cargo') {
+          <div>
+            <label class="label">Cargo</label>
+            <app-custom-select-search
+              [options]="positionsOptionsWithCurrent()"
+              (selectedItem)="onPositionSelected($event)"
+              (onSearchValue)="onSearchPositionsFilter($event)"
+              formControlName="positionId"
+              placeholder="Seleccione un cargo..."
+              class="w-full"
+            />
+          </div>
+        }
+        @if (tipo() !== 'cargo') {
+          <app-input
+            [label]="'Nombre '"
+            [placeholder]="'Ingrese el nombre del rol'"
+            [formControlName]="'name'"
+            [formControl]="roleForm.controls['name']"
+            [errMsg]="'Nombre inválido'"
+            [loading]="isLoading()"
+            ngDefaultControl
+          />
+        }
+      </div>
+    </section>
+    <section class="w-full">
+      <div class="text-primary-blue flex place-items-center">
+        <fa-icon class="mr-2 text-[1.4rem]" [icon]="faCircleCheck" />
+        <h4 class="text-[1.2rem]">
+          @if(this.roleId()) { Editar Permisos } @else { Añadir Permisos }
+        </h4>
+      </div>
+      @if (!isLoading()) {
+      <div
+        formArrayName="claimIds"
+        class="my-4 max-h-[20rem] overflow-y-auto pr-2"
+      >
+        <ul>
+          @for(claim of claims(); track $index) {
+          <li
+            class="mb-2 cursor-pointer rounded-lg px-4 py-2 text-gray-600 duration-200 hover:bg-slate-100"
+            [ngClass]="isClaimSelected(claim.id) ? 'bg-primary-blue-lighter border border-primary-blue text-primary-blue ' : ' border border-slate-200  '"
+            (click)="toggleClaimSelection(claim.id)"
+            tabindex="0"
+            (keydown)="toggleClaimSelection(claim.id)"
+          >
+            {{ claim.name }}
+          </li>
+          }
+        </ul>
+      </div>
+      } @else {
+      <div class="skeleton h-[20rem] w-full rounded-lg"></div>
+      }
+    </section>
+    <div class="pt-4">
+      <button class="w-full">Guardar</button>
+    </div>
+  </form>
+</app-modal>

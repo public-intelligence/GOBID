@@ -1,0 +1,25 @@
+<div class="relative">
+  <label for="{{ name }}" class="label">
+    {{ label | titlecase }}
+    @if (required) {<span class="text-red-500 ml-0.5">*</span>}
+  </label>
+  @if (!loading) {
+  <select
+    name="{{ name }}"
+    id="{{ name }}"
+    class="input w-full {{ className }}"
+    [ngClass]="{ 'error-input': control.invalid && isSubmitted }"
+    [formControl]="control"
+    (ngModelChange)="valueChange.emit($event)"
+    aria-required="true"
+  >
+    @for (option of options; track option.value) {
+    <option value="{{ option.value }}">{{ option.label }}</option>
+    }
+  </select>
+  } @else {
+  <div class="input-skeleton h-[2.6875rem] w-full {{ className }}"></div>
+  } @let show = control.getError("server") || (control.invalid && isSubmitted);
+
+  <app-error-label [show]="show" [errors]="onError()" />
+</div>

@@ -1,0 +1,180 @@
+<app-info-modal />
+<form class="my-[2rem] rounded-lg" [formGroup]="form">
+  <section class="my-[2rem]">
+    <app-details-panel
+      [title]="'register.detailsTitle' | transloco"
+      [description]="'register.detailsDesc' | transloco"
+    />
+    <div class="my-8 grid gap-4 md:grid-cols-2 md:gap-8">
+      <div class="col-span-2 md:col-span-1">
+        <app-input
+          [formControlName]="'firstName'"
+          [label]="'register.firstName' | transloco"
+          [type]="'text'"
+          [name]="'firstName'"
+          [className]="'w-full'"
+          [formControl]="form.controls['firstName']"
+          [errMsg]="'register.firstNameRequired' | transloco"
+          [placeholder]="'register.firstNamePlaceholder' | transloco"
+          [loading]="isLoading()"
+          [required]="true"
+          ngDefaultControl
+        />
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <app-input
+          [formControlName]="'lastName'"
+          [label]="'register.lastName' | transloco"
+          [type]="'text'"
+          [name]="'lastName'"
+          [className]="'w-full'"
+          [formControl]="form.controls['lastName']"
+          [errMsg]="'register.lastNameRequired' | transloco"
+          [placeholder]="'register.lastNamePlaceholder' | transloco"
+          [loading]="isLoading()"
+          [required]="true"
+          ngDefaultControl
+        />
+      </div>
+      <div>
+        <label class="label" for="identificationType"
+          >{{ 'common.docType' | transloco }}</label
+        >
+        <select
+          name="identificationType"
+          id="identificationType"
+          class="input w-full"
+          [formControl]="form.controls['identificationType']"
+          (change)="getIdentificationTypeId($event)"
+        >
+          <option value="">{{ 'register.selectDocType' | transloco }}</option>
+          @for (option of identificationTypes(); track $index) {
+          <option [value]="option.value">{{ option.label }}</option>
+          }
+        </select>
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <app-input
+          [formControlName]="'identificationNumber'"
+          [label]="'common.docNumber' | transloco"
+          [type]="'text'"
+          [name]="'identificationNumber'"
+          [className]="'w-full'"
+          [formControl]="form.controls['identificationNumber']"
+          [errMsg]="'register.docNumberRequired' | transloco"
+          [placeholder]="'register.docNumberPlaceholder2' | transloco"
+          [loading]="isLoading()"
+          [mask]="identificationTypeId() === '1' ? '000-0000000-0' : ''"
+          [required]="true"
+          ngDefaultControl
+        />
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <app-input
+          [formControlName]="'birthdate'"
+          [label]="'register.birthdate' | transloco"
+          [type]="'date'"
+          [name]="'birthdate'"
+          [className]="'w-full'"
+          [formControl]="form.controls['birthdate']"
+          [errMsg]="'register.birthdateRequired' | transloco"
+          [placeholder]="'register.birthdatePlaceholder' | transloco"
+          [loading]="isLoading()"
+          [required]="true"
+          ngDefaultControl
+        />
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <app-select
+          [formControlName]="'gender'"
+          [label]="'register.genderLabel' | transloco"
+          [name]="'gender'"
+          [formControl]="form.controls['gender']"
+          [options]="genders()"
+          [errMsg]="'register.genderRequired' | transloco"
+          [loading]="isLoading()"
+          [required]="true"
+          ngDefaultControl
+        />
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <app-input
+          [formControlName]="'email'"
+          [label]="'common.email' | transloco"
+          [type]="'email'"
+          [name]="'email'"
+          [className]="'w-full'"
+          [formControl]="form.controls['email']"
+          [errMsg]="'register.emailRequired' | transloco"
+          [placeholder]="'register.emailPlaceholder2' | transloco"
+          [loading]="isLoading()"
+          [required]="true"
+          ngDefaultControl
+        />
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <app-input
+          [formControlName]="'phoneNumber'"
+          [label]="'common.phone' | transloco"
+          [type]="'text'"
+          [name]="'phoneNumber'"
+          [className]="'w-full'"
+          [formControl]="form.controls['phoneNumber']"
+          [errMsg]="'register.phoneRequired' | transloco"
+          [placeholder]="'register.phonePlaceholder2' | transloco"
+          [loading]="isLoading()"
+          [mask]="'+0 (000) 000-0000'"
+          ngDefaultControl
+        />
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <app-select
+          [formControlName]="'isExternal'"
+          [label]="'register.isExternal' | transloco"
+          [name]="'isExternal'"
+          [formControl]="form.controls['isExternal']"
+          [options]="isExternalOptions()"
+          [errMsg]="'register.selectOption' | transloco"
+          [loading]="isLoading()"
+          [required]="true"
+          ngDefaultControl
+        />
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <app-input
+          [formControlName]="'password'"
+          [label]="'common.password' | transloco"
+          [type]="'password'"
+          [name]="'password'"
+          [className]="'w-full'"
+          [formControl]="form.controls['password']"
+          [errMsg]="'register.passwordRequired' | transloco"
+          [placeholder]="'register.passwordPlaceholder2' | transloco"
+          [loading]="isLoading()"
+          [required]="true"
+          ngDefaultControl
+        />
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <app-input
+          [formControlName]="'confirmPassword'"
+          [label]="'common.confirmPassword' | transloco"
+          [type]="'password'"
+          [name]="'confirmPassword'"
+          [className]="'w-full'"
+          [formControl]="form.controls['confirmPassword']"
+          [errMsg]="'common.passwordsMismatch' | transloco"
+          [placeholder]="'register.confirmPasswordPlaceholder2' | transloco"
+          [loading]="isLoading()"
+          [required]="true"
+          ngDefaultControl
+        />
+      </div>
+    </div>
+  </section>
+  <section class="mt-8 flex justify-end gap-4">
+    <button type="button" (click)="onSubmit()" [disabled]="isLoading()">
+      <span>{{ 'register.submitStep2' | transloco }}</span>
+    </button>
+  </section>
+</form>

@@ -1,0 +1,151 @@
+@let container = 'border border-gray-300 bg-white p-8 rounded-lg';
+<app-confirmation-modal />
+<div class="mt-4">
+  <div class="mb-4">
+    <h1 class="text-2xl font-bold">
+      {{ isEdit ? 'Editar Personal' : 'Registrar Personal' }}
+    </h1>
+  </div>
+</div>
+<form class="my-[2rem] rounded-lg" [formGroup]="form">
+  <section class="my-[2rem] {{ container }}">
+    <app-details-panel
+      [title]="'Detalles del Personal'"
+      [description]="'Complete la información solicitada a continuación.'"
+    />
+    <div class="my-8 grid gap-4 md:grid-cols-2 md:gap-8">
+      <div class="col-span-2 md:col-span-1">
+        <app-input
+          [formControlName]="'firstName'"
+          [label]="'Nombre'"
+          [type]="'text'"
+          [name]="'firstName'"
+          [className]="'w-full'"
+          [formControl]="form.controls['firstName']"
+          [errMsg]="'El nombre es obligatorio'"
+          [placeholder]="'Ej: Juan'"
+          [loading]="isLoading()"
+          ngDefaultControl
+        />
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <app-input
+          [formControlName]="'lastName'"
+          [label]="'Apellido'"
+          [type]="'text'"
+          [name]="'lastName'"
+          [className]="'w-full'"
+          [formControl]="form.controls['lastName']"
+          [errMsg]="'El apellido es obligatorio'"
+          [placeholder]="'Ej: Pérez'"
+          [loading]="isLoading()"
+          ngDefaultControl
+        />
+      </div>
+      <div>
+        <label class="label">Tipo de Documento de Identidad</label>
+        <select
+          name="identificationType"
+          id="identificationType"
+          class="input w-full"
+          (change)="getIdentificationTypeId($event)"
+        >
+          <option value="">Seleccione un tipo de documento de identidad</option>
+          @for (option of identificationTypes; track $index) {
+          <option [value]="option.value">{{ option.label }}</option>
+          }
+        </select>
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <app-input
+          [formControlName]="'identificationNumber'"
+          [label]="'Documento de Identidad'"
+          [type]="'text'"
+          [name]="'identificationNumber'"
+          [className]="'w-full'"
+          [formControl]="form.controls['identificationNumber']"
+          [errMsg]="'El número de documento de identidad es obligatorio'"
+          [placeholder]="'Ingrese el número de documento de identidad'"
+          [loading]="isLoading()"
+          [mask]="identificationTypeId() === '1' ? '000-0000000-0' : ''"
+          ngDefaultControl
+        />
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <app-input
+          [formControlName]="'birthdate'"
+          [label]="'Fecha de Nacimiento'"
+          [type]="'date'"
+          [name]="'birthdate'"
+          [className]="'w-full'"
+          [formControl]="form.controls['birthdate']"
+          [errMsg]="'La fecha de nacimiento es obligatoria'"
+          [placeholder]="'Ej: 18/08/1998'"
+          [loading]="isLoading()"
+          ngDefaultControl
+        />
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <app-select
+          [formControlName]="'gender'"
+          [label]="'Género'"
+          [name]="'gender'"
+          [formControl]="form.controls['gender']"
+          [options]="genders"
+          [errMsg]="'Seleccione un género'"
+          [loading]="isLoading()"
+          ngDefaultControl
+        />
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <app-input
+          [formControlName]="'email'"
+          [label]="'Correo Electrónico'"
+          [type]="'email'"
+          [name]="'email'"
+          [className]="'w-full'"
+          [formControl]="form.controls['email']"
+          [errMsg]="'El correo es obligatorio o tiene formato inválido'"
+          [placeholder]="'Ej: usuario@example.com'"
+          [loading]="isLoading()"
+          ngDefaultControl
+        />
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <app-input
+          [formControlName]="'phoneNumber'"
+          [label]="'Número de Teléfono'"
+          [type]="'text'"
+          [name]="'phoneNumber'"
+          [className]="'w-full'"
+          [formControl]="form.controls['phoneNumber']"
+          [errMsg]="'El número de teléfono es obligatorio'"
+          [placeholder]="'Ej: 8090000000'"
+          [loading]="isLoading()"
+          [mask]="'+0 (000) 000-0000'"
+          ngDefaultControl
+        />
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <app-select
+          [formControlName]="'isExternal'"
+          [label]="'Es externo'"
+          [name]="'isExternal'"
+          [formControl]="form.controls['isExternal']"
+          [options]="isExternalOptions"
+          [errMsg]="'Seleccione una opción'"
+          [loading]="isLoading()"
+          ngDefaultControl
+        />
+      </div>
+    </div>
+  </section>
+  <section class="mt-8 flex justify-end gap-4">
+    <button type="button" (click)="goBackToList()" class="secondary-button">
+      Cancelar
+    </button>
+    <button type="button" (click)="onSubmit()" [disabled]="isLoading()">
+      <span>{{isEdit ? 'Actualizar' : 'Guardar'}}</span>
+    </button>
+  </section>
+</form>

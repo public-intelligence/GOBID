@@ -1,0 +1,12 @@
+<app-role-modal [onRefresh]="fetchData" />
+<app-confirmation-modal />
+<app-maintenance
+  [headers]="headers"
+  [columnData]="tableData()"
+  [title]="title"
+  [subTitle]=" applicationName()"
+  [showButton]="true"
+  [isLoading]="isLoading()"
+  [onCreate]="createRole"
+  (searchValue)="onSearchChange($event)"
+/>

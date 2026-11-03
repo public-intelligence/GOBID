@@ -1,0 +1,111 @@
+@let container = 'border border-gray-300 bg-white p-8 rounded-lg';
+<app-confirmation-modal />
+<div class="mt-4">
+  <div class="mb-4">
+    <h1 class="text-2xl font-bold">
+      {{ isEdit ? 'Editar Organización' : 'Registrar Organización' }}
+    </h1>
+  </div>
+</div>
+<form class="my-[2rem] rounded-lg" [formGroup]="form">
+  <section class="my-[2rem] {{ container }}">
+    <app-details-panel
+      [title]="'Detalles de la Organización'"
+      [description]="'Complete la información solicitada a continuación.'"
+    />
+    <div class="my-8 grid gap-4 md:grid-cols-2 md:gap-8">
+      <div class="col-span-2 md:col-span-1">
+        <app-input
+          [formControlName]="'legalName'"
+          [label]="'Nombre Legal'"
+          [type]="'text'"
+          [name]="'legalName'"
+          [className]="'w-full'"
+          [formControl]="form.controls['legalName']"
+          [errMsg]="'El nombre legal es obligatorio'"
+          [placeholder]="'Ej: Empresa S.R.L.'"
+          [loading]="isLoading()"
+          ngDefaultControl
+        />
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <app-input
+          [formControlName]="'socialName'"
+          [label]="'Nombre Social'"
+          [type]="'text'"
+          [name]="'socialName'"
+          [className]="'w-full'"
+          [formControl]="form.controls['socialName']"
+          [errMsg]="'El nombre social es obligatorio'"
+          [placeholder]="'Ej: Mi Empresa'"
+          [loading]="isLoading()"
+          ngDefaultControl
+        />
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <app-input
+          [formControlName]="'rnc'"
+          [label]="'RNC'"
+          [type]="'text'"
+          [name]="'rnc'"
+          [className]="'w-full'"
+          [formControl]="form.controls['rnc']"
+          [errMsg]="'El RNC es obligatorio'"
+          [placeholder]="'Ej: 130000000'"
+          [mask]="'000-0000000-0'"
+          [loading]="isLoading()"
+          ngDefaultControl
+        />
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <app-input
+          [formControlName]="'email'"
+          [label]="'Correo Electrónico'"
+          [type]="'email'"
+          [name]="'email'"
+          [className]="'w-full'"
+          [formControl]="form.controls['email']"
+          [errMsg]="'El correo es obligatorio o tiene formato inválido'"
+          [placeholder]="'Ej: contacto@ejemplo.com'"
+          [loading]="isLoading()"
+          ngDefaultControl
+        />
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <app-input
+          [formControlName]="'phoneNumber'"
+          [label]="'Número de Teléfono'"
+          [type]="'text'"
+          [name]="'phoneNumber'"
+          [className]="'w-full'"
+          [formControl]="form.controls['phoneNumber']"
+          [errMsg]="'El teléfono es obligatorio'"
+          [placeholder]="'Ej: +1 (809) 555-5555'"
+          [loading]="isLoading()"
+          [mask]="'+0 (000) 000-0000'"
+          ngDefaultControl
+        />
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <app-input
+          [formControlName]="'type'"
+          [label]="'Tipo de Entidad'"
+          [name]="'type'"
+          [className]="'w-full'"
+          [formControl]="form.controls['type']"
+          [errMsg]="'El tipo de entidad es obligatorio'"
+          [loading]="isLoading()"
+          ngDefaultControl
+        />
+      </div>
+    </div>
+  </section>
+  <section class="mt-8 flex justify-end gap-4">
+    <button type="button" (click)="goBackToList()" class="secondary-button">
+      Cancelar
+    </button>
+    <button type="button" (click)="onSubmit()" [disabled]="isLoading()">
+      <span>{{isEdit ? 'Actualizar' : 'Guardar'}}</span>
+    </button>
+  </section>
+</form>

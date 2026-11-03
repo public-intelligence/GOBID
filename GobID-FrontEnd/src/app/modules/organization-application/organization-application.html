@@ -1,0 +1,15 @@
+<app-maintenance
+  [showButton]="false"
+  [headers]="headers"
+  [columnData]="tableData()"
+  [title]="title"
+  [isLoading]="isLoading()"
+  (searchValue)="onSearchChange($event)"
+  [showPaginator]="true"
+  [pageNumber]="organizationFilter().pageNumber || 1"
+  (pageSize)="onPageSizeChange($event)"
+  [totalCount]="totalCount()"
+  [totalPages]="totalPages()"
+  (actualPage)="onPageChange($event)"
+  [pageSizeInput]="organizationFilter().pageSize || 10"
+/>

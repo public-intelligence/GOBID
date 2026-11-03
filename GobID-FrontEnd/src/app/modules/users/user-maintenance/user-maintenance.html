@@ -1,0 +1,459 @@
+@let person = personData();
+<div class="my-6">
+  <h1 class="mb-8 text-[1.2rem] font-semibold">
+    {{isEdit ? 'Edición' : 'Creación'}} de Usuario
+  </h1>
+  <div class="mt-4 mb-8">
+    <app-steps-form [data]="steps"></app-steps-form>
+  </div>
+</div>
+@if(!isEdit) {
+<div class="mb-8">
+  <label for="" class="label" [ngClass]="currentStep !== 1 ? 'hidden' : ''"
+    >Documento de Identidad del Personal</label
+  >
+  <app-search
+    type="text"
+    placeholder="Ingrese el número de documento de identidad"
+    (searchValue)="onSearch($event)"
+    [ngClass]="currentStep !== 1 ? 'hidden' : ''"
+  />
+  <div class="mt-2">
+    @if(isSearching()) {
+    <div class="flex items-center gap-2 text-primary-blue-dark">
+      <div
+        class="h-4 w-4 animate-spin rounded-full border-2 border-primary-blue-dark border-t-transparent"
+      ></div>
+      <span class="text-sm">Buscando persona...</span>
+    </div>
+    }
+  </div>
+</div>
+}
+<form action="" [formGroup]="form" class="my-4 rounded-lg">
+  @switch (currentStep) {
+  <!-- /   -->
+  @case (1) {
+  <!-- / -->
+  @if(isLoadingUser()) {
+  <div class="grid gap-8 xl:grid-cols-3">
+    <div class="skeleton h-[12rem] w-full"></div>
+    <div class="skeleton h-[12rem] w-full md:col-span-2"></div>
+  </div>
+  } @else if(person) {
+  <div class="fade-in">
+    <section class="grid gap-8 xl:grid-cols-3">
+      <div class="container h-fit">
+        <h4 class="mb-4 text-[1rem] font-semibold">Información del personal</h4>
+        <ul class="grid gap-4">
+          <li>
+            <label for="" class="label ml-0 font-semibold text-gray-600"
+              >Nombres</label
+            >
+            <h6 class="text-[.9rem]">{{ person?.firstName }}</h6>
+          </li>
+          <li>
+            <label for="" class="label ml-0 font-semibold text-gray-600"
+              >Apellidos</label
+            >
+            <h6 class="text-[.9rem]">{{ person?.lastName }}</h6>
+          </li>
+        </ul>
+      </div>
+      <div class="container md:col-span-2">
+        <h4 class="mb-4 text-[1rem] font-semibold">Datos del usuario</h4>
+        <div class="grid gap-8 md:grid-cols-2">
+          <app-select
+            [formControlName]="'organizationId'"
+            [label]="'Organización'"
+            [options]="organizationOptions()"
+            [loading]="isLoading()"
+            [className]="'w-full'"
+            [errMsg]="'Organización inválida'"
+            [isSubmitted]="isFirstStepSubmitted()"
+            ngDefaultControl
+          />
+          <app-custom-select-search
+            [formControlName]="'positionId'"
+            [label]="'Cargo'"
+            [options]="positionsOptionsWithCurrent()"
+            [className]="'w-full'"
+            (onSearchValue)="onSearchPositionsFilter($event)"
+          />
+          <app-input
+            [formControlName]="'email'"
+            [label]="'Correo Electrónico'"
+            [type]="'email'"
+            [name]="'email'"
+            [className]="'w-full'"
+            [formControl]="form.controls['email']"
+            [placeholder]="'Ingrese el correo electrónico del usuario'"
+            [loading]="false"
+            [isSubmitted]="isFirstStepSubmitted()"
+            ngDefaultControl
+          />
+        </div>
+        <div class="mt-8">
+          <ul class="grid gap-4 md:grid-cols-2">
+            <!-- <li class="">
+              <app-checkbox
+                [formControlName]="'isGlobalAdmin'"
+                [label]="'¿Es administrador global?'"
+                [name]="'isGlobalAdmin'"
+                [className]="'w-full'"
+                [formControl]="form.controls['isGlobalAdmin']"
+                ngDefaultControl
+              />
+            </li> -->
+            <li class="">
+              <app-checkbox
+                [formControlName]="'mustChangePassword'"
+                [label]="'¿Debe cambiar la contraseña?'"
+                [name]="'mustChangePassword'"
+                [className]="'w-full'"
+                [formControl]="form.controls['mustChangePassword']"
+                ngDefaultControl
+              />
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+  }
+  <!-- / -->
+  } @case (2) {
+  <!-- Paso 2: Selección de Organizaciones -->
+  <div>
+    <h4 class="mb-2 text-[1.1rem] text-gray-700">
+      Seleccione las organizaciones a vincular
+    </h4>
+    <div class="mb-3">
+      <app-search
+        [placeholder]="'Buscar organización por nombre'"
+        [useButton]="true"
+        (searchValue)="onOrgSearch($event)"
+      />
+    </div>
+    @if (!isLoading()) {
+    <div class="container max-h-[25rem] overflow-auto p-0">
+      <ul class="w-full">
+        @for (org of organizationOptions(); track org.value) { @if (org.value
+        !== 'default') {
+        <li
+          class="flex cursor-pointer items-center gap-3 border-b border-gray-300 px-4 py-3 duration-200 hover:bg-slate-100"
+          [ngClass]="{ 'bg-primary-blue-lighter': isOrganizationSelected(org.value.toString()) }"
+          tabindex="0"
+          (click)="toggleOrganizationSelection(org.value.toString())"
+          (keyup.enter)="toggleOrganizationSelection(org.value.toString())"
+        >
+          <span
+            class="flex h-5 w-5 items-center justify-center rounded border border-gray-400"
+            [ngClass]="{ 'border-primary-blue bg-primary-blue text-white': isOrganizationSelected(org.value.toString()) }"
+          >
+            @if (isOrganizationSelected(org.value.toString())) {
+            <fa-icon [icon]="faCheck" class="text-[0.7rem]"></fa-icon>
+            }
+          </span>
+          {{ org.label }}
+        </li>
+        } }
+      </ul>
+    </div>
+    } @else {
+    <div class="skeleton h-[20rem] w-full"></div>
+    }
+  </div>
+  }
+  <!-- / -->
+  @case (3) {
+  <!-- Paso 3: Acceso a Aplicaciones -->
+  <div class="grid gap-4 md:grid-cols-2">
+    <div>
+      <h4 class="mb-2 text-[1.1rem] text-gray-700">Listado de Aplicaciones</h4>
+      <div class="mb-3">
+        <app-search
+          [placeholder]="'Buscar aplicación por nombre'"
+          [useButton]="true"
+          (searchValue)="onAppSearch($event)"
+        />
+      </div>
+      @if(orgAppData().length > 0 && !isLoadingOrgApp()) {
+      <div class="container max-h-[20rem] overflow-auto p-0">
+        <ul class="w-full space-y-3">
+          @for(group of groupedOrgAppData(); track group.orgId) {
+          <li class="border-b border-gray-300 pb-3 last:border-b-0 last:pb-0">
+            <h5
+              class="bg-gray-50 px-4 py-2 text-[0.8rem] font-semibold text-gray-600"
+            >
+              {{ group.orgName }}
+            </h5>
+            <ul>
+              @for(app of group.apps; track app.organizationApplicationId) {
+              <li
+                class="cursor-pointer border-t border-gray-200 px-4 py-2 duration-200 hover:bg-slate-100"
+                [ngClass]="{ 'bg-primary-blue-lighter': selectedApp() === app.organizationApplicationId}"
+                tabindex="0"
+                (click)="handleAppSelect(app.organizationApplicationId)"
+                (keyup.enter)="handleAppSelect(app.organizationApplicationId)"
+              >
+                {{ app.application.name }}
+                @if(getNameOfSelectedRolesByApp(app.organizationApplicationId)) {
+                <span class="ml-2 text-gray-500">
+                  -
+                  {{getNameOfSelectedRolesByApp(app.organizationApplicationId)}}</span
+                >
+                }
+              </li>
+              }
+            </ul>
+          </li>
+          }
+        </ul>
+      </div>
+      } @else if (isLoadingOrgApp()) {
+      <div class="skeleton h-[20rem] w-full"></div>
+      } @else {
+      <div class="grid h-[20rem] items-center justify-center">
+        <div class="">
+          <div class="flex place-items-center justify-center">
+            <svg
+              id="Icons"
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewBox="0 0 24 24"
+              class="mb-2 h-[2.5rem] w-[2.5rem] rotate-45 text-gray-400"
+              fill="currentColor"
+            >
+              <path
+                d="M20,3H4c-.552,0-1,.448-1,1v16c0,.552.448,1,1,1h16c.552,0,1-.448,1-1V4c0-.552-.448-1-1-1ZM17.354,8.061l-9.293,9.293c-.195.195-.512.195-.707,0l-.707-.707c-.195-.195-.195-.512,0-.707L15.939,6.647c.195-.195.512-.195.707,0l.707.707c.195.195.195.512,0,.707Z"
+              />
+            </svg>
+          </div>
+          <p class="text-gray-400">No se encontraron aplicaciones</p>
+        </div>
+      </div>
+      }
+    </div>
+    <div>
+      <h4 class="mb-2 text-[1.1rem] text-gray-700">Listado de Roles</h4>
+      @if (rolesData().length > 0) {
+      <div class="mb-3">
+        <app-search
+          [placeholder]="'Buscar rol por nombre'"
+          [useButton]="true"
+          (searchValue)="onRoleSearch($event)"
+        />
+      </div>
+      }
+      <div class="container max-h-[20rem] overflow-auto p-0">
+        @if (filteredRolesData().length > 0 && !isLoadingRole()) {
+        <ul class="w-full">
+          @for(role of filteredRolesData(); track role.id) {
+          <li
+            class="cursor-pointer border-b border-gray-300 px-4 py-2 duration-200 hover:bg-slate-100"
+            tabindex="0"
+            (click)="handleRoleSelect(role)"
+            (keyup.enter)="handleRoleSelect(role)"
+          >
+            {{ role.name }} @if(isRoleSelected(role)) {
+            <span class="ml-2 text-green-500"
+              ><fa-icon [icon]="faCheck"></fa-icon
+            ></span>
+            }
+          </li>
+          }
+        </ul>
+        } @else if (isLoadingRole()) {
+        <div class="skeleton h-[20rem] w-full"></div>
+        } @else {
+        <div class="grid h-[20rem] items-center justify-center">
+          <div class="">
+            <div class="flex place-items-center justify-center">
+              <svg
+                id="Icons"
+                xmlns="http://www.w3.org/2000/svg"
+                version="1.1"
+                viewBox="0 0 24 24"
+                class="mb-2 h-[2.5rem] w-[2.5rem] rotate-45 text-gray-400"
+                fill="currentColor"
+              >
+                <path
+                  d="M20,3H4c-.552,0-1,.448-1,1v16c0,.552.448,1,1,1h16c.552,0,1-.448,1-1V4c0-.552-.448-1-1-1ZM17.354,8.061l-9.293,9.293c-.195.195-.512.195-.707,0l-.707-.707c-.195-.195-.195-.512,0-.707L15.939,6.647c.195-.195.512-.195.707,0l.707.707c.195.195.195.512,0,.707Z"
+                />
+              </svg>
+            </div>
+            <p class="text-center text-gray-400">
+              {{ rolesData().length > 0 ? 'No se encontraron roles con ese nombre' : 'No se encontraron roles para esta aplicación' }}
+            </p>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+  }
+  <!-- / -->
+  @case (4) {
+  <div>
+    <h4 class="mb-4 text-[1.1rem] text-gray-700">Seleccionar Políticas</h4>
+    @if (isLoadingPolicies()) {
+    <div class="skeleton h-[20rem] w-full"></div>
+    } @else if (availablePolicies().length > 0) {
+    <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      @for (policy of availablePolicies(); track policy.policyId) {
+      <div
+        class="container cursor-pointer border-2 duration-200"
+        [ngClass]="{
+          'border-primary-blue': isPolicySelected(policy.policyId),
+          'border-gray-300': !isPolicySelected(policy.policyId)
+        }"
+        tabindex="0"
+        (click)="togglePolicySelection(policy.policyId)"
+        (keyup.enter)="togglePolicySelection(policy.policyId)"
+      >
+        <div class="flex min-h-6 items-start justify-between">
+          <h5 class="text-[.95rem] font-semibold">{{ policy.name }}</h5>
+          @if (isPolicySelected(policy.policyId)) {
+          <fa-icon class="text-green-500" [icon]="faCheck"></fa-icon>}
+        </div>
+        @if (policy.description) {
+        <p class="mt-1 text-[.85rem] text-gray-500">{{ policy.description }}</p>
+        }
+        <div class="mt-2 flex gap-2">
+          @switch (policy.policyTypeName) { @case ('IP_RANGE') {
+          <p class="mt-1 text-[.85rem] text-gray-500">
+            IP: {{ policy.conditionFormatted?.['IpRangeStart'] }} - {{
+            policy.conditionFormatted?.['IpRangeEnd'] }}
+          </p>
+          } @case ('TIME_WINDOW') {
+          <p class="mt-1 text-[.85rem] text-gray-500">
+            Hora: {{ policy.conditionFormatted?.['StartTime'] }} - {{
+            policy.conditionFormatted?.['EndTime'] }}
+          </p>
+          } }
+        </div>
+        <div class="mt-2">
+          <span
+            class="rounded px-2 py-0.5 text-[.75rem] font-medium"
+            [ngClass]="{
+              'bg-green-100 text-green-700': policy.effect === 'ALLOW',
+              'bg-red-100 text-red-700': policy.effect === 'DENY'
+            }"
+            >{{ policy.effect === 'ALLOW' ? 'Permitir Acceso' : 'Denegar Acceso'
+            }}</span
+          >
+        </div>
+      </div>
+      }
+    </div>
+    } @else {
+    <div class="grid h-[20rem] items-center justify-center">
+      <p class="text-center text-gray-400">No se encontraron políticas</p>
+    </div>
+    }
+  </div>
+  } @case (5) {
+  <section class="grid gap-4 pt-[1rem] md:grid-cols-2">
+    <div class="container">
+      <h4 class="mb-2 text-[0.95rem] font-semibold text-gray-700">
+        Datos del usuario
+      </h4>
+      <ul class="divide-y divide-gray-200">
+        <li class="grid grid-cols-[13rem_1fr] items-start gap-4 py-2">
+          <span class="text-[0.85rem] text-gray-500">Nombre Completo</span>
+          <span class="wrap text-[0.9rem] font-semibold"
+            >{{ personData()?.firstName }} {{ personData()?.lastName }}</span
+          >
+        </li>
+        <li class="grid grid-cols-[13rem_1fr] items-start gap-4 py-2">
+          <span class="text-[0.85rem] text-gray-500">Organización</span>
+          <span class="wrap text-[0.9rem] font-semibold">{{ getOrganizationName() }}</span>
+        </li>
+        <li class="grid grid-cols-[13rem_1fr] items-start gap-4 py-2">
+          <span class="text-[0.85rem] text-gray-500">Cargo</span>
+          <span class="wrap text-[0.9rem] font-semibold">{{ getPositionName() }}</span>
+        </li>
+        <li class="grid grid-cols-[13rem_1fr] items-start gap-4 py-2">
+          <span class="text-[0.85rem] text-gray-500">Correo Electrónico</span>
+          <span class="wrap text-[0.9rem] font-semibold">{{ email }}</span>
+        </li>
+        <li class="grid grid-cols-[13rem_1fr] items-start gap-4 py-2">
+          <span class="text-[0.85rem] text-gray-500"
+            >¿Debe cambiar la contraseña?</span
+          >
+          <span class="text-[0.9rem] font-semibold">
+            {{ mustChangePassword ? 'Sí' : 'No' }}
+          </span>
+        </li>
+      </ul>
+    </div>
+    <div class="container">
+      <h4 class="mb-2 text-[0.95rem] font-semibold text-gray-700">
+        Aplicaciones y roles
+      </h4>
+      <ul class="max-h-[16rem] space-y-3 overflow-y-auto pr-2">
+        @for (group of getApplicationSelectedGroupedByOrg(); track group.orgId)
+        {
+        <li>
+          <h5 class="mb-1 text-[0.8rem] font-semibold text-gray-500">
+            {{ group.orgName }}
+          </h5>
+          <ul class="divide-y divide-gray-200">
+            @for (app of group.apps; track app.organizationApplicationId) {
+            <li class="flex items-center justify-between gap-4 py-2">
+              <span class="wrap text-[0.9rem] text-gray-700">{{
+                app.applicationName
+              }}</span>
+              <span
+                class="shrink-0 rounded bg-gray-100 px-2 py-0.5 text-[0.8rem] font-medium text-gray-700"
+                >{{ app.roleName }}</span
+              >
+            </li>
+            }
+          </ul>
+        </li>
+        }
+      </ul>
+    </div>
+    @if(getSelectedPolicies().length > 0) {
+    <div class="container w-full md:col-span-2">
+      <h4 class="mb-2 text-[0.95rem] font-semibold text-gray-700">
+        Políticas asociadas
+      </h4>
+      <ul class="grid gap-2 md:grid-cols-2">
+        @for (policy of getSelectedPolicies(); track policy.policyId) {
+        <li
+          class="flex items-center justify-between gap-2 rounded-lg border border-gray-200 px-3 py-1.5"
+        >
+          <span class="wrap text-[.85rem] font-medium">{{ policy.name }}</span>
+          <span
+            class="shrink-0 rounded px-2 py-0.5 text-[.75rem] font-medium"
+            [ngClass]="{
+              'bg-green-100 text-green-700': policy.effect === 'ALLOW',
+              'bg-red-100 text-red-700': policy.effect === 'DENY'
+            }"
+            >{{ policy.effect === 'ALLOW' ? 'Permitir Acceso' : 'Denegar
+            Acceso' }}</span
+          >
+        </li>
+        }
+      </ul>
+    </div>
+    }
+  </section>
+  } }
+  <section class="mt-4 flex justify-between gap-4">
+    @if(firstStep) {
+    <button class="secondary-button" (click)="goBackToList()">Volver</button>
+    } @else {
+    <button class="secondary-button" (click)="previousStep()">Volver</button>
+    } @if(finalStep) {
+    <button (click)="onSubmit()" [disabled]="isPending()">
+      {{isEdit ? 'Actualizar' : 'Crear'}}
+    </button>
+    } @else {
+    <button (click)="nextStep()">Siguiente</button>
+    }
+  </section>
+</form>

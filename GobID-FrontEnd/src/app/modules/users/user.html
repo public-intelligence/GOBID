@@ -1,0 +1,20 @@
+<app-confirmation-modal />
+<app-maintenance
+  [headers]="headers"
+  [columnData]="tableData()"
+  [title]="title"
+  [createPath]="createPath"
+  [isLoading]="isLoading()"
+  [buttonText]="'Nuevo Usuario'"
+  (searchValue)="onSearchChange($event)"
+  (filterSelected)="onFiltersChange($event)"
+  [filters]="filters"
+  [showFilters]="true"
+  [showPaginator]="true"
+  [pageNumber]="userFilters().pageNumber || 1"
+  (pageSize)="onPageSizeChange($event)"
+  [totalCount]="totalCount()"
+  [totalPages]="totalPages()"
+  (actualPage)="onPageChange($event)"
+  [pageSizeInput]="userFilters().pageSize || 10"
+/>

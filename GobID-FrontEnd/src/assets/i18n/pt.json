@@ -1,0 +1,138 @@
+{
+  "language": {
+    "select": "Selecionar idioma"
+  },
+  "common": {
+    "help": "Ajuda",
+    "email": "E-mail",
+    "emailPlaceholder": "exemplo@email.gob.do",
+    "emailInvalid": "E-mail inválido",
+    "password": "Senha",
+    "confirmPassword": "Confirmar senha",
+    "passwordsMismatch": "As senhas não coincidem",
+    "docType": "Tipo de documento de identidade",
+    "docNumber": "Documento de identidade",
+    "phone": "Número de telefone",
+    "loading": "Carregando informações...",
+    "close": "Fechar",
+    "yes": "Sim",
+    "no": "Não",
+    "cedula": "Carteira de identidade nacional",
+    "passport": "Passaporte",
+    "country": "República Dominicana",
+    "terms": "Termos",
+    "privacy": "Privacidade",
+    "contact": "Contato"
+  },
+  "footer": {
+    "copyright": "© 2026 Todos os direitos reservados."
+  },
+  "auth": {
+    "welcome": "Bem-vindo",
+    "selectOrg": "Selecione uma organização",
+    "selectOrgHint": "Sua conta tem acesso a mais de uma organização.",
+    "policyDenied": "Acesso negado pelas políticas de segurança",
+    "forgotPassword": "Esqueceu sua senha?",
+    "rememberDevice": "Lembrar deste dispositivo",
+    "signIn": "Entrar",
+    "noAccount": "Não tem uma conta?",
+    "registerHere": "Cadastre-se aqui",
+    "passwordInvalid": "Senha inválida",
+    "toasts": {
+      "missingFields": "Campos ausentes",
+      "invalidCredentials": "E-mail e/ou senha inválidos",
+      "loginError": "Ocorreu um erro ao entrar"
+    }
+  },
+  "register": {
+    "title": "Criar conta",
+    "step1Intro": "Insira o número do seu documento para verificar sua identidade e concluir o cadastro.",
+    "selectDocType": "Selecione um tipo de documento de identidade",
+    "docNumberPlaceholder": "Insira o número do seu documento",
+    "searching": "Pesquisando...",
+    "change": "Alterar",
+    "searchAnother": "Pesquisar outro documento",
+    "backToLogin": "Voltar para o login",
+    "phonePlaceholder": "Insira seu número de telefone",
+    "phoneRequired": "Número de telefone obrigatório",
+    "passwordPlaceholder": "Mínimo de 6 caracteres",
+    "passwordRule": "A senha deve ter pelo menos 6 caracteres e conter pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial.",
+    "confirmPasswordPlaceholder": "Repita sua senha",
+    "registering": "Cadastrando...",
+    "submit": "Cadastrar",
+    "detailsTitle": "Detalhes do usuário",
+    "detailsDesc": "Preencha as informações solicitadas abaixo.",
+    "firstName": "Nome",
+    "firstNameRequired": "O nome é obrigatório",
+    "firstNamePlaceholder": "ex.: João",
+    "lastName": "Sobrenome",
+    "lastNameRequired": "O sobrenome é obrigatório",
+    "lastNamePlaceholder": "ex.: Silva",
+    "docNumberRequired": "O número do documento de identidade é obrigatório",
+    "docNumberPlaceholder2": "Insira o número do documento de identidade",
+    "birthdate": "Data de nascimento",
+    "birthdateRequired": "A data é obrigatória",
+    "birthdatePlaceholder": "ex.: 18/08/1998",
+    "genderLabel": "Gênero",
+    "genderRequired": "Selecione um gênero",
+    "emailRequired": "O e-mail é obrigatório ou tem formato inválido",
+    "emailPlaceholder2": "ex.: usuario@example.com",
+    "phonePlaceholder2": "ex.: 8090000000",
+    "isExternal": "É externo",
+    "selectOption": "Selecione uma opção",
+    "passwordRequired": "A senha é obrigatória",
+    "passwordPlaceholder2": "Insira sua senha",
+    "confirmPasswordPlaceholder2": "Confirme sua senha",
+    "submitStep2": "Cadastrar",
+    "gender": {
+      "male": "Masculino",
+      "female": "Feminino",
+      "other": "Outro"
+    },
+    "modal": {
+      "title": "Confirmar e-mail",
+      "body": "Usuário cadastrado com sucesso. Verifique seu e-mail para confirmar sua conta."
+    },
+    "toasts": {
+      "personNotFound": "Nenhuma pessoa encontrada com este número de identificação",
+      "completeFields": "Por favor, preencha todos os campos corretamente",
+      "registerError": "Erro ao cadastrar o usuário",
+      "completeFieldsCorrectly": "Por favor, preencha corretamente todos os campos obrigatórios.",
+      "formError": "Ocorreu um erro ao processar o formulário."
+    }
+  },
+  "forgot": {
+    "intro": "Insira seu e-mail e enviaremos as instruções para redefinir sua senha.",
+    "submit": "Enviar instruções",
+    "toasts": {
+      "emailInvalid": "O e-mail é inválido",
+      "resetError": "Erro ao redefinir a senha"
+    },
+    "modal": {
+      "title": "Redefinir senha",
+      "body": "Um e-mail para redefinir a senha foi enviado para"
+    }
+  },
+  "changePwd": {
+    "heading": "Alterar senha",
+    "intro": "Antes de continuar, você deve atualizar sua senha.",
+    "newPassword": "Nova senha",
+    "newPasswordPlaceholder": "Insira sua nova senha",
+    "passwordRule": "A senha deve conter pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial.",
+    "confirmNewPassword": "Confirmar nova senha",
+    "confirmNewPasswordPlaceholder": "Confirme sua nova senha",
+    "submit": "Confirmar",
+    "toasts": {
+      "success": "Senha redefinida com sucesso",
+      "error": "Erro ao alterar a senha"
+    }
+  },
+  "verify": {
+    "verifying": "Verificando seu e-mail...",
+    "success": "E-mail verificado!",
+    "successBody": "Seu e-mail foi confirmado com sucesso. Agora você pode entrar com sua conta.",
+    "goToLogin": "Ir para o login",
+    "failed": "Falha na verificação",
+    "invalidLink": "O link de verificação é inválido ou expirou."
+  }
+}

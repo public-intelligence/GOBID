@@ -1,0 +1,138 @@
+{
+  "language": {
+    "select": "Select language"
+  },
+  "common": {
+    "help": "Help",
+    "email": "Email",
+    "emailPlaceholder": "example@email.gob.do",
+    "emailInvalid": "Invalid email address",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "passwordsMismatch": "Passwords do not match",
+    "docType": "Identity Document Type",
+    "docNumber": "Identity Document",
+    "phone": "Phone Number",
+    "loading": "Loading information...",
+    "close": "Close",
+    "yes": "Yes",
+    "no": "No",
+    "cedula": "National ID card",
+    "passport": "Passport",
+    "country": "Dominican Republic",
+    "terms": "Terms",
+    "privacy": "Privacy",
+    "contact": "Contact"
+  },
+  "footer": {
+    "copyright": "© 2026 All Rights Reserved."
+  },
+  "auth": {
+    "welcome": "Welcome",
+    "selectOrg": "Select an organization",
+    "selectOrgHint": "Your account has access to more than one organization.",
+    "policyDenied": "Access denied by security policies",
+    "forgotPassword": "Forgot your password?",
+    "rememberDevice": "Remember this device",
+    "signIn": "Sign in",
+    "noAccount": "Don't have an account?",
+    "registerHere": "Register here",
+    "passwordInvalid": "Invalid password",
+    "toasts": {
+      "missingFields": "Missing fields",
+      "invalidCredentials": "Invalid email and/or password",
+      "loginError": "An error occurred while signing in"
+    }
+  },
+  "register": {
+    "title": "Create account",
+    "step1Intro": "Enter your document number to verify your identity and complete the registration.",
+    "selectDocType": "Select an identity document type",
+    "docNumberPlaceholder": "Enter your document number",
+    "searching": "Searching...",
+    "change": "Change",
+    "searchAnother": "Search another ID",
+    "backToLogin": "Back to sign in",
+    "phonePlaceholder": "Enter your phone number",
+    "phoneRequired": "Phone number required",
+    "passwordPlaceholder": "Minimum 6 characters",
+    "passwordRule": "The password must be at least 6 characters long and contain at least one uppercase letter, one lowercase letter, a number and a special character.",
+    "confirmPasswordPlaceholder": "Repeat your password",
+    "registering": "Registering...",
+    "submit": "Register",
+    "detailsTitle": "User Details",
+    "detailsDesc": "Complete the information requested below.",
+    "firstName": "First Name",
+    "firstNameRequired": "First name is required",
+    "firstNamePlaceholder": "e.g. John",
+    "lastName": "Last Name",
+    "lastNameRequired": "Last name is required",
+    "lastNamePlaceholder": "e.g. Smith",
+    "docNumberRequired": "The identity document number is required",
+    "docNumberPlaceholder2": "Enter the identity document number",
+    "birthdate": "Date of Birth",
+    "birthdateRequired": "The date is required",
+    "birthdatePlaceholder": "e.g. 08/18/1998",
+    "genderLabel": "Gender",
+    "genderRequired": "Select a gender",
+    "emailRequired": "Email is required or has an invalid format",
+    "emailPlaceholder2": "e.g. user@example.com",
+    "phonePlaceholder2": "e.g. 8090000000",
+    "isExternal": "Is external",
+    "selectOption": "Select an option",
+    "passwordRequired": "Password is required",
+    "passwordPlaceholder2": "Enter your password",
+    "confirmPasswordPlaceholder2": "Confirm your password",
+    "submitStep2": "Register",
+    "gender": {
+      "male": "Male",
+      "female": "Female",
+      "other": "Other"
+    },
+    "modal": {
+      "title": "Confirm Email",
+      "body": "User registered successfully. Please check your email to confirm your account."
+    },
+    "toasts": {
+      "personNotFound": "No person was found with this identification number",
+      "completeFields": "Please complete all fields correctly",
+      "registerError": "Error registering the user",
+      "completeFieldsCorrectly": "Please complete all required fields correctly.",
+      "formError": "An error occurred while processing the form."
+    }
+  },
+  "forgot": {
+    "intro": "Enter your email address and we will send you the instructions to reset your password.",
+    "submit": "Send instructions",
+    "toasts": {
+      "emailInvalid": "The email address is invalid",
+      "resetError": "Error resetting the password"
+    },
+    "modal": {
+      "title": "Reset password",
+      "body": "An email to reset the password has been sent to"
+    }
+  },
+  "changePwd": {
+    "heading": "Change Password",
+    "intro": "Before continuing, you must update your password.",
+    "newPassword": "New Password",
+    "newPasswordPlaceholder": "Enter your new password",
+    "passwordRule": "The password must contain at least one uppercase letter, one lowercase letter, a number and a special character.",
+    "confirmNewPassword": "Confirm New Password",
+    "confirmNewPasswordPlaceholder": "Confirm your new password",
+    "submit": "Confirm",
+    "toasts": {
+      "success": "Password reset successfully",
+      "error": "Error changing the password"
+    }
+  },
+  "verify": {
+    "verifying": "Verifying your email address...",
+    "success": "Email verified!",
+    "successBody": "Your email address has been confirmed successfully. You can now sign in with your account.",
+    "goToLogin": "Go to sign in",
+    "failed": "Verification failed",
+    "invalidLink": "The verification link is invalid or has expired."
+  }
+}

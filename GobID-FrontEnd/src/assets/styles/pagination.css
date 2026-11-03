@@ -1,0 +1,25 @@
+.custom-paginator .p-paginator-page,
+.custom-paginator .p-paginator-prev,
+.custom-paginator .p-paginator-next,
+.custom-paginator .p-paginator-first,
+.custom-paginator .p-paginator-last {
+  @apply mr-1 w-[2rem] rounded-md bg-slate-200 py-2 text-gray-700 duration-100 hover:bg-slate-100 md:w-[2.5rem];
+}
+
+.custom-paginator .p-paginator {
+  @apply flex w-full justify-between;
+}
+
+.custom-paginator .p-paginator-current {
+  @apply hidden text-sm md:mr-auto md:block;
+}
+
+.custom-paginator .p-paginator-page:hover {
+  @apply bg-slate-400;
+}
+.custom-paginator {
+  --p-paginator-nav-button-selected-color: #fff;
+  --p-paginator-nav-button-selected-background: var(--color-primary-blue);
+  --p-paginator-nav-button-hover-background: #b3c3da;
+  --p-paginator-current-page-report-color: #9b9b9b;
+}

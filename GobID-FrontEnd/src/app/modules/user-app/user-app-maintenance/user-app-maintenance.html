@@ -1,0 +1,138 @@
+<main class="bg-white pb-[2rem] transition-all">
+  <form action="" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="my-8">
+      <div class="flex items-center justify-between">
+        <button type="button" class="secondary-button" (click)="goBack()">
+          Volver
+        </button>
+        <button type="submit" class="">Guardar</button>
+      </div>
+      <div class="my-8">
+        <app-basic-detail
+          title="Vincular aplicaciones para el usuario {{userData()?.personnel?.firstName}} {{userData()?.personnel?.lastName}}"
+          description="Vincula un usuario a una aplicación y asigna los roles correspondientes."
+        />
+      </div>
+    </div>
+    <div class="mb-8 flex justify-between gap-8">
+      <div class="md:w-[30%]">
+        <app-select
+          [formControlName]="'organizationId'"
+          [label]="'Organización'"
+          [name]="'organizationId'"
+          [options]="organizationOptions()"
+          [formControl]="form.controls['organizationId']"
+          [className]="'w-[16rem] md:w-[18rem]'"
+          [errMsg]="'Organización inválida'"
+          (valueChange)="handleSelectOrganization($event)"
+          ngDefaultControl
+        ></app-select>
+      </div>
+
+      @if(isAllRowSelected || isRowSelected) {
+      <div class="mt-auto flex gap-4">
+        <button
+          class="secondary-button"
+          type="button"
+          (click)="disableSelectedRows()"
+        >
+          Desactivar
+        </button>
+        <button
+          class="secondary-button"
+          type="button"
+          (click)="activateSelectedRows()"
+        >
+          Activar
+        </button>
+      </div>
+      }
+    </div>
+
+    <!-- // -->
+
+    @if(!isLoading()) {
+    <!-- // -->
+
+    @if(appOrgData().length > 0) {
+    <div class="max-h-[45dvh] overflow-auto">
+      <table class="w-full text-left">
+        <thead
+          class="sticky top-0 z-[11] bg-slate-100 text-xs text-gray-700 uppercase"
+        >
+          <tr>
+            <th class="px-6 py-1">
+              <input
+                type="checkbox"
+                class="cursor-pointer"
+                formControlName="selectAllRows"
+                (click)="selectAllRows()"
+              />
+            </th>
+            <th class="px-6 py-1 text-ellipsis">Aplicación</th>
+            <th class="px-6 py-1 text-ellipsis">Organización</th>
+            <th class="px-6 py-1 text-ellipsis">Roles</th>
+            <th class="px-6 py-1 text-ellipsis">Estado</th>
+          </tr>
+        </thead>
+        <tbody formArrayName="appCards">
+          @for (app of appCards.controls; track $index) {
+          <tr
+            [formGroupName]="$index"
+            class="border-b border-gray-200 bg-white last-of-type:border-b-0"
+          >
+            <td class="mx-auto px-6 py-1">
+              <input
+                type="checkbox"
+                class="cursor-pointer"
+                formControlName="selected"
+              />
+            </td>
+            <td
+              title="{{ app.get('title')?.value }}"
+              class="max-w-[200px] truncate px-6 py-1 text-ellipsis"
+            >
+              {{ app.get('title')?.value }}
+            </td>
+            <td
+              title="{{ app.get('organizationName')?.value }}"
+              class="max-w-[200px] truncate px-6 py-1 text-ellipsis"
+            >
+              {{ app.get('organizationName')?.value }}
+            </td>
+            <td
+              class="flex place-items-center justify-center px-6 py-1"
+              formArrayName="roles"
+            >
+              <select
+                class="my-auto mt-1 w-full min-w-[5rem]"
+                (change)="handleSelectRole($event)"
+              >
+                @for(role of getRolesControls(app); track role) {
+                <option [value]="role.get('id')?.value">
+                  {{ role.get('name')?.value }}
+                </option>
+                }
+              </select>
+            </td>
+            <td class="px-6 py-1 text-ellipsis">
+              <app-checkbox [formControlName]="'isActive'" />
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    } @else {
+    <div class="h-[20dvh]">
+      <app-nothing-found />
+    </div>
+    } } @else {
+    <div class="flex h-[30dvh] place-content-center place-items-center">
+      <app-loading-spinner
+        message="Cargando aplicaciones de la organización..."
+      ></app-loading-spinner>
+    </div>
+    }
+  </form>
+</main>

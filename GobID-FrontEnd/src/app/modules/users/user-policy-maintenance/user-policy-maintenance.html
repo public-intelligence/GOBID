@@ -1,0 +1,141 @@
+<app-confirmation-modal></app-confirmation-modal>
+@let person = personData();
+<section class="my-4">
+  <button class="secondary-button" (click)="goBackToList()">
+    <fa-icon [icon]="faArrowLeft" class="mr-2" /> Volver
+  </button>
+</section>
+<h1 class="text-2xl font-semibold">Asignación de Políticas</h1>
+<div class="my-5 rounded-lg">
+  @if (isLoadingUser()) {
+  <div class="skeleton h-80 w-full"></div>
+  } @else if (userApps().length === 0) {
+  <div class="grid h-80 items-center justify-center p-2">
+    <p class="text-center text-gray-500">No se encontraron aplicaciones</p>
+  </div>
+  } @else {
+  <div
+    class="mb-3 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between"
+  >
+    <h3 class="text-[1.1rem]">Listado de Aplicaciones Vinculadas</h3>
+    <p class="text-sm font-medium">
+      <span class="text-gray-500">Usuario:</span> {{ person?.firstName }} {{
+      person?.lastName }}
+    </p>
+  </div>
+
+  <ul class="flex w-full flex-col gap-3 rounded-lg">
+    @for (app of userApps(); track app.userApplicationId) {
+    <li>
+      <div
+        class="flex w-full cursor-pointer items-center justify-between rounded-lg border border-gray-300 bg-white px-4 py-3 text-left duration-150 hover:bg-slate-100"
+        (click)="toggleApp(app.userApplicationId)"
+        role="button"
+      >
+        <div class="flex min-w-0 flex-1 flex-col">
+          <span class="text-sm font-medium">{{ app.applicationName }}</span>
+          @if (app.roleName) {
+          <span class="text-xs text-gray-400">{{ app.roleName }}</span>
+          }
+          <span class="text-xs text-gray-400">{{ app.organizationName }}</span>
+        </div>
+        <div class="ml-3 flex shrink-0 items-center gap-2">
+          @if (loadingAppId() === app.userApplicationId) {
+          <span class="loading loading-spinner loading-xs text-gray-400"></span>
+          }
+          <fa-icon
+            [icon]="
+              expandedAppId() === app.userApplicationId
+                ? faChevronUp
+                : faChevronDown
+            "
+            class="text-sm text-gray-400"
+          ></fa-icon>
+        </div>
+      </div>
+
+      @if (expandedAppId() === app.userApplicationId) { @if (loadingAppId() ===
+      app.userApplicationId) {
+      <div class="mt-3">
+        <div class="skeleton h-32 w-full"></div>
+      </div>
+      } @else if (getAvailablePolicies(app.userApplicationId).length === 0) {
+      <div
+        class="mt-2 rounded-lg border border-gray-300 bg-gray-100 px-4 py-6 text-center text-sm text-gray-400"
+      >
+        No se encontraron políticas en la organización
+      </div>
+      } @else {
+      <ul
+        class="mt-2 flex w-full flex-col gap-2 rounded-lg border border-gray-300 bg-gray-100 p-3"
+      >
+        @for (policy of getAvailablePolicies(app.userApplicationId); track
+        policy.policyId) {
+        <li
+          class="flex w-full items-start justify-between gap-3 rounded-lg border border-gray-300 bg-white px-4 py-3"
+        >
+          <!-- Info de la política -->
+          <div class="min-w-0 flex-1">
+            <p class="text-sm font-medium">{{ policy.name }}</p>
+            @if (policy.description) {
+            <p class="text-xs text-gray-400">{{ policy.description }}</p>
+            }
+            <div class="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1">
+              @switch (policy.policyTypeName) { @case ('IP_RANGE') {
+              <span class="text-xs text-gray-500">
+                IP: {{ policy.conditionFormatted?.['IpRangeStart'] }} - {{
+                policy.conditionFormatted?.['IpRangeEnd'] }}
+              </span>
+              } @case ('TIME_WINDOW') {
+              <span class="text-xs text-gray-500">
+                Hora: {{ policy.conditionFormatted?.['StartTime'] }} - {{
+                policy.conditionFormatted?.['EndTime'] }}
+              </span>
+              } }
+              <span
+                class="rounded px-2 py-0.5 text-xs font-medium"
+                [ngClass]="{
+                  'bg-green-100 text-green-700': policy.effect === 'ALLOW',
+                  'bg-red-100 text-red-700': policy.effect === 'DENY'
+                }"
+                >{{ policy.effect === 'ALLOW' ? 'Permitir Acceso' : 'Denegar
+                Acceso' }}</span
+              >
+            </div>
+          </div>
+
+          <!-- Acción -->
+          <div class="shrink-0 self-center">
+            @if (isPolicyLinked(app.userApplicationId, policy.policyId)) {
+            <button
+              class="flex h-8 w-8 items-center justify-center rounded-md bg-transparent text-red-500 hover:bg-red-50 active:bg-red-100"
+              (click)="showDeleteConfirmationPolicy(app.userApplicationId, policy.policyId)"
+              title="Desvincular política"
+            >
+              @if (pendingPolicyId() === policy.policyId) {
+              <fa-icon [icon]="faSpinner"></fa-icon>} @else {
+              <fa-icon [icon]="faTrash"></fa-icon>
+              }
+            </button>
+            }@else {
+            <button
+              class="text-primary-blue flex h-8 w-8 items-center justify-center rounded-md bg-transparent hover:bg-blue-50 active:bg-blue-100"
+              (click)="showAssociateConfirmationPolicy(app.userApplicationId, policy.policyId)"
+              title="Asociar política"
+            >
+              @if (pendingPolicyId() === policy.policyId) {
+              <fa-icon [icon]="faSpinner"></fa-icon> } @else {
+              <fa-icon [icon]="faPlus"></fa-icon>
+              }
+            </button>
+            }
+          </div>
+        </li>
+        }
+      </ul>
+      } }
+    </li>
+    }
+  </ul>
+  }
+</div>

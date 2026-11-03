@@ -1,0 +1,239 @@
+@let person = personData();
+<div class="my-[2rem] rounded-lg">
+  <div class="my-8">
+    @if (!isLoading()) {
+    <h1 class="text-[1.2rem] font-semibold">
+      Aplicaciones Vinculadas para {{ person?.firstName }} {{ person?.lastName
+      }}
+    </h1>
+    } @else {
+    <div class="skeleton h-[2.3rem] w-[20rem]"></div>
+    }
+  </div>
+
+  <div class="mt-4 mb-8">
+    <app-steps-form [data]="steps"></app-steps-form>
+  </div>
+
+  @switch (currentStep) { @case (1) {
+  <!-- Paso 1: Selección de Organizaciones -->
+  <div>
+    <h4 class="mb-2 text-[1.1rem] text-gray-700">
+      Seleccione las organizaciones a vincular
+    </h4>
+    <div class="mb-3">
+      <app-search
+        [placeholder]="'Buscar organización por nombre'"
+        (searchValue)="onOrgSearch($event)"
+      />
+    </div>
+    @if (!isLoading()) {
+    <div class="container max-h-[25rem] overflow-auto p-0">
+      <ul class="w-full">
+        @for (org of organizationOptions(); track org.value) {
+        <li
+          class="flex cursor-pointer items-center gap-3 border-b border-gray-300 px-4 py-3 duration-200 hover:bg-slate-100"
+          [ngClass]="{ 'bg-primary-blue-lighter': isOrganizationSelected(org.value.toString()) }"
+          tabindex="0"
+          (click)="toggleOrganizationSelection(org.value.toString())"
+          (keyup.enter)="toggleOrganizationSelection(org.value.toString())"
+        >
+          <span
+            class="flex h-5 w-5 items-center justify-center rounded border border-gray-400"
+            [ngClass]="{ 'border-primary-blue bg-primary-blue text-white': isOrganizationSelected(org.value.toString()) }"
+          >
+            @if (isOrganizationSelected(org.value.toString())) {
+            <fa-icon [icon]="faCheck" class="text-[0.7rem]"></fa-icon>
+            }
+          </span>
+          {{ org.label }}
+        </li>
+        }
+      </ul>
+    </div>
+    } @else {
+    <div class="skeleton h-[20rem] w-full"></div>
+    }
+  </div>
+  } @case (2) {
+  <!-- Paso 2: Acceso a Aplicaciones -->
+  <div class="grid gap-4 md:grid-cols-2">
+    <div>
+      <h4 class="mb-2 text-[1.1rem] text-gray-700">Listado de Aplicaciones</h4>
+      <div class="mb-3">
+        <app-search
+          [placeholder]="'Buscar aplicación por nombre'"
+          (searchValue)="onAppSearch($event)"
+        />
+      </div>
+      @if (orgAppData().length > 0 && !isLoadingOrgApp()) {
+      <div class="container max-h-[20rem] overflow-auto p-0">
+        <ul class="w-full space-y-3">
+          @for (group of groupedOrgAppData(); track group.orgId) {
+          <li class="border-b border-gray-300 pb-3 last:border-b-0 last:pb-0">
+            <h5
+              class="bg-gray-50 px-4 py-2 text-[0.8rem] font-semibold text-gray-600"
+            >
+              {{ group.orgName }}
+            </h5>
+            <ul>
+              @for (app of group.apps; track app.organizationApplicationId) {
+              <li
+                class="cursor-pointer border-t border-gray-200 px-4 py-2 duration-200 hover:bg-slate-100"
+                [ngClass]="{ 'bg-primary-blue-lighter': selectedApp() === app.organizationApplicationId }"
+                tabindex="0"
+                (click)="handleAppSelect(app.organizationApplicationId)"
+                (keyup.enter)="handleAppSelect(app.organizationApplicationId)"
+              >
+                {{ app.application.name }} @if
+                (getNameOfSelectedRolesByApp(app.organizationApplicationId)) {
+                <span class="ml-2 text-gray-500">
+                  - {{
+                  getNameOfSelectedRolesByApp(app.organizationApplicationId) }}
+                </span>
+                }
+              </li>
+              }
+            </ul>
+          </li>
+          }
+        </ul>
+      </div>
+      } @else if (isLoadingOrgApp()) {
+      <div class="skeleton h-[20rem] w-full"></div>
+      } @else {
+      <div class="grid h-[20rem] items-center justify-center">
+        <div>
+          <div class="flex place-items-center justify-center">
+            <svg
+              id="Icons"
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              viewBox="0 0 24 24"
+              class="mb-2 h-[2.5rem] w-[2.5rem] rotate-45 text-gray-400"
+              fill="currentColor"
+            >
+              <path
+                d="M20,3H4c-.552,0-1,.448-1,1v16c0,.552.448,1,1,1h16c.552,0,1-.448,1-1V4c0-.552-.448-1-1-1ZM17.354,8.061l-9.293,9.293c-.195.195-.512.195-.707,0l-.707-.707c-.195-.195-.195-.512,0-.707L15.939,6.647c.195-.195.512-.195.707,0l.707.707c.195.195.195.512,0,.707Z"
+              />
+            </svg>
+          </div>
+          <p class="text-gray-400">No se encontraron aplicaciones</p>
+        </div>
+      </div>
+      }
+    </div>
+    <div>
+      <h4 class="mb-2 text-[1.1rem] text-gray-700">Listado de Roles</h4>
+      @if (rolesData().length > 0) {
+      <div class="mb-3">
+        <app-search
+          [placeholder]="'Buscar rol por nombre'"
+          (searchValue)="onRoleSearch($event)"
+        />
+      </div>
+      }
+      <div class="container max-h-[20rem] overflow-auto p-0">
+        @if (filteredRolesData().length > 0 && !isLoadingRole()) {
+        <ul class="w-full">
+          @for (role of filteredRolesData(); track role.id) {
+          <li
+            class="cursor-pointer border-b border-gray-300 px-4 py-2 duration-200 hover:bg-slate-100"
+            tabindex="0"
+            (click)="handleRoleSelect(role)"
+            (keyup.enter)="handleRoleSelect(role)"
+          >
+            {{ role.name }} @if (isRoleSelected(role)) {
+            <span class="ml-2 text-green-500">
+              <fa-icon [icon]="faCheck"></fa-icon>
+            </span>
+            }
+          </li>
+          }
+        </ul>
+        } @else if (isLoadingRole()) {
+        <div class="skeleton h-[20rem] w-full"></div>
+        } @else {
+        <div class="grid h-[20rem] items-center justify-center">
+          <div>
+            <div class="flex place-items-center justify-center">
+              <svg
+                id="Icons"
+                xmlns="http://www.w3.org/2000/svg"
+                version="1.1"
+                viewBox="0 0 24 24"
+                class="mb-2 h-[2.5rem] w-[2.5rem] rotate-45 text-gray-400"
+                fill="currentColor"
+              >
+                <path
+                  d="M20,3H4c-.552,0-1,.448-1,1v16c0,.552.448,1,1,1h16c.552,0,1-.448,1-1V4c0-.552-.448-1-1-1ZM17.354,8.061l-9.293,9.293c-.195.195-.512.195-.707,0l-.707-.707c-.195-.195-.195-.512,0-.707L15.939,6.647c.195-.195.512-.195.707,0l.707.707c.195.195.195.512,0,.707Z"
+                />
+              </svg>
+            </div>
+            <p class="text-center text-gray-400">
+              {{ rolesData().length > 0 ? 'No se encontraron roles con ese nombre' : 'Seleccione una aplicación para ver sus roles' }}
+            </p>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+  } @case (3) {
+  <!-- Paso 3: Revisión y Confirmación -->
+  <section class="grid gap-4 pt-[1rem]">
+    <div class="container">
+      <h4 class="mb-1 text-[1rem] font-semibold">Resumen de Vinculaciones</h4>
+      <p class="mb-6 text-[0.9rem] text-gray-500">
+        Revise las vinculaciones antes de confirmar.
+      </p>
+      @if (getApplicationSelectedGroupedByOrg().length > 0) {
+      <div class="grid gap-6">
+        @for (group of getApplicationSelectedGroupedByOrg(); track group.orgId)
+        {
+        <div>
+          <h5
+            class="mb-3 border-b border-gray-200 pb-2 text-[0.95rem] font-semibold text-gray-700"
+          >
+            {{ group.orgName }}
+          </h5>
+          <ul class="grid gap-2">
+            @for (app of group.apps; track app.organizationApplicationId) {
+            <li class="container grid grid-cols-2 p-4">
+              <div>
+                <h4 class="mb-1 text-[1rem] font-semibold">
+                  {{ app.applicationName }}
+                </h4>
+                <p class="pr-4 text-[0.9rem] text-gray-500">
+                  {{ app.applicationDescription }}
+                </p>
+              </div>
+              <div class="border-l border-gray-200 pl-4">
+                <label class="text-[0.9rem] text-gray-500">Rol asignado</label>
+                <h4 class="text-[1rem]">{{ app.roleName }}</h4>
+              </div>
+            </li>
+            }
+          </ul>
+        </div>
+        }
+      </div>
+      } @else {
+      <p class="text-gray-400">No se han seleccionado aplicaciones.</p>
+      }
+    </div>
+  </section>
+  } }
+
+  <section class="mt-8 flex justify-between gap-4">
+    @if (firstStep) {
+    <button class="secondary-button" (click)="goBackToList()">Volver</button>
+    } @else {
+    <button class="secondary-button" (click)="previousStep()">Volver</button>
+    } @if (finalStep) {
+    <button [disabled]="isPending()" (click)="onSubmit()">Actualizar</button>
+    } @else {
+    <button (click)="nextStep()">Siguiente</button>
+    }
+  </section>
+</div>

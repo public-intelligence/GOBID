@@ -1,0 +1,187 @@
+<app-confirmation-modal />
+
+<section class="mx-4 my-6">
+  <!-- Header -->
+  <div class="mb-8 flex flex-col items-start gap-6">
+    <button (click)="goBack()" class="secondary-button">
+      <fa-icon [icon]="faArrowLeft" class="mr-2" />
+      Volver
+    </button>
+    <div>
+      <h1 class="text-2xl font-bold">
+        {{ id ? 'Editar Política' : 'Nueva Política' }}
+      </h1>
+      <p class="mt-0.5 text-sm text-gray-500">
+        {{ id ? 'Modifica la información de la política' : 'Completa el
+        formulario para registrar una nueva política' }}
+      </p>
+    </div>
+  </div>
+
+  <form [formGroup]="policyForm" (ngSubmit)="onSubmit()">
+    <!-- Step 1: Información de la Política -->
+    <div class="mb-6 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+      <div class="mb-5 flex items-center gap-3">
+        <span
+          class="flex h-7 w-7 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-600"
+          >1</span
+        >
+        <h2 class="text-base font-semibold">Información de la Política</h2>
+      </div>
+
+      <div class="grid gap-6 sm:grid-cols-2">
+        <app-input
+          [formControlName]="'name'"
+          [label]="'Nombre'"
+          [type]="'text'"
+          [name]="'name'"
+          [isSubmitted]="submitted()"
+          [formControl]="policyForm.controls['name']"
+          [className]="'w-full'"
+          [errMsg]="'El nombre es requerido'"
+          [placeholder]="'Nombre de la política'"
+          [loading]="isLoading()"
+          class="sm:col-span-2"
+          ngDefaultControl
+        />
+
+        <app-textarea
+          [formControlName]="'description'"
+          [label]="'Descripción'"
+          [isSubmitted]="submitted()"
+          [formControl]="policyForm.controls['description']"
+          [errMsg]="'Descripción inválida'"
+          [placeholder]="'Descripción de la política'"
+          [loading]="isLoading()"
+          class="sm:col-span-2"
+          ngDefaultControl
+        />
+
+        <app-select
+          [formControlName]="'policyTypeId'"
+          [label]="'Tipo de Política'"
+          [name]="'policyTypeId'"
+          [isSubmitted]="submitted()"
+          [formControl]="policyForm.controls['policyTypeId']"
+          [options]="policyTypeOptions()"
+          [errMsg]="'Seleccione un tipo de política'"
+          [loading]="isLoading()"
+          ngDefaultControl
+        />
+
+        <app-select
+          [formControlName]="'effect'"
+          [label]="'Efecto'"
+          [name]="'effect'"
+          [isSubmitted]="submitted()"
+          [formControl]="policyForm.controls['effect']"
+          [options]="effectOptions"
+          [errMsg]="'Seleccione un efecto'"
+          [loading]="isLoading()"
+          ngDefaultControl
+        />
+
+        <div class="flex items-center pt-5">
+          <app-checkbox
+            [formControlName]="'isActive'"
+            label="Política activa"
+            ngDefaultControl
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2: Condiciones -->
+    <div class="mb-6 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+      <div class="mb-5 flex items-center gap-3">
+        <span
+          class="flex h-7 w-7 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-600"
+          >2</span
+        >
+        <h2 class="text-base font-semibold">Condiciones</h2>
+      </div>
+
+      @if (!policyForm.value.policyTypeId) {
+      <div
+        class="rounded-lg border-2 border-dashed border-gray-200 p-6 text-center text-sm text-gray-400"
+      >
+        Selecciona un tipo de política para ver sus condiciones
+      </div>
+      } @else {
+      <div formArrayName="conditions" class="grid gap-6 sm:grid-cols-2">
+        @for (item of conditions.controls; let i = $index; track $index) {
+        <div
+          [formGroupName]="i"
+          [class.sm:col-span-2]="currentTypeKeys()[i].inputType === 'days'"
+        >
+          @if (currentTypeKeys()[i].inputType === 'timezone') {
+          <app-select
+            [formControlName]="'conditionValue'"
+            [label]="currentTypeKeys()[i].label"
+            [name]="'conditionValue-' + i"
+            [isSubmitted]="submitted()"
+            [formControl]="$any(item).controls['conditionValue']"
+            [options]="timezoneOptions"
+            [errMsg]="'Seleccione una zona horaria'"
+            [loading]="isLoading()"
+            ngDefaultControl
+          />
+          } @else if (currentTypeKeys()[i].inputType === 'days') {
+          <div>
+            <p class="mb-4 text-base text-gray-700">
+              {{ currentTypeKeys()[i].label }}
+            </p>
+            <div class="flex flex-wrap gap-2">
+              @for (day of applyOnDays; track day.value) {
+              <button
+                type="button"
+                (click)="toggleDay(i, day.value)"
+                [class]="isDaySelected(i, day.value)
+                      ? 'rounded-full border border-blue-600 bg-blue-600 px-3 py-1 text-sm font-medium text-white transition-colors'
+                      : 'rounded-full border border-gray-300 bg-white px-3 py-1 text-sm font-medium text-gray-600 transition-colors hover:border-blue-400 hover:text-blue-600'"
+              >
+                {{ day.label }}
+              </button>
+              }
+            </div>
+            @if (submitted() && $any(item).controls['conditionValue'].invalid) {
+            <p class="mt-1 text-xs text-red-500">Seleccione al menos un día</p>
+            }
+          </div>
+          } @else {
+          <app-input
+            [formControlName]="'conditionValue'"
+            [label]="currentTypeKeys()[i].label"
+            [type]="currentTypeKeys()[i].inputType === 'time' ? 'time' : 'text'"
+            [name]="'conditionValue-' + i"
+            [isSubmitted]="submitted()"
+            [formControl]="$any(item).controls['conditionValue']"
+            [className]="'w-full'"
+            [errMsg]="'Este campo es requerido'"
+            [placeholder]="currentTypeKeys()[i].inputType === 'time' ? '' : 'Valor para ' + currentTypeKeys()[i].label"
+            [loading]="isLoading()"
+            ngDefaultControl
+          />
+          }
+        </div>
+        }
+      </div>
+      }
+    </div>
+
+    <!-- Actions -->
+    <div class="flex justify-end gap-3">
+      <button
+        type="button"
+        class="secondary-button"
+        (click)="goBack()"
+        [disabled]="isPending()"
+      >
+        Cancelar
+      </button>
+      <button type="submit" [disabled]="isPending()">
+        {{ id ? 'Actualizar' : 'Registrar' }}
+      </button>
+    </div>
+  </form>
+</section>

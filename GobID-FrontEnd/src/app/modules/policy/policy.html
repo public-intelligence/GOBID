@@ -1,0 +1,20 @@
+<app-confirmation-modal></app-confirmation-modal>
+<app-maintenance
+  [createPath]="'/policy/create'"
+  [headers]="headers"
+  [columnData]="tableData()"
+  [title]="title"
+  [buttonText]="'Nueva Política'"
+  [isLoading]="isLoading()"
+  (searchValue)="onSearchChange($event)"
+  [filters]="filters"
+  (filterSelected)="onFiltersChange($event)"
+  [showFilters]="true"
+  [showPaginator]="true"
+  [pageNumber]="policyFilter().pageNumber || 1"
+  (pageSize)="onPageSizeChange($event)"
+  [totalCount]="totalCount()"
+  [totalPages]="totalPages()"
+  (actualPage)="onPageChange($event)"
+  [pageSizeInput]="policyFilter().pageSize || 10"
+/>
