@@ -1,20 +1,38 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# GOB-ID web application
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+Angular 20 application that hosts the GOB-ID sign-in pages used by every connected application, and the administration console for organizations, applications (including machine-to-machine credentials), users, roles, permissions, policies, sessions and staff.
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+See the [repository README](../README.md) for the overall architecture.
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+## Pages
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+- **Sign-in flow:** `/app/:application-id/login`, `forgot-password`, `change-password` and `register`. Applications send their users to the login page, and GOB-ID returns them to the application's registered `redirect_url` with an authorization code.
+- **Administration console:** the rest of the routes. They are protected by the permissions in the user's token.
+
+## Stack
+
+Angular 20 (standalone components), Tailwind CSS 4, [`@public-intelligence/ui-core`](https://github.com/public-intelligence/UICORE), Karma and Jasmine.
+
+## Run
+
+`@public-intelligence/ui-core` is installed from GitHub Packages. Add the registry to your user `~/.npmrc`, with a GitHub token that has `read:packages`:
+
+```
+@public-intelligence:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${NPM_TOKEN}
+```
+
+```bash
+npm install
+npm start          # http://localhost:4200
+npm test           # Karma and Jasmine (only Angular's default spec for now)
+npm run build      # production build in dist/
+```
+
+## Configuration
+
+`src/environments/` holds one file per environment (`environment.ts`, `environment.development.ts` and `environment.production.ts`) with:
+
+- `apiUrl`: base URL of the GOB-ID API;
+- `appUrl`: public URL of this web application;
+- `applicationId`: the GOB-ID application id this console signs in with.
