@@ -154,7 +154,7 @@ GOB-ID and IdentityHub were designed and built with the participation of:
 | Name | Role |
 |---|---|
 | Rainier Mallol | Software Architecture Design |
-| José Cid | Principal Engineer |
+| José Ant. Cid Troncoso | Lead Engineer |
 | Angel Peña | Engineer |
 | Frailin Ogando | Engineer |
 | Cristian Jimenez | Engineer |
